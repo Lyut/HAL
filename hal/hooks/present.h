@@ -12,10 +12,10 @@
 ID3D11Device* pD11Device = nullptr;
 ID3D11DeviceContext* pD11DeviceContext = nullptr;
 ID3D11RenderTargetView* pD11RenderTargetView = nullptr;
+IDXGISwapChain* pSwapChain = nullptr;
 WNDPROC oWndProc;
 HRESULT(*HK_PresentOriginal)(IDXGISwapChain* dxSwapChain, UINT syncInterval, UINT flags) = nullptr;
 extern LRESULT ImGui_ImplWin32_WndProcHandler(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam);
-
 
 inline void ImguiStyle()
 {
@@ -80,20 +80,20 @@ LRESULT __stdcall HAL::Hooks::Present::WndProc(const HWND hWnd, UINT uMsg, WPARA
     switch (uMsg) {
     case WM_SIZE:
         if (pD11Device != NULL && wParam != SIZE_MINIMIZED) {
-            ImGui_ImplDX11_InvalidateDeviceObjects();
-            ImGui_ImplDX11_CreateDeviceObjects();
+            if (pD11RenderTargetView) { pD11RenderTargetView->Release(); pD11RenderTargetView = NULL; }
+            pSwapChain->ResizeBuffers(0, (UINT)LOWORD(lParam), (UINT)HIWORD(lParam), DXGI_FORMAT_UNKNOWN, 0);
         }
         break;
-    /*case WM_SYSCOMMAND:
-        if ((wParam & 0xfff0) == SC_KEYMENU) // Disable ALT application menu
-            return false;
-        break;*/
     }
-
-    if (true && ImGui_ImplWin32_WndProcHandler(hWnd, uMsg, wParam, lParam))
-        return false;
-
-    return CallWindowProc(oWndProc, hWnd, uMsg, wParam, lParam);
+    if (uMsg == WM_KEYUP && wParam == VK_INSERT)
+        Config::ESP::bShowMenu = !Config::ESP::bShowMenu;
+    ImGuiIO& io = ImGui::GetIO();
+    if (Config::ESP::bShowMenu && ImGui_ImplWin32_WndProcHandler(hWnd, uMsg, wParam, lParam))
+        return 0;
+    if (io.WantCaptureMouse && (uMsg == WM_LBUTTONDOWN || uMsg == WM_LBUTTONUP || uMsg == WM_RBUTTONDOWN || uMsg == WM_RBUTTONUP || uMsg == WM_MBUTTONDOWN || uMsg == WM_MBUTTONUP || uMsg == WM_MOUSEWHEEL || uMsg == WM_MOUSEMOVE))
+        return 1;
+    
+        return CallWindowProc(oWndProc, hWnd, uMsg, wParam, lParam);
 }
 
 HRESULT HAL::Hooks::Present::Present_hk(IDXGISwapChain* dxSwapChain, UINT syncInterval, UINT flags) 
@@ -112,6 +112,7 @@ HRESULT HAL::Hooks::Present::Present_hk(IDXGISwapChain* dxSwapChain, UINT syncIn
             pD11Device->GetImmediateContext(&pD11DeviceContext);
         }
 
+        pSwapChain = dxSwapChain;
         DXGI_SWAP_CHAIN_DESC desc;
         dxSwapChain->GetDesc(&desc);
         oWndProc = (WNDPROC)SetWindowLongPtr(desc.OutputWindow, GWLP_WNDPROC, (LONG_PTR)WndProc);
@@ -136,50 +137,23 @@ HRESULT HAL::Hooks::Present::Present_hk(IDXGISwapChain* dxSwapChain, UINT syncIn
     ImGui_ImplWin32_NewFrame();
     ImGui::NewFrame();
 
-   // HAL::Graphics::Drawing::Draw();
-    ImguiStyle();
-    ImVec2 center(ImGui::GetIO().DisplaySize.x * 0.5f, ImGui::GetIO().DisplaySize.y * 0.5f);
-    ImGui::SetNextWindowPos(center, ImGuiCond_Once, ImVec2(0.5f, 0.5f));
-    ImGui::SetWindowSize(ImVec2(300, 500));
-    ImGui::Begin("lewd.vip menu");
-    ImGuiTabBarFlags tab_bar_flags = ImGuiTabBarFlags_Reorderable;
-    if (ImGui::BeginTabBar("merdaMenu", tab_bar_flags))
+    Graphics::Drawing::Draw();
+
+    if (Config::ESP::bShowMenu)
     {
-        if (ImGui::BeginTabItem("DEBUG"))
-        {
-
-            ImGui::Text((std::string("GTA version: b") + std::to_string(HAL::SDK::Utils::GetGameBuild())).c_str());
-            ImGui::EndTabItem();
-        }
-        if (ImGui::BeginTabItem("Aimbot"))
-        {
-
-            ImGui::EndTabItem();
-        }
-        if (ImGui::BeginTabItem("ESP"))
-        {
-
-            ImGui::EndTabItem();
-        }
-        if (ImGui::BeginTabItem("Chams"))
-        {
-
-            ImGui::EndTabItem();
-        }
-        if (ImGui::BeginTabItem("Settings"))
-        {
-
-            ImGui::EndTabItem();
-        }
-
-        ImGui::EndTabBar();
+        ImGui::GetIO().MouseDrawCursor = true;
+        Graphics::Drawing::DrawMenu();
     }
-    ImGui::End();
+    else
+        ImGui::GetIO().MouseDrawCursor = false;
+
+    ImguiStyle();
+    Graphics::Drawing::Draw();
 
     pD11DeviceContext->OMSetRenderTargets(1, &pD11RenderTargetView, nullptr);
     ImGui::Render();
 
     ImGui_ImplDX11_RenderDrawData(ImGui::GetDrawData());
 
-    return HAL::Hooks::Present::o_Present(dxSwapChain, syncInterval, flags);
+    return Hooks::Present::o_Present(dxSwapChain, syncInterval, flags);
 }

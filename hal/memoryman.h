@@ -1,11 +1,24 @@
 #pragma once
 #include <Windows.h>
 #include <vector>
+#include "xorstr.h"
 
-#define isValidPtr(pointer) ((uintptr_t)pointer > 0x1000 && (uintptr_t)pointer < 0x7fffffffffff)
+#ifdef _WIN64
+#define PTRMAXVAL ((DWORD64)0x000F000000000000)
+#else
+#define PTRMAXVAL ((DWORD64)0xFFF00000)
+#endif
 
 namespace HAL::MemoryMan
 {
+    bool ValidPTR(DWORD64 ptr)
+    {
+        if (ptr >= 0x10000 && ptr < PTRMAXVAL)
+            return true;
+
+        return false;
+    }
+
     std::uint8_t* PatternScan(const HMODULE Module, const char* Signature)
     {
         [[unlikely]]
@@ -91,7 +104,7 @@ namespace HAL::MemoryMan
     bool Initialize()
     {
 #ifdef _WIN64
-        const HMODULE GameOverlayRenderer = GetModuleHandleA("gameoverlayrenderer64.dll");
+        const HMODULE GameOverlayRenderer = GetModuleHandleA(xorstr_("gameoverlayrenderer64.dll"));
 #else
         const HMODULE GameOverlayRenderer = GetModuleHandleA("gameoverlayrenderer.dll");
 #endif
@@ -101,7 +114,7 @@ namespace HAL::MemoryMan
             return false;
 
 #ifdef _WIN64
-        ValveHook = reinterpret_cast<FnValveHook>(PatternScan(GameOverlayRenderer, "48 89 5C 24 ? 57 48 83 EC 30 33 C0"));
+        ValveHook = reinterpret_cast<FnValveHook>(PatternScan(GameOverlayRenderer, xorstr_("48 89 5C 24 ? 57 48 83 EC 30 33 C0")));
 #else
         ValveHook = reinterpret_cast<FnValveHook>(PatternScan(GameOverlayRenderer, "55 8B EC 51 8B 45 10 C7"));
 #endif
@@ -111,7 +124,7 @@ namespace HAL::MemoryMan
             return false;
 
 #ifdef _WIN64
-        const std::uint8_t* JmpAddress = PatternScan(GameOverlayRenderer, "E8 ? ? ? ? FF 15 ? ? ? ? 48 89 45 E8");
+        const std::uint8_t* JmpAddress = PatternScan(GameOverlayRenderer, xorstr_("E8 ? ? ? ? FF 15 ? ? ? ? 48 89 45 E8"));
 #else
         const std::uint8_t* JmpAddress = PatternScan(GameOverlayRenderer, "E8 ? ? ? ? 83 C4 08 FF 15 ? ? ? ?");
 #endif

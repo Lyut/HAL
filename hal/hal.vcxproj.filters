@@ -22,28 +22,31 @@
     <Filter Include="File di intestazione\sdk">
       <UniqueIdentifier>{4b93921e-558e-4d5d-98e9-fb9a2a1e7c36}</UniqueIdentifier>
     </Filter>
+    <Filter Include="File di intestazione\graphics\imgui">
+      <UniqueIdentifier>{334421a7-57b0-4b5c-8d7a-d9568e30ade6}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="dllmain.cpp">
       <Filter>File di origine</Filter>
     </ClCompile>
-    <ClCompile Include="graphics\imgui_impl_win32.cpp">
-      <Filter>File di intestazione\graphics</Filter>
-    </ClCompile>
-    <ClCompile Include="graphics\imgui_widgets.cpp">
-      <Filter>File di intestazione\graphics</Filter>
-    </ClCompile>
     <ClCompile Include="graphics\imgui.cpp">
-      <Filter>File di intestazione\graphics</Filter>
+      <Filter>File di intestazione\graphics\imgui</Filter>
     </ClCompile>
     <ClCompile Include="graphics\imgui_demo.cpp">
-      <Filter>File di intestazione\graphics</Filter>
+      <Filter>File di intestazione\graphics\imgui</Filter>
     </ClCompile>
     <ClCompile Include="graphics\imgui_draw.cpp">
-      <Filter>File di intestazione\graphics</Filter>
+      <Filter>File di intestazione\graphics\imgui</Filter>
     </ClCompile>
     <ClCompile Include="graphics\imgui_impl_dx11.cpp">
-      <Filter>File di intestazione\graphics</Filter>
+      <Filter>File di intestazione\graphics\imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="graphics\imgui_impl_win32.cpp">
+      <Filter>File di intestazione\graphics\imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="graphics\imgui_widgets.cpp">
+      <Filter>File di intestazione\graphics\imgui</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -65,30 +68,6 @@
     <ClInclude Include="hooks\present.h">
       <Filter>File di intestazione\hooks</Filter>
     </ClInclude>
-    <ClInclude Include="graphics\imgui_impl_dx11.h">
-      <Filter>File di intestazione\graphics</Filter>
-    </ClInclude>
-    <ClInclude Include="graphics\imgui_impl_win32.h">
-      <Filter>File di intestazione\graphics</Filter>
-    </ClInclude>
-    <ClInclude Include="graphics\imgui_internal.h">
-      <Filter>File di intestazione\graphics</Filter>
-    </ClInclude>
-    <ClInclude Include="graphics\imstb_rectpack.h">
-      <Filter>File di intestazione\graphics</Filter>
-    </ClInclude>
-    <ClInclude Include="graphics\imstb_textedit.h">
-      <Filter>File di intestazione\graphics</Filter>
-    </ClInclude>
-    <ClInclude Include="graphics\imstb_truetype.h">
-      <Filter>File di intestazione\graphics</Filter>
-    </ClInclude>
-    <ClInclude Include="graphics\imconfig.h">
-      <Filter>File di intestazione\graphics</Filter>
-    </ClInclude>
-    <ClInclude Include="graphics\imgui.h">
-      <Filter>File di intestazione\graphics</Filter>
-    </ClInclude>
     <ClInclude Include="hooks\reset.h">
       <Filter>File di intestazione\hooks</Filter>
     </ClInclude>
@@ -97,6 +76,39 @@
     </ClInclude>
     <ClInclude Include="sdk\utils.h">
       <Filter>File di intestazione\sdk</Filter>
+    </ClInclude>
+    <ClInclude Include="xorstr.h">
+      <Filter>File di intestazione</Filter>
+    </ClInclude>
+    <ClInclude Include="sdk\vec3.h">
+      <Filter>File di intestazione\sdk</Filter>
+    </ClInclude>
+    <ClInclude Include="graphics\imconfig.h">
+      <Filter>File di intestazione\graphics\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="graphics\imgui.h">
+      <Filter>File di intestazione\graphics\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="graphics\imgui_impl_dx11.h">
+      <Filter>File di intestazione\graphics\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="graphics\imgui_impl_win32.h">
+      <Filter>File di intestazione\graphics\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="graphics\imgui_internal.h">
+      <Filter>File di intestazione\graphics\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="graphics\imstb_rectpack.h">
+      <Filter>File di intestazione\graphics\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="graphics\imstb_textedit.h">
+      <Filter>File di intestazione\graphics\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="graphics\imstb_truetype.h">
+      <Filter>File di intestazione\graphics\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="config.h">
+      <Filter>File di intestazione</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -21,18 +21,9 @@ namespace HAL::Hooks
     }
     namespace Reset
     {
-        /*using FnDeleteD3D11RendererForSwapChain = void(__stdcall*)(__int64, IDXGISwapChain*);
-        void* g_pDeleteD3D11RendererForSwapChain;
-        FnDeleteD3D11RendererForSwapChain o_DeleteD3D11RendererForSwapChain;
-        void DeleteD3D11RendererForSwapChain_hk(__int64, IDXGISwapChain*);*/
         using FnCreateSwapChain = void(__stdcall*)(__int64, ID3D11Device*, DXGI_SWAP_CHAIN_DESC, __int64**);
         void* g_pCreateSwapChain;
         FnCreateSwapChain o_CreateSwapChain;
         void CreateSwapChain_hk(__int64, ID3D11Device*, DXGI_SWAP_CHAIN_DESC, __int64**);
     }
-   /* namespace WndProc
-    {
-        WNDPROC WndProcFunc;
-        LRESULT WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
-    }*/
 }

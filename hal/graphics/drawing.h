@@ -6,6 +6,7 @@
 #include "../graphics/imgui_internal.h"
 #include "../sdk/utils.h"
 #include "../hooks.h"
+#include "../config.h"
 
 namespace HAL::Graphics::Drawing
 {
@@ -93,6 +94,16 @@ namespace HAL::Graphics::Drawing
 	};
 	Color Col;
 
+	RGBA FLOAT4TORGBA(float Col[])
+	{
+		ImU32 col32_no_alpha = ImGui::ColorConvertFloat4ToU32(ImVec4(Col[0], Col[1], Col[2], Col[3]));
+		float a = (col32_no_alpha >> 24) & 255;
+		float r = (col32_no_alpha >> 16) & 255;
+		float g = (col32_no_alpha >> 8) & 255;
+		float b = col32_no_alpha & 255;
+		return RGBA((int)r, (int)g, (int)b, (int)a);
+	}
+
 	std::string string_To_UTF8(const std::string& str)
 	{
 		int nwLen = ::MultiByteToWideChar(CP_ACP, 0, str.c_str(), -1, NULL, 0);
@@ -120,16 +131,16 @@ namespace HAL::Graphics::Drawing
 		return retStr;
 	}
 
-	void DrawStrokeText(int x, int y, RGBA* color, const char* str)
+	void DrawStrokeText(int x, int y, RGBA color, const char* str)
 	{
 		ImFont a;
 		std::string utf_8_1 = std::string(str);
 		std::string utf_8_2 = string_To_UTF8(utf_8_1);
-		ImGui::GetOverlayDrawList()->AddText(ImVec2(x, y - 1), ImGui::ColorConvertFloat4ToU32(ImVec4(1 / 255.0, 1 / 255.0, 1 / 255.0, 255 / 255.0)), utf_8_2.c_str());
-		ImGui::GetOverlayDrawList()->AddText(ImVec2(x, y + 1), ImGui::ColorConvertFloat4ToU32(ImVec4(1 / 255.0, 1 / 255.0, 1 / 255.0, 255 / 255.0)), utf_8_2.c_str());
-		ImGui::GetOverlayDrawList()->AddText(ImVec2(x - 1, y), ImGui::ColorConvertFloat4ToU32(ImVec4(1 / 255.0, 1 / 255.0, 1 / 255.0, 255 / 255.0)), utf_8_2.c_str());
-		ImGui::GetOverlayDrawList()->AddText(ImVec2(x + 1, y), ImGui::ColorConvertFloat4ToU32(ImVec4(1 / 255.0, 1 / 255.0, 1 / 255.0, 255 / 255.0)), utf_8_2.c_str());
-		ImGui::GetOverlayDrawList()->AddText(ImVec2(x, y), ImGui::ColorConvertFloat4ToU32(ImVec4(color->R / 255.0, color->G / 255.0, color->B / 255.0, color->A / 255.0)), utf_8_2.c_str());
+		ImGui::GetOverlayDrawList()->AddText(ImVec2(x, y - 1), ImGui::ColorConvertFloat4ToU32(ImVec4(1 / 255.0, 1 / 255.0, 1 / 255.0, color.A / 255.0)), utf_8_2.c_str());
+		ImGui::GetOverlayDrawList()->AddText(ImVec2(x, y + 1), ImGui::ColorConvertFloat4ToU32(ImVec4(1 / 255.0, 1 / 255.0, 1 / 255.0, color.A / 255.0)), utf_8_2.c_str());
+		ImGui::GetOverlayDrawList()->AddText(ImVec2(x - 1, y), ImGui::ColorConvertFloat4ToU32(ImVec4(1 / 255.0, 1 / 255.0, 1 / 255.0, color.A / 255.0)), utf_8_2.c_str());
+		ImGui::GetOverlayDrawList()->AddText(ImVec2(x + 1, y), ImGui::ColorConvertFloat4ToU32(ImVec4(1 / 255.0, 1 / 255.0, 1 / 255.0, color.A / 255.0)), utf_8_2.c_str());
+		ImGui::GetOverlayDrawList()->AddText(ImVec2(x, y), ImGui::ColorConvertFloat4ToU32(ImVec4(color.R / 255.0, color.G / 255.0, color.B / 255.0, color.A / 255.0)), utf_8_2.c_str());
 	}
 	void DrawNewText(int x, int y, RGBA* color, const char* str)
 	{
@@ -162,9 +173,9 @@ namespace HAL::Graphics::Drawing
 	{
 		ImGui::GetOverlayDrawList()->AddTriangleFilled(ImVec2(x1, y1), ImVec2(x2, y2), ImVec2(x3, y3), ImGui::ColorConvertFloat4ToU32(ImVec4(color->R / 255.0, color->G / 255.0, color->B / 255.0, color->A / 255.0)));
 	}
-	void DrawLine(int x1, int y1, int x2, int y2, RGBA* color, int thickness)
+	void DrawLine(int x1, int y1, int x2, int y2, RGBA color, int thickness)
 	{
-		ImGui::GetOverlayDrawList()->AddLine(ImVec2(x1, y1), ImVec2(x2, y2), ImGui::ColorConvertFloat4ToU32(ImVec4(color->R / 255.0, color->G / 255.0, color->B / 255.0, color->A / 255.0)), thickness);
+		ImGui::GetOverlayDrawList()->AddLine(ImVec2(x1, y1), ImVec2(x2, y2), ImGui::ColorConvertFloat4ToU32(ImVec4(color.R / 255.0, color.G / 255.0, color.B / 255.0, color.A / 255.0)), thickness);
 	}
 	void DrawCornerBox(int x, int y, int w, int h, int borderPx, RGBA* color)
 	{
@@ -177,8 +188,148 @@ namespace HAL::Graphics::Drawing
 		DrawFilledRect(x + w + borderPx, y, borderPx, h / 3, color);//right 
 		DrawFilledRect(x + w + borderPx, y + h - h / 3 + borderPx * 2, borderPx, h / 3, color);//right 
 	}
+	void DrawSkeleton(uintptr_t ped) {
+		int bone_positions[][2] = {
+			{ 0, 7 },
+			{ 7, 6 },
+			{ 7, 5 },
+			{ 7, 8 },
+			{ 8, 3 },
+			{ 8, 4 }
+		};
+
+		for (int i = 0; i < 6; ++i) {
+			ImVec2 screen_1, screen_2;
+			auto bone_1 = SDK::Utils::getBone(ped, bone_positions[i][0]),
+				bone_2 = SDK::Utils::getBone(ped, bone_positions[i][1]);
+			screen_1 = SDK::Utils::WorldToScreen2(bone_1);
+			screen_2 = SDK::Utils::WorldToScreen2(bone_2);
+			if (bone_1.x != 0 && bone_1.y != 0 && bone_1.z != 0 &&
+				bone_2.x != 0 && bone_2.y != 0 && bone_2.z != 0 &&
+				screen_1.x != 0 && screen_1.y != 0 &&
+				screen_2.x != 0 && screen_2.y != 0) {
+				if (SDK::Utils::Distance(Vector3(screen_1.x, screen_1.y, 0.0f), Vector3(screen_2.x, screen_2.y, 0.0f)) < 6.0f)
+					DrawLine(screen_1.x, screen_1.y, screen_2.x, screen_2.y, FLOAT4TORGBA(Config::ESP::f2DColor), 1);
+			}
+		}
+	}
+	void DrawMenu() 
+	{
+		ImGui::ShowDemoWindow();
+		ImVec2 center(ImGui::GetIO().DisplaySize.x * 0.5f, ImGui::GetIO().DisplaySize.y * 0.5f);
+		ImGui::SetNextWindowPos(center, ImGuiCond_Once, ImVec2(0.5f, 0.5f));
+		ImGui::SetWindowSize(ImVec2(300, 500));
+		ImGui::Begin(xorstr_("Menu"));
+		ImGuiTabBarFlags tab_bar_flags = ImGuiTabBarFlags_Reorderable;
+		if (ImGui::BeginTabBar(xorstr_("merdaMenu"), tab_bar_flags))
+		{
+			if (ImGui::BeginTabItem(xorstr_("DEBUG")))
+			{
+
+				ImGui::Text((std::string(xorstr_("GTA version: b")) + std::to_string(SDK::Utils::GetGameBuild())).c_str());
+				ImGui::EndTabItem();
+			}
+			if (ImGui::BeginTabItem(xorstr_("Aimbot")))
+			{
+
+				ImGui::EndTabItem();
+			}
+			if (ImGui::BeginTabItem(xorstr_("ESP")))
+			{
+				ImGui::Checkbox("2D Box", &Config::ESP::bShow2DBox);
+				ImGui::SameLine();
+				ImGui::ColorEdit4("2D Box Color", (float*)Config::ESP::f2DColor, ImGuiColorEditFlags_NoInputs | ImGuiColorEditFlags_AlphaPreview | ImGuiColorEditFlags_AlphaBar);
+				ImGui::Checkbox("Name", &Config::ESP::bShowName);
+				ImGui::Checkbox("Health", &Config::ESP::bShowHealth);
+				ImGui::Checkbox("Skeleton", &Config::ESP::bShowSkeleton);
+				ImGui::Checkbox("Tracer", &Config::ESP::bShowTracer);
+				
+				ImGui::EndTabItem();
+			}
+			if (ImGui::BeginTabItem(xorstr_("Chams")))
+			{
+
+				ImGui::EndTabItem();
+			}
+			if (ImGui::BeginTabItem(xorstr_("Settings")))
+			{
+
+				ImGui::EndTabItem();
+			}
+
+			ImGui::EndTabBar();
+		}
+		ImGui::End();
+	}
 	void Draw()
 	{
-		DrawStrokeText(1, 1, &Col.white, "TEST");
+		if (MemoryMan::ValidPTR(SDK::Utils::World))
+		{
+			SDK::Utils::Tick();
+			SDK::Utils::LocalPlayer = *(DWORD64*)(SDK::Utils::World + 0x8);
+			if (SDK::Utils::LocalPlayer != NULL)
+			{
+				for (int i = 0; i < 1024; i++)
+				{
+					if (SDK::Utils::Players[i].ped == SDK::Utils::LocalPlayer)
+						continue;
+
+					Vector3 pedPos = Vector3(SDK::Utils::Players[i].position.x, SDK::Utils::Players[i].position.y, SDK::Utils::Players[i].position.z);
+
+					/*if (Distance(SDK::PLAYER::Position(), pedPos) <= (Config::ESP::distance * 3))
+						continue;*/
+
+					if (pedPos.x == 0.0f || pedPos.y == 0.0f || pedPos.z == 0.0f)
+						continue;
+
+					float health = SDK::Utils::Players[i].health;
+					if (health > 200.0f)    health = 200.0f;
+					else if (health < 0.0f) health = 0.0f;
+
+					float armor = SDK::Utils::Players[i].armor;
+					if (armor > 100.0f)    armor = 100.0f;
+					else if (armor < 0.0f) armor = 0.0f;
+
+					Vector3 originPos = Vector3(pedPos.x, pedPos.y, pedPos.z - 1.0f);
+					Vector3 headPos = Vector3(pedPos.x, pedPos.y, pedPos.z + 0.9f);
+
+					ImVec2 screenPos = SDK::Utils::WorldToScreen(originPos);
+					ImVec2 screenPosHead = SDK::Utils::WorldToScreen(headPos);
+
+					ImVec2 localPlyScreenPos = SDK::Utils::WorldToScreen(SDK::Utils::Position());
+					if (screenPos.x > 0 && screenPosHead.x > 0)
+					{
+						float h = screenPosHead.y - screenPos.y;
+						float w = (screenPos.y - screenPosHead.y) / 3.5f;
+						if (Config::ESP::bShow2DBox) {
+							Graphics::Drawing::DrawLine(screenPos.x - w, screenPosHead.y, screenPos.x + w, screenPosHead.y, FLOAT4TORGBA(Config::ESP::f2DColor), 1);
+							Graphics::Drawing::DrawLine(screenPos.x - w, screenPos.y, screenPos.x - w, screenPosHead.y, FLOAT4TORGBA(Config::ESP::f2DColor), 1);
+							Graphics::Drawing::DrawLine(screenPos.x + w, screenPos.y, screenPos.x + w, screenPosHead.y, FLOAT4TORGBA(Config::ESP::f2DColor), 1);
+							Graphics::Drawing::DrawLine(screenPos.x - w, screenPos.y, screenPos.x + w, screenPos.y, FLOAT4TORGBA(Config::ESP::f2DColor), 1);
+						}
+						if (Config::ESP::bShowName)
+							Graphics::Drawing::DrawStrokeText(screenPos.x - (w / 2.5), screenPosHead.y, FLOAT4TORGBA(Config::ESP::f2DColor), std::to_string(SDK::Utils::Players[i].ped).c_str());
+						if (Config::ESP::bShowSkeleton)
+							DrawSkeleton(SDK::Utils::Players[i].ped);
+						if (Config::ESP::bShowTracer)
+							Graphics::Drawing::DrawLine(localPlyScreenPos.x, localPlyScreenPos.y, screenPos.x, screenPos.y + (h * 0.5), FLOAT4TORGBA(Config::ESP::f2DColor), 1);
+						if (Config::ESP::bShowHealth)
+						{
+							Graphics::Drawing::DrawStrokeText(screenPos.x - (w / 2.5), screenPosHead.y, FLOAT4TORGBA(Config::ESP::f2DColor), std::to_string(SDK::Utils::Players[i].health).c_str());
+							float flBarlenght = ((SDK::Utils::Players[i].health * (h - 2)) / 100) + 2;
+							Graphics::Drawing::DrawRect((screenPos.x - 1) - 4, screenPos.y - 1, 3 + 2, h + 2, &Graphics::Drawing::Col.black, 1);
+							Graphics::Drawing::DrawRect((screenPos.x + 1) - 4, screenPos.y + 1, 3 - 2, h - 2, &Graphics::Drawing::Col.black, 1);
+							RGBA colHealth = { 255 - 2.55 * (SDK::Utils::Players[i].health), 2.55 * (SDK::Utils::Players[i].health), 0, 255 };
+							Graphics::Drawing::DrawFilledRect(screenPos.x - 4, screenPos.y + (h - flBarlenght), 3, flBarlenght, &colHealth);
+							/*client.surface->SetDrawColor(0, 0, 0);
+							client.surface->DrawOutlined((x - 1) - 4, y - 1, 3 + 2, h + 2);
+							client.surface->DrawOutlined((x + 1) - 4, y + 1, 3 - 2, h - 2);
+							client.surface->SetDrawColor(255 - 2.55 * (m_iHealth), 2.55 * (m_iHealth), 0);
+							client.surface->DrawRect(x - 4, y + (h - flBarlenght), 3, flBarlenght); */
+						}
+					}
+				}
+			}
+		}
 	}
 }
