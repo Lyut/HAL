@@ -1,0 +1,21 @@
+﻿  dllmain.cpp
+C:\Users\19v\source\repos\hal\hal\dllmain.cpp(21,1): fatal error C1010: fine file imprevista durante la ricerca dell'intestazione precompilata. Si è omesso di aggiungere '#include "pch.h"' all'origine?
+  imgui.cpp
+C:\Users\19v\source\repos\hal\hal\graphics\imgui.cpp(2173,1): warning C4005: 'va_copy': ridefinizione macro
+C:\Users\19v\source\repos\hal\hal\graphics\imgui.cpp(2171): message : vedere la precedente definizione di 'va_copy'
+C:\Users\19v\source\repos\hal\hal\graphics\imgui.cpp(10109,1): fatal error C1010: fine file imprevista durante la ricerca dell'intestazione precompilata. Si è omesso di aggiungere '#include "pch.h"' all'origine?
+  imgui_demo.cpp
+C:\Users\19v\source\repos\hal\hal\graphics\imgui_demo.cpp(106,1): warning C4005: 'IM_NEWLINE': ridefinizione macro
+C:\Users\19v\source\repos\hal\hal\graphics\imgui_demo.cpp(102): message : vedere la precedente definizione di 'IM_NEWLINE'
+C:\Users\19v\source\repos\hal\hal\graphics\imgui_demo.cpp(4750,1): fatal error C1010: fine file imprevista durante la ricerca dell'intestazione precompilata. Si è omesso di aggiungere '#include "pch.h"' all'origine?
+  imgui_draw.cpp
+C:\Users\19v\source\repos\hal\hal\graphics\imgui_draw.cpp(126,10): error C2006: '#include': è previsto "NOMEFILE" o <NOMEFILE>
+C:\Users\19v\source\repos\hal\hal\graphics\imgui_draw.cpp(149,10): error C2006: '#include': è previsto "NOMEFILE" o <NOMEFILE>
+C:\Users\19v\source\repos\hal\hal\graphics\imgui_draw.cpp(3368,1): fatal error C1010: fine file imprevista durante la ricerca dell'intestazione precompilata. Si è omesso di aggiungere '#include "pch.h"' all'origine?
+  imgui_impl_dx11.cpp
+C:\Users\19v\source\repos\hal\hal\graphics\imgui_impl_dx11.cpp(546,1): fatal error C1010: fine file imprevista durante la ricerca dell'intestazione precompilata. Si è omesso di aggiungere '#include "pch.h"' all'origine?
+  imgui_impl_win32.cpp
+C:\Users\19v\source\repos\hal\hal\graphics\imgui_impl_win32.cpp(324,1): fatal error C1010: fine file imprevista durante la ricerca dell'intestazione precompilata. Si è omesso di aggiungere '#include "pch.h"' all'origine?
+  imgui_widgets.cpp
+C:\Users\19v\source\repos\hal\hal\graphics\imgui_widgets.cpp(7591,1): fatal error C1010: fine file imprevista durante la ricerca dell'intestazione precompilata. Si è omesso di aggiungere '#include "pch.h"' all'origine?
+  Generazione del codice in corso...

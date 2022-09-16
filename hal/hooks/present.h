@@ -8,6 +8,7 @@
 #include "../graphics/imgui_internal.h"
 #include "../graphics/font.h"
 #include "../sdk/utils.h"
+#include "../sdk/game.h"
 
 ID3D11Device* pD11Device = nullptr;
 ID3D11DeviceContext* pD11DeviceContext = nullptr;
@@ -86,12 +87,12 @@ LRESULT __stdcall HAL::Hooks::Present::WndProc(const HWND hWnd, UINT uMsg, WPARA
         break;
     }
     if (uMsg == WM_KEYUP && wParam == VK_INSERT)
-        Config::ESP::bShowMenu = !Config::ESP::bShowMenu;
+        Config::bShowMenu = !Config::bShowMenu;
     ImGuiIO& io = ImGui::GetIO();
-    if (Config::ESP::bShowMenu && ImGui_ImplWin32_WndProcHandler(hWnd, uMsg, wParam, lParam))
+    if (Config::bShowMenu && ImGui_ImplWin32_WndProcHandler(hWnd, uMsg, wParam, lParam))
         return 0;
     if (io.WantCaptureMouse && (uMsg == WM_LBUTTONDOWN || uMsg == WM_LBUTTONUP || uMsg == WM_RBUTTONDOWN || uMsg == WM_RBUTTONUP || uMsg == WM_MBUTTONDOWN || uMsg == WM_MBUTTONUP || uMsg == WM_MOUSEWHEEL || uMsg == WM_MOUSEMOVE))
-        return 1;
+        return 1; 
     
         return CallWindowProc(oWndProc, hWnd, uMsg, wParam, lParam);
 }
@@ -105,6 +106,8 @@ HRESULT HAL::Hooks::Present::Present_hk(IDXGISwapChain* dxSwapChain, UINT syncIn
         ImGuiIO& io = ImGui::GetIO();
         (void)io;
 		io.Fonts->AddFontFromMemoryTTF(&lewdFontData, sizeof lewdFontData, 14);
+
+        SDK::Game::Init();
 
         if (SUCCEEDED(dxSwapChain->GetDevice(__uuidof(ID3D11Device), (void**)&pD11Device)))
         {
@@ -137,9 +140,7 @@ HRESULT HAL::Hooks::Present::Present_hk(IDXGISwapChain* dxSwapChain, UINT syncIn
     ImGui_ImplWin32_NewFrame();
     ImGui::NewFrame();
 
-    Graphics::Drawing::Draw();
-
-    if (Config::ESP::bShowMenu)
+    if (Config::bShowMenu)
     {
         ImGui::GetIO().MouseDrawCursor = true;
         Graphics::Drawing::DrawMenu();
@@ -153,7 +154,7 @@ HRESULT HAL::Hooks::Present::Present_hk(IDXGISwapChain* dxSwapChain, UINT syncIn
     pD11DeviceContext->OMSetRenderTargets(1, &pD11RenderTargetView, nullptr);
     ImGui::Render();
 
-    ImGui_ImplDX11_RenderDrawData(ImGui::GetDrawData());
+    ImGui_ImplDX11_RenderDrawData(ImGui::GetDrawData()); 
 
     return Hooks::Present::o_Present(dxSwapChain, syncInterval, flags);
 }

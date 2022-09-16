@@ -147,6 +147,8 @@
       <PrecompiledHeaderFile>
       </PrecompiledHeaderFile>
       <LanguageStandard>stdcpp20</LanguageStandard>
+      <BufferSecurityCheck>true</BufferSecurityCheck>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -184,6 +186,7 @@
     <ClInclude Include="hooks\reset.h" />
     <ClInclude Include="includes.h" />
     <ClInclude Include="memoryman.h" />
+    <ClInclude Include="sdk\game.h" />
     <ClInclude Include="sdk\utils.h" />
     <ClInclude Include="sdk\vec3.h" />
     <ClInclude Include="xorstr.h" />

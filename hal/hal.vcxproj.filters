@@ -110,5 +110,8 @@
     <ClInclude Include="config.h">
       <Filter>File di intestazione</Filter>
     </ClInclude>
+    <ClInclude Include="sdk\game.h">
+      <Filter>File di intestazione\sdk</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

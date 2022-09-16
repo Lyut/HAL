@@ -1,0 +1,209 @@
+﻿C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\MSBuild\Microsoft\VC\v160\Microsoft.CppBuild.targets(499,5): warning MSB8004: la directory Output non termina con una barra finale. Nell'istanza della compilazione verrà aggiunta la barra poiché è necessaria per consentire la corretta valutazione della directory Output.
+  dllmain.cpp
+C:\Program Files (x86)\Microsoft DirectX SDK (June 2010)\Include\dxgitype.h(12,1): warning C4005: 'DXGI_STATUS_OCCLUDED': ridefinizione macro
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.18362.0\shared\winerror.h(55840): message : vedere la precedente definizione di 'DXGI_STATUS_OCCLUDED'
+C:\Program Files (x86)\Microsoft DirectX SDK (June 2010)\Include\dxgitype.h(13,1): warning C4005: 'DXGI_STATUS_CLIPPED': ridefinizione macro
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.18362.0\shared\winerror.h(55849): message : vedere la precedente definizione di 'DXGI_STATUS_CLIPPED'
+C:\Program Files (x86)\Microsoft DirectX SDK (June 2010)\Include\dxgitype.h(14,1): warning C4005: 'DXGI_STATUS_NO_REDIRECTION': ridefinizione macro
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.18362.0\shared\winerror.h(55858): message : vedere la precedente definizione di 'DXGI_STATUS_NO_REDIRECTION'
+C:\Program Files (x86)\Microsoft DirectX SDK (June 2010)\Include\dxgitype.h(15,1): warning C4005: 'DXGI_STATUS_NO_DESKTOP_ACCESS': ridefinizione macro
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.18362.0\shared\winerror.h(55867): message : vedere la precedente definizione di 'DXGI_STATUS_NO_DESKTOP_ACCESS'
+C:\Program Files (x86)\Microsoft DirectX SDK (June 2010)\Include\dxgitype.h(16,1): warning C4005: 'DXGI_STATUS_GRAPHICS_VIDPN_SOURCE_IN_USE': ridefinizione macro
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.18362.0\shared\winerror.h(55876): message : vedere la precedente definizione di 'DXGI_STATUS_GRAPHICS_VIDPN_SOURCE_IN_USE'
+C:\Program Files (x86)\Microsoft DirectX SDK (June 2010)\Include\dxgitype.h(17,1): warning C4005: 'DXGI_STATUS_MODE_CHANGED': ridefinizione macro
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.18362.0\shared\winerror.h(55885): message : vedere la precedente definizione di 'DXGI_STATUS_MODE_CHANGED'
+C:\Program Files (x86)\Microsoft DirectX SDK (June 2010)\Include\dxgitype.h(18,1): warning C4005: 'DXGI_STATUS_MODE_CHANGE_IN_PROGRESS': ridefinizione macro
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.18362.0\shared\winerror.h(55894): message : vedere la precedente definizione di 'DXGI_STATUS_MODE_CHANGE_IN_PROGRESS'
+C:\Program Files (x86)\Microsoft DirectX SDK (June 2010)\Include\dxgitype.h(21,1): warning C4005: 'DXGI_ERROR_INVALID_CALL': ridefinizione macro
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.18362.0\shared\winerror.h(55909): message : vedere la precedente definizione di 'DXGI_ERROR_INVALID_CALL'
+C:\Program Files (x86)\Microsoft DirectX SDK (June 2010)\Include\dxgitype.h(22,1): warning C4005: 'DXGI_ERROR_NOT_FOUND': ridefinizione macro
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.18362.0\shared\winerror.h(55918): message : vedere la precedente definizione di 'DXGI_ERROR_NOT_FOUND'
+C:\Program Files (x86)\Microsoft DirectX SDK (June 2010)\Include\dxgitype.h(23,1): warning C4005: 'DXGI_ERROR_MORE_DATA': ridefinizione macro
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.18362.0\shared\winerror.h(55927): message : vedere la precedente definizione di 'DXGI_ERROR_MORE_DATA'
+C:\Program Files (x86)\Microsoft DirectX SDK (June 2010)\Include\dxgitype.h(24,1): warning C4005: 'DXGI_ERROR_UNSUPPORTED': ridefinizione macro
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.18362.0\shared\winerror.h(55936): message : vedere la precedente definizione di 'DXGI_ERROR_UNSUPPORTED'
+C:\Program Files (x86)\Microsoft DirectX SDK (June 2010)\Include\dxgitype.h(25,1): warning C4005: 'DXGI_ERROR_DEVICE_REMOVED': ridefinizione macro
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.18362.0\shared\winerror.h(55945): message : vedere la precedente definizione di 'DXGI_ERROR_DEVICE_REMOVED'
+C:\Program Files (x86)\Microsoft DirectX SDK (June 2010)\Include\dxgitype.h(26,1): warning C4005: 'DXGI_ERROR_DEVICE_HUNG': ridefinizione macro
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.18362.0\shared\winerror.h(55954): message : vedere la precedente definizione di 'DXGI_ERROR_DEVICE_HUNG'
+C:\Program Files (x86)\Microsoft DirectX SDK (June 2010)\Include\dxgitype.h(27,1): warning C4005: 'DXGI_ERROR_DEVICE_RESET': ridefinizione macro
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.18362.0\shared\winerror.h(55964): message : vedere la precedente definizione di 'DXGI_ERROR_DEVICE_RESET'
+C:\Program Files (x86)\Microsoft DirectX SDK (June 2010)\Include\dxgitype.h(28,1): warning C4005: 'DXGI_ERROR_WAS_STILL_DRAWING': ridefinizione macro
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.18362.0\shared\winerror.h(55973): message : vedere la precedente definizione di 'DXGI_ERROR_WAS_STILL_DRAWING'
+C:\Program Files (x86)\Microsoft DirectX SDK (June 2010)\Include\dxgitype.h(29,1): warning C4005: 'DXGI_ERROR_FRAME_STATISTICS_DISJOINT': ridefinizione macro
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.18362.0\shared\winerror.h(55983): message : vedere la precedente definizione di 'DXGI_ERROR_FRAME_STATISTICS_DISJOINT'
+C:\Program Files (x86)\Microsoft DirectX SDK (June 2010)\Include\dxgitype.h(30,1): warning C4005: 'DXGI_ERROR_GRAPHICS_VIDPN_SOURCE_IN_USE': ridefinizione macro
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.18362.0\shared\winerror.h(55992): message : vedere la precedente definizione di 'DXGI_ERROR_GRAPHICS_VIDPN_SOURCE_IN_USE'
+C:\Program Files (x86)\Microsoft DirectX SDK (June 2010)\Include\dxgitype.h(31,1): warning C4005: 'DXGI_ERROR_DRIVER_INTERNAL_ERROR': ridefinizione macro
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.18362.0\shared\winerror.h(56002): message : vedere la precedente definizione di 'DXGI_ERROR_DRIVER_INTERNAL_ERROR'
+C:\Program Files (x86)\Microsoft DirectX SDK (June 2010)\Include\dxgitype.h(32,1): warning C4005: 'DXGI_ERROR_NONEXCLUSIVE': ridefinizione macro
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.18362.0\shared\winerror.h(56011): message : vedere la precedente definizione di 'DXGI_ERROR_NONEXCLUSIVE'
+C:\Program Files (x86)\Microsoft DirectX SDK (June 2010)\Include\dxgitype.h(33,1): warning C4005: 'DXGI_ERROR_NOT_CURRENTLY_AVAILABLE': ridefinizione macro
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.18362.0\shared\winerror.h(56020): message : vedere la precedente definizione di 'DXGI_ERROR_NOT_CURRENTLY_AVAILABLE'
+C:\Program Files (x86)\Microsoft DirectX SDK (June 2010)\Include\dxgitype.h(34,1): warning C4005: 'DXGI_ERROR_REMOTE_CLIENT_DISCONNECTED': ridefinizione macro
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.18362.0\shared\winerror.h(56030): message : vedere la precedente definizione di 'DXGI_ERROR_REMOTE_CLIENT_DISCONNECTED'
+C:\Program Files (x86)\Microsoft DirectX SDK (June 2010)\Include\dxgitype.h(35,1): warning C4005: 'DXGI_ERROR_REMOTE_OUTOFMEMORY': ridefinizione macro
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.18362.0\shared\winerror.h(56039): message : vedere la precedente definizione di 'DXGI_ERROR_REMOTE_OUTOFMEMORY'
+C:\Program Files (x86)\Microsoft DirectX SDK (June 2010)\Include\d3d11.h(917,1): warning C4005: 'D3D11_ERROR_TOO_MANY_UNIQUE_STATE_OBJECTS': ridefinizione macro
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.18362.0\shared\winerror.h(56303): message : vedere la precedente definizione di 'D3D11_ERROR_TOO_MANY_UNIQUE_STATE_OBJECTS'
+C:\Program Files (x86)\Microsoft DirectX SDK (June 2010)\Include\d3d11.h(918,1): warning C4005: 'D3D11_ERROR_FILE_NOT_FOUND': ridefinizione macro
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.18362.0\shared\winerror.h(56312): message : vedere la precedente definizione di 'D3D11_ERROR_FILE_NOT_FOUND'
+C:\Program Files (x86)\Microsoft DirectX SDK (June 2010)\Include\d3d11.h(919,1): warning C4005: 'D3D11_ERROR_TOO_MANY_UNIQUE_VIEW_OBJECTS': ridefinizione macro
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.18362.0\shared\winerror.h(56322): message : vedere la precedente definizione di 'D3D11_ERROR_TOO_MANY_UNIQUE_VIEW_OBJECTS'
+C:\Program Files (x86)\Microsoft DirectX SDK (June 2010)\Include\d3d11.h(920,1): warning C4005: 'D3D11_ERROR_DEFERRED_CONTEXT_MAP_WITHOUT_INITIAL_DISCARD': ridefinizione macro
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.18362.0\shared\winerror.h(56331): message : vedere la precedente definizione di 'D3D11_ERROR_DEFERRED_CONTEXT_MAP_WITHOUT_INITIAL_DISCARD'
+C:\Program Files (x86)\Microsoft DirectX SDK (June 2010)\Include\d3d10.h(608,1): warning C4005: 'D3D10_ERROR_TOO_MANY_UNIQUE_STATE_OBJECTS': ridefinizione macro
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.18362.0\shared\winerror.h(56279): message : vedere la precedente definizione di 'D3D10_ERROR_TOO_MANY_UNIQUE_STATE_OBJECTS'
+C:\Program Files (x86)\Microsoft DirectX SDK (June 2010)\Include\d3d10.h(609,1): warning C4005: 'D3D10_ERROR_FILE_NOT_FOUND': ridefinizione macro
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.18362.0\shared\winerror.h(56288): message : vedere la precedente definizione di 'D3D10_ERROR_FILE_NOT_FOUND'
+C:\Users\19v\source\repos\hal\hal\sdk\game.h(191,41): error C2065: '_ObjectNavigation': identificatore non dichiarato
+C:\Users\19v\source\repos\hal\hal\sdk\game.h(192,14): warning C4477: 'printf': con la stringa di formato '%p' è necessario un argomento di tipo 'void *', ma il tipo dell'argomento variadic 1 è 'HAL::SDK::Game::CObjectNavigation'
+C:\Users\19v\source\repos\hal\hal\graphics\drawing.h(104,11): warning C4244: 'inizializzazione': conversione da 'ImU32' a 'float'. Possibile perdita di dati.
+C:\Users\19v\source\repos\hal\hal\graphics\drawing.h(105,11): warning C4244: 'inizializzazione': conversione da 'ImU32' a 'float'. Possibile perdita di dati.
+C:\Users\19v\source\repos\hal\hal\graphics\drawing.h(106,11): warning C4244: 'inizializzazione': conversione da 'ImU32' a 'float'. Possibile perdita di dati.
+C:\Users\19v\source\repos\hal\hal\graphics\drawing.h(107,11): warning C4244: 'inizializzazione': conversione da 'ImU32' a 'float'. Possibile perdita di dati.
+C:\Users\19v\source\repos\hal\hal\graphics\drawing.h(118,75): warning C4267: 'argomento': conversione da 'size_t' a 'int'. Possibile perdita di dati.
+C:\Users\19v\source\repos\hal\hal\graphics\drawing.h(143,137): warning C4244: 'argomento': conversione da 'double' a 'float'. Possibile perdita di dati.
+C:\Users\19v\source\repos\hal\hal\graphics\drawing.h(143,145): warning C4305: 'argomento': troncamento da 'double' a 'float'
+C:\Users\19v\source\repos\hal\hal\graphics\drawing.h(143,52): warning C4244: 'argomento': conversione da 'int' a 'float'. Possibile perdita di dati.
+C:\Users\19v\source\repos\hal\hal\graphics\drawing.h(143,47): warning C4244: 'argomento': conversione da 'int' a 'float'. Possibile perdita di dati.
+C:\Users\19v\source\repos\hal\hal\graphics\drawing.h(144,137): warning C4244: 'argomento': conversione da 'double' a 'float'. Possibile perdita di dati.
+C:\Users\19v\source\repos\hal\hal\graphics\drawing.h(144,145): warning C4305: 'argomento': troncamento da 'double' a 'float'
+C:\Users\19v\source\repos\hal\hal\graphics\drawing.h(144,52): warning C4244: 'argomento': conversione da 'int' a 'float'. Possibile perdita di dati.
+C:\Users\19v\source\repos\hal\hal\graphics\drawing.h(144,47): warning C4244: 'argomento': conversione da 'int' a 'float'. Possibile perdita di dati.
+C:\Users\19v\source\repos\hal\hal\graphics\drawing.h(145,137): warning C4244: 'argomento': conversione da 'double' a 'float'. Possibile perdita di dati.
+C:\Users\19v\source\repos\hal\hal\graphics\drawing.h(145,145): warning C4305: 'argomento': troncamento da 'double' a 'float'
+C:\Users\19v\source\repos\hal\hal\graphics\drawing.h(145,54): warning C4244: 'argomento': conversione da 'int' a 'float'. Possibile perdita di dati.
+C:\Users\19v\source\repos\hal\hal\graphics\drawing.h(145,49): warning C4244: 'argomento': conversione da 'int' a 'float'. Possibile perdita di dati.
+C:\Users\19v\source\repos\hal\hal\graphics\drawing.h(146,137): warning C4244: 'argomento': conversione da 'double' a 'float'. Possibile perdita di dati.
+C:\Users\19v\source\repos\hal\hal\graphics\drawing.h(146,145): warning C4305: 'argomento': troncamento da 'double' a 'float'
+C:\Users\19v\source\repos\hal\hal\graphics\drawing.h(146,54): warning C4244: 'argomento': conversione da 'int' a 'float'. Possibile perdita di dati.
+C:\Users\19v\source\repos\hal\hal\graphics\drawing.h(146,49): warning C4244: 'argomento': conversione da 'int' a 'float'. Possibile perdita di dati.
+C:\Users\19v\source\repos\hal\hal\graphics\drawing.h(147,151): warning C4244: 'argomento': conversione da 'double' a 'float'. Possibile perdita di dati.
+C:\Users\19v\source\repos\hal\hal\graphics\drawing.h(147,134): warning C4244: 'argomento': conversione da 'double' a 'float'. Possibile perdita di dati.
+C:\Users\19v\source\repos\hal\hal\graphics\drawing.h(147,117): warning C4244: 'argomento': conversione da 'double' a 'float'. Possibile perdita di dati.
+C:\Users\19v\source\repos\hal\hal\graphics\drawing.h(147,100): warning C4244: 'argomento': conversione da 'double' a 'float'. Possibile perdita di dati.
+C:\Users\19v\source\repos\hal\hal\graphics\drawing.h(147,50): warning C4244: 'argomento': conversione da 'int' a 'float'. Possibile perdita di dati.
+C:\Users\19v\source\repos\hal\hal\graphics\drawing.h(147,47): warning C4244: 'argomento': conversione da 'int' a 'float'. Possibile perdita di dati.
+C:\Users\19v\source\repos\hal\hal\graphics\drawing.h(154,155): warning C4244: 'argomento': conversione da 'double' a 'float'. Possibile perdita di dati.
+C:\Users\19v\source\repos\hal\hal\graphics\drawing.h(154,137): warning C4244: 'argomento': conversione da 'double' a 'float'. Possibile perdita di dati.
+C:\Users\19v\source\repos\hal\hal\graphics\drawing.h(154,119): warning C4244: 'argomento': conversione da 'double' a 'float'. Possibile perdita di dati.
+C:\Users\19v\source\repos\hal\hal\graphics\drawing.h(154,101): warning C4244: 'argomento': conversione da 'double' a 'float'. Possibile perdita di dati.
+C:\Users\19v\source\repos\hal\hal\graphics\drawing.h(154,50): warning C4244: 'argomento': conversione da 'int' a 'float'. Possibile perdita di dati.
+C:\Users\19v\source\repos\hal\hal\graphics\drawing.h(154,47): warning C4244: 'argomento': conversione da 'int' a 'float'. Possibile perdita di dati.
+C:\Users\19v\source\repos\hal\hal\graphics\drawing.h(158,173): warning C4244: 'argomento': conversione da 'double' a 'float'. Possibile perdita di dati.
+C:\Users\19v\source\repos\hal\hal\graphics\drawing.h(158,156): warning C4244: 'argomento': conversione da 'double' a 'float'. Possibile perdita di dati.
+C:\Users\19v\source\repos\hal\hal\graphics\drawing.h(158,139): warning C4244: 'argomento': conversione da 'double' a 'float'. Possibile perdita di dati.
+C:\Users\19v\source\repos\hal\hal\graphics\drawing.h(158,122): warning C4244: 'argomento': conversione da 'double' a 'float'. Possibile perdita di dati.
+C:\Users\19v\source\repos\hal\hal\graphics\drawing.h(158,190): warning C4244: 'argomento': conversione da 'int' a 'float'. Possibile perdita di dati.
+C:\Users\19v\source\repos\hal\hal\graphics\drawing.h(158,70): warning C4244: 'argomento': conversione da 'int' a 'float'. Possibile perdita di dati.
+C:\Users\19v\source\repos\hal\hal\graphics\drawing.h(158,63): warning C4244: 'argomento': conversione da 'int' a 'float'. Possibile perdita di dati.
+C:\Users\19v\source\repos\hal\hal\graphics\drawing.h(158,50): warning C4244: 'argomento': conversione da 'int' a 'float'. Possibile perdita di dati.
+C:\Users\19v\source\repos\hal\hal\graphics\drawing.h(158,47): warning C4244: 'argomento': conversione da 'int' a 'float'. Possibile perdita di dati.
+C:\Users\19v\source\repos\hal\hal\graphics\drawing.h(162,183): warning C4244: 'argomento': conversione da 'double' a 'float'. Possibile perdita di dati.
+C:\Users\19v\source\repos\hal\hal\graphics\drawing.h(162,165): warning C4244: 'argomento': conversione da 'double' a 'float'. Possibile perdita di dati.
+C:\Users\19v\source\repos\hal\hal\graphics\drawing.h(162,147): warning C4244: 'argomento': conversione da 'double' a 'float'. Possibile perdita di dati.
+C:\Users\19v\source\repos\hal\hal\graphics\drawing.h(162,129): warning C4244: 'argomento': conversione da 'double' a 'float'. Possibile perdita di dati.
+C:\Users\19v\source\repos\hal\hal\graphics\drawing.h(162,76): warning C4244: 'argomento': conversione da 'int' a 'float'. Possibile perdita di dati.
+C:\Users\19v\source\repos\hal\hal\graphics\drawing.h(162,69): warning C4244: 'argomento': conversione da 'int' a 'float'. Possibile perdita di dati.
+C:\Users\19v\source\repos\hal\hal\graphics\drawing.h(162,56): warning C4244: 'argomento': conversione da 'int' a 'float'. Possibile perdita di dati.
+C:\Users\19v\source\repos\hal\hal\graphics\drawing.h(162,53): warning C4244: 'argomento': conversione da 'int' a 'float'. Possibile perdita di dati.
+C:\Users\19v\source\repos\hal\hal\graphics\drawing.h(166,171): warning C4244: 'argomento': conversione da 'double' a 'float'. Possibile perdita di dati.
+C:\Users\19v\source\repos\hal\hal\graphics\drawing.h(166,153): warning C4244: 'argomento': conversione da 'double' a 'float'. Possibile perdita di dati.
+C:\Users\19v\source\repos\hal\hal\graphics\drawing.h(166,135): warning C4244: 'argomento': conversione da 'double' a 'float'. Possibile perdita di dati.
+C:\Users\19v\source\repos\hal\hal\graphics\drawing.h(166,117): warning C4244: 'argomento': conversione da 'double' a 'float'. Possibile perdita di dati.
+C:\Users\19v\source\repos\hal\hal\graphics\drawing.h(166,62): warning C4244: 'argomento': conversione da 'int' a 'float'. Possibile perdita di dati.
+C:\Users\19v\source\repos\hal\hal\graphics\drawing.h(166,58): warning C4244: 'argomento': conversione da 'int' a 'float'. Possibile perdita di dati.
+C:\Users\19v\source\repos\hal\hal\graphics\drawing.h(166,55): warning C4244: 'argomento': conversione da 'int' a 'float'. Possibile perdita di dati.
+C:\Users\19v\source\repos\hal\hal\graphics\drawing.h(170,165): warning C4244: 'argomento': conversione da 'double' a 'float'. Possibile perdita di dati.
+C:\Users\19v\source\repos\hal\hal\graphics\drawing.h(170,147): warning C4244: 'argomento': conversione da 'double' a 'float'. Possibile perdita di dati.
+C:\Users\19v\source\repos\hal\hal\graphics\drawing.h(170,129): warning C4244: 'argomento': conversione da 'double' a 'float'. Possibile perdita di dati.
+C:\Users\19v\source\repos\hal\hal\graphics\drawing.h(170,111): warning C4244: 'argomento': conversione da 'double' a 'float'. Possibile perdita di dati.
+C:\Users\19v\source\repos\hal\hal\graphics\drawing.h(170,56): warning C4244: 'argomento': conversione da 'int' a 'float'. Possibile perdita di dati.
+C:\Users\19v\source\repos\hal\hal\graphics\drawing.h(170,52): warning C4244: 'argomento': conversione da 'int' a 'float'. Possibile perdita di dati.
+C:\Users\19v\source\repos\hal\hal\graphics\drawing.h(170,49): warning C4244: 'argomento': conversione da 'int' a 'float'. Possibile perdita di dati.
+C:\Users\19v\source\repos\hal\hal\graphics\drawing.h(174,193): warning C4244: 'argomento': conversione da 'double' a 'float'. Possibile perdita di dati.
+C:\Users\19v\source\repos\hal\hal\graphics\drawing.h(174,175): warning C4244: 'argomento': conversione da 'double' a 'float'. Possibile perdita di dati.
+C:\Users\19v\source\repos\hal\hal\graphics\drawing.h(174,157): warning C4244: 'argomento': conversione da 'double' a 'float'. Possibile perdita di dati.
+C:\Users\19v\source\repos\hal\hal\graphics\drawing.h(174,139): warning C4244: 'argomento': conversione da 'double' a 'float'. Possibile perdita di dati.
+C:\Users\19v\source\repos\hal\hal\graphics\drawing.h(174,87): warning C4244: 'argomento': conversione da 'int' a 'float'. Possibile perdita di dati.
+C:\Users\19v\source\repos\hal\hal\graphics\drawing.h(174,83): warning C4244: 'argomento': conversione da 'int' a 'float'. Possibile perdita di dati.
+C:\Users\19v\source\repos\hal\hal\graphics\drawing.h(174,71): warning C4244: 'argomento': conversione da 'int' a 'float'. Possibile perdita di dati.
+C:\Users\19v\source\repos\hal\hal\graphics\drawing.h(174,67): warning C4244: 'argomento': conversione da 'int' a 'float'. Possibile perdita di dati.
+C:\Users\19v\source\repos\hal\hal\graphics\drawing.h(174,55): warning C4244: 'argomento': conversione da 'int' a 'float'. Possibile perdita di dati.
+C:\Users\19v\source\repos\hal\hal\graphics\drawing.h(174,51): warning C4244: 'argomento': conversione da 'int' a 'float'. Possibile perdita di dati.
+C:\Users\19v\source\repos\hal\hal\graphics\drawing.h(178,199): warning C4244: 'argomento': conversione da 'double' a 'float'. Possibile perdita di dati.
+C:\Users\19v\source\repos\hal\hal\graphics\drawing.h(178,181): warning C4244: 'argomento': conversione da 'double' a 'float'. Possibile perdita di dati.
+C:\Users\19v\source\repos\hal\hal\graphics\drawing.h(178,163): warning C4244: 'argomento': conversione da 'double' a 'float'. Possibile perdita di dati.
+C:\Users\19v\source\repos\hal\hal\graphics\drawing.h(178,145): warning C4244: 'argomento': conversione da 'double' a 'float'. Possibile perdita di dati.
+C:\Users\19v\source\repos\hal\hal\graphics\drawing.h(178,93): warning C4244: 'argomento': conversione da 'int' a 'float'. Possibile perdita di dati.
+C:\Users\19v\source\repos\hal\hal\graphics\drawing.h(178,89): warning C4244: 'argomento': conversione da 'int' a 'float'. Possibile perdita di dati.
+C:\Users\19v\source\repos\hal\hal\graphics\drawing.h(178,77): warning C4244: 'argomento': conversione da 'int' a 'float'. Possibile perdita di dati.
+C:\Users\19v\source\repos\hal\hal\graphics\drawing.h(178,73): warning C4244: 'argomento': conversione da 'int' a 'float'. Possibile perdita di dati.
+C:\Users\19v\source\repos\hal\hal\graphics\drawing.h(178,61): warning C4244: 'argomento': conversione da 'int' a 'float'. Possibile perdita di dati.
+C:\Users\19v\source\repos\hal\hal\graphics\drawing.h(178,57): warning C4244: 'argomento': conversione da 'int' a 'float'. Possibile perdita di dati.
+C:\Users\19v\source\repos\hal\hal\graphics\drawing.h(182,169): warning C4244: 'argomento': conversione da 'double' a 'float'. Possibile perdita di dati.
+C:\Users\19v\source\repos\hal\hal\graphics\drawing.h(182,152): warning C4244: 'argomento': conversione da 'double' a 'float'. Possibile perdita di dati.
+C:\Users\19v\source\repos\hal\hal\graphics\drawing.h(182,135): warning C4244: 'argomento': conversione da 'double' a 'float'. Possibile perdita di dati.
+C:\Users\19v\source\repos\hal\hal\graphics\drawing.h(182,118): warning C4244: 'argomento': conversione da 'double' a 'float'. Possibile perdita di dati.
+C:\Users\19v\source\repos\hal\hal\graphics\drawing.h(182,180): warning C4244: 'argomento': conversione da 'int' a 'float'. Possibile perdita di dati.
+C:\Users\19v\source\repos\hal\hal\graphics\drawing.h(182,67): warning C4244: 'argomento': conversione da 'int' a 'float'. Possibile perdita di dati.
+C:\Users\19v\source\repos\hal\hal\graphics\drawing.h(182,63): warning C4244: 'argomento': conversione da 'int' a 'float'. Possibile perdita di dati.
+C:\Users\19v\source\repos\hal\hal\graphics\drawing.h(182,51): warning C4244: 'argomento': conversione da 'int' a 'float'. Possibile perdita di dati.
+C:\Users\19v\source\repos\hal\hal\graphics\drawing.h(182,47): warning C4244: 'argomento': conversione da 'int' a 'float'. Possibile perdita di dati.
+C:\Users\19v\source\repos\hal\hal\graphics\drawing.h(211,71): warning C4244: 'argomento': conversione da 'float' a 'int'. Possibile perdita di dati.
+C:\Users\19v\source\repos\hal\hal\graphics\drawing.h(211,56): warning C4244: 'argomento': conversione da 'float' a 'int'. Possibile perdita di dati.
+C:\Users\19v\source\repos\hal\hal\graphics\drawing.h(211,41): warning C4244: 'argomento': conversione da 'float' a 'int'. Possibile perdita di dati.
+C:\Users\19v\source\repos\hal\hal\graphics\drawing.h(211,25): warning C4244: 'argomento': conversione da 'float' a 'int'. Possibile perdita di dati.
+C:\Users\19v\source\repos\hal\hal\graphics\drawing.h(236,59): warning C4244: 'argomento': conversione da 'float' a 'int'. Possibile perdita di dati.
+C:\Users\19v\source\repos\hal\hal\graphics\drawing.h(236,47): warning C4244: 'argomento': conversione da 'float' a 'int'. Possibile perdita di dati.
+C:\Users\19v\source\repos\hal\hal\graphics\drawing.h(236,35): warning C4244: 'argomento': conversione da 'float' a 'int'. Possibile perdita di dati.
+C:\Users\19v\source\repos\hal\hal\graphics\drawing.h(236,23): warning C4244: 'argomento': conversione da 'float' a 'int'. Possibile perdita di dati.
+C:\Users\19v\source\repos\hal\hal\graphics\drawing.h(357,13): warning C4477: 'printf': con la stringa di formato '%p' è necessario un argomento di tipo 'void *', ma il tipo dell'argomento variadic 1 è 'DWORD64'
+C:\Users\19v\source\repos\hal\hal\graphics\drawing.h(384,100): warning C4244: 'argomento': conversione da 'float' a 'int'. Possibile perdita di dati.
+C:\Users\19v\source\repos\hal\hal\graphics\drawing.h(384,82): warning C4244: 'argomento': conversione da 'float' a 'int'. Possibile perdita di dati.
+C:\Users\19v\source\repos\hal\hal\graphics\drawing.h(384,66): warning C4244: 'argomento': conversione da 'float' a 'int'. Possibile perdita di dati.
+C:\Users\19v\source\repos\hal\hal\graphics\drawing.h(384,48): warning C4244: 'argomento': conversione da 'float' a 'int'. Possibile perdita di dati.
+C:\Users\19v\source\repos\hal\hal\graphics\drawing.h(385,96): warning C4244: 'argomento': conversione da 'float' a 'int'. Possibile perdita di dati.
+C:\Users\19v\source\repos\hal\hal\graphics\drawing.h(385,78): warning C4244: 'argomento': conversione da 'float' a 'int'. Possibile perdita di dati.
+C:\Users\19v\source\repos\hal\hal\graphics\drawing.h(385,62): warning C4244: 'argomento': conversione da 'float' a 'int'. Possibile perdita di dati.
+C:\Users\19v\source\repos\hal\hal\graphics\drawing.h(385,48): warning C4244: 'argomento': conversione da 'float' a 'int'. Possibile perdita di dati.
+C:\Users\19v\source\repos\hal\hal\graphics\drawing.h(386,96): warning C4244: 'argomento': conversione da 'float' a 'int'. Possibile perdita di dati.
+C:\Users\19v\source\repos\hal\hal\graphics\drawing.h(386,78): warning C4244: 'argomento': conversione da 'float' a 'int'. Possibile perdita di dati.
+C:\Users\19v\source\repos\hal\hal\graphics\drawing.h(386,62): warning C4244: 'argomento': conversione da 'float' a 'int'. Possibile perdita di dati.
+C:\Users\19v\source\repos\hal\hal\graphics\drawing.h(386,48): warning C4244: 'argomento': conversione da 'float' a 'int'. Possibile perdita di dati.
+C:\Users\19v\source\repos\hal\hal\graphics\drawing.h(387,92): warning C4244: 'argomento': conversione da 'float' a 'int'. Possibile perdita di dati.
+C:\Users\19v\source\repos\hal\hal\graphics\drawing.h(387,78): warning C4244: 'argomento': conversione da 'float' a 'int'. Possibile perdita di dati.
+C:\Users\19v\source\repos\hal\hal\graphics\drawing.h(387,62): warning C4244: 'argomento': conversione da 'float' a 'int'. Possibile perdita di dati.
+C:\Users\19v\source\repos\hal\hal\graphics\drawing.h(387,48): warning C4244: 'argomento': conversione da 'float' a 'int'. Possibile perdita di dati.
+C:\Users\19v\source\repos\hal\hal\graphics\drawing.h(399,91): warning C4244: 'argomento': conversione da 'float' a 'int'. Possibile perdita di dati.
+C:\Users\19v\source\repos\hal\hal\graphics\drawing.h(399,77): warning C4244: 'argomento': conversione da 'float' a 'int'. Possibile perdita di dati.
+C:\Users\19v\source\repos\hal\hal\graphics\drawing.h(399,60): warning C4244: 'argomento': conversione da 'float' a 'int'. Possibile perdita di dati.
+C:\Users\19v\source\repos\hal\hal\graphics\drawing.h(400,91): warning C4244: 'argomento': conversione da 'float' a 'int'. Possibile perdita di dati.
+C:\Users\19v\source\repos\hal\hal\graphics\drawing.h(400,77): warning C4244: 'argomento': conversione da 'float' a 'int'. Possibile perdita di dati.
+C:\Users\19v\source\repos\hal\hal\graphics\drawing.h(400,60): warning C4244: 'argomento': conversione da 'float' a 'int'. Possibile perdita di dati.
+C:\Users\19v\source\repos\hal\hal\graphics\drawing.h(401,31): warning C4838: la conversione da 'float' a 'DWORD' richiede una conversione che supporta un minor numero di dati
+C:\Users\19v\source\repos\hal\hal\graphics\drawing.h(401,31): warning C4244: 'inizializzazione': conversione da 'float' a 'DWORD'. Possibile perdita di dati.
+C:\Users\19v\source\repos\hal\hal\graphics\drawing.h(401,147): warning C4838: la conversione da 'float' a 'DWORD' richiede una conversione che supporta un minor numero di dati
+C:\Users\19v\source\repos\hal\hal\graphics\drawing.h(401,147): warning C4244: 'inizializzazione': conversione da 'float' a 'DWORD'. Possibile perdita di dati.
+C:\Users\19v\source\repos\hal\hal\graphics\drawing.h(402,81): warning C4244: 'argomento': conversione da 'float' a 'int'. Possibile perdita di dati.
+C:\Users\19v\source\repos\hal\hal\graphics\drawing.h(402,74): warning C4244: 'argomento': conversione da 'float' a 'int'. Possibile perdita di dati.
+C:\Users\19v\source\repos\hal\hal\graphics\drawing.h(402,60): warning C4244: 'argomento': conversione da 'float' a 'int'. Possibile perdita di dati.
+C:\Users\19v\source\repos\hal\hal\graphics\drawing.h(409,92): warning C4244: 'argomento': conversione da 'float' a 'int'. Possibile perdita di dati.
+C:\Users\19v\source\repos\hal\hal\graphics\drawing.h(409,78): warning C4244: 'argomento': conversione da 'float' a 'int'. Possibile perdita di dati.
+C:\Users\19v\source\repos\hal\hal\graphics\drawing.h(409,61): warning C4244: 'argomento': conversione da 'float' a 'int'. Possibile perdita di dati.
+C:\Users\19v\source\repos\hal\hal\graphics\drawing.h(410,92): warning C4244: 'argomento': conversione da 'float' a 'int'. Possibile perdita di dati.
+C:\Users\19v\source\repos\hal\hal\graphics\drawing.h(410,78): warning C4244: 'argomento': conversione da 'float' a 'int'. Possibile perdita di dati.
+C:\Users\19v\source\repos\hal\hal\graphics\drawing.h(410,61): warning C4244: 'argomento': conversione da 'float' a 'int'. Possibile perdita di dati.
+C:\Users\19v\source\repos\hal\hal\graphics\drawing.h(411,31): warning C4838: la conversione da 'float' a 'DWORD' richiede una conversione che supporta un minor numero di dati
+C:\Users\19v\source\repos\hal\hal\graphics\drawing.h(411,31): warning C4244: 'inizializzazione': conversione da 'float' a 'DWORD'. Possibile perdita di dati.
+C:\Users\19v\source\repos\hal\hal\graphics\drawing.h(411,91): warning C4838: la conversione da 'float' a 'DWORD' richiede una conversione che supporta un minor numero di dati
+C:\Users\19v\source\repos\hal\hal\graphics\drawing.h(411,91): warning C4244: 'inizializzazione': conversione da 'float' a 'DWORD'. Possibile perdita di dati.
+C:\Users\19v\source\repos\hal\hal\graphics\drawing.h(412,82): warning C4244: 'argomento': conversione da 'float' a 'int'. Possibile perdita di dati.
+C:\Users\19v\source\repos\hal\hal\graphics\drawing.h(412,75): warning C4244: 'argomento': conversione da 'float' a 'int'. Possibile perdita di dati.
+C:\Users\19v\source\repos\hal\hal\graphics\drawing.h(412,61): warning C4244: 'argomento': conversione da 'float' a 'int'. Possibile perdita di dati.
+C:\Users\19v\source\repos\hal\hal\graphics\drawing.h(416,79): warning C4244: 'argomento': conversione da 'float' a 'int'. Possibile perdita di dati.
+C:\Users\19v\source\repos\hal\hal\graphics\drawing.h(416,58): warning C4244: 'argomento': conversione da 'float' a 'int'. Possibile perdita di dati.
+C:\Users\19v\source\repos\hal\hal\graphics\drawing.h(421,22): warning C4244: 'inizializzazione': conversione da 'float' a 'int'. Possibile perdita di dati.
+C:\Users\19v\source\repos\hal\hal\graphics\drawing.h(423,79): warning C4244: 'argomento': conversione da 'float' a 'int'. Possibile perdita di dati.
+C:\Users\19v\source\repos\hal\hal\graphics\drawing.h(423,58): warning C4244: 'argomento': conversione da 'float' a 'int'. Possibile perdita di dati.

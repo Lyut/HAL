@@ -1,6 +1,9 @@
 #pragma once
 #include <Windows.h>
 #include <vector>
+#include <Psapi.h>
+#include <winternl.h>
+#include <filesystem>
 #include "xorstr.h"
 
 #ifdef _WIN64
@@ -11,6 +14,125 @@
 
 namespace HAL::MemoryMan
 {
+    void OutputDebugString_(const std::string& s)
+    {
+        ::OutputDebugStringA(s.c_str());
+    }
+
+    HMODULE getModuleHandle(const char* name)
+    {
+        PEB* peb = (PEB*)__readgsqword(0x60);
+
+        LIST_ENTRY* head = &peb->Ldr->InMemoryOrderModuleList;
+        for (LIST_ENTRY* item = head->Flink; item != head; item = item->Flink)
+        {
+            LDR_DATA_TABLE_ENTRY* entry = CONTAINING_RECORD(item, LDR_DATA_TABLE_ENTRY, InMemoryOrderLinks);
+
+            std::filesystem::path path(entry->FullDllName.Buffer);
+
+            if (path.filename() == name)
+                return (HMODULE)entry->DllBase;
+        }
+
+        return nullptr;
+    }
+
+    namespace PageGuard
+    {
+        static void* breakpointAddress;
+        static void* anti_cheat_base;
+        static MODULEINFO anti_cheat_info;
+
+        static void* GOR_base;
+
+        auto PageGuardMemory(void* address, const SIZE_T length) -> void
+        {
+            DWORD oldProtect;
+            MEMORY_BASIC_INFORMATION mbi;
+
+            VirtualQuery(static_cast<const void*>(address), &mbi, sizeof(MEMORY_BASIC_INFORMATION));
+
+            if (!VirtualProtect(address, length, mbi.Protect | PAGE_GUARD, &oldProtect))
+            {
+                OutputDebugString_("[#] failed to protect: " + std::to_string(GetLastError()));
+            }
+        }
+
+        auto UnPageGuardMemory(void* address, const SIZE_T length) -> void
+        {
+            DWORD oldProtect;
+            MEMORY_BASIC_INFORMATION mbi;
+
+            VirtualQuery(static_cast<const void*>(address), &mbi, sizeof(MEMORY_BASIC_INFORMATION));
+            VirtualProtect(address, length, mbi.Protect & ~PAGE_GUARD, &oldProtect);
+        }
+
+        typedef LONG(NTAPI* NtSuspendProcess)(IN HANDLE ProcessHandle);
+
+        void SuspendProc(DWORD processId)
+        {
+            HANDLE processHandle = OpenProcess(PROCESS_ALL_ACCESS, FALSE, processId);
+
+            NtSuspendProcess pfnNtSuspendProcess = (NtSuspendProcess)GetProcAddress(
+                GetModuleHandleA("ntdll.dll"), "NtSuspendProcess");
+
+            pfnNtSuspendProcess(processHandle);
+            CloseHandle(processHandle);
+        }
+
+        auto CALLBACK VectoredExceptionHandler(_EXCEPTION_POINTERS* ep) -> LONG
+        {
+            if (ep->ExceptionRecord->ExceptionCode == EXCEPTION_GUARD_PAGE)
+            {
+                //SDK::OutputDebugString_("[#] memory attempt access");
+
+                auto address_source = ep->ExceptionRecord->ExceptionAddress;
+                auto address_destination = ep->ExceptionRecord->ExceptionInformation[1];
+
+                if ((void*)address_source >= anti_cheat_base && address_source <= (void*)((uintptr_t)anti_cheat_base + anti_cheat_info.SizeOfImage))
+                {
+                    std::stringstream stream_address_source; stream_address_source << std::hex << address_source; std::string result_address_source(stream_address_source.str());
+                    std::stringstream stream_address_base; stream_address_base << std::hex << anti_cheat_base; std::string result_address_base(stream_address_base.str());
+                    std::stringstream stream_address_offset; stream_address_offset << std::hex << (uintptr_t)address_source - (uintptr_t)anti_cheat_base; std::string result_address_offset(stream_address_offset.str());
+                    std::stringstream stream_address_destination; stream_address_destination << std::hex << address_destination; std::string result_address_destination(stream_address_destination.str());
+                    std::stringstream stream_address_offset_lua; stream_address_offset_lua << std::hex << (uintptr_t)address_destination - (uintptr_t)GOR_base; std::string result_address_offset_lua(stream_address_offset_lua.str());
+
+                    OutputDebugString_("[#] memory attempt access from adhesive: source: " + result_address_source +
+                        std::string(" base: ") + result_address_base +
+                        std::string(" offset: ") + result_address_offset +
+                        std::string(" destination: ") + result_address_destination +
+                        std::string(" offset from gor64.dll: ") + result_address_offset_lua);
+                   // OutputDebugString_("[#] memory attempt access from adhesive");
+                   // SuspendProc(GetCurrentProcessId());
+                }
+
+                ep->ContextRecord->EFlags |= 0x100ui32;
+
+                return EXCEPTION_CONTINUE_EXECUTION;
+            }
+            else if (ep->ExceptionRecord->ExceptionCode == EXCEPTION_SINGLE_STEP)
+            {
+                PageGuardMemory(breakpointAddress, 1);
+
+                return EXCEPTION_CONTINUE_EXECUTION;
+            }
+
+            return EXCEPTION_CONTINUE_SEARCH;
+        }
+
+        auto initializeBreakpoint(void* address) -> void
+        {
+            breakpointAddress = address;
+            PageGuardMemory(breakpointAddress, 1ui64);
+        }
+
+        auto disableBreakpoint(void* address) -> void
+        {
+            breakpointAddress = nullptr;
+            UnPageGuardMemory(address, 1ui64);
+        }
+    }
+
     bool ValidPTR(DWORD64 ptr)
     {
         if (ptr >= 0x10000 && ptr < PTRMAXVAL)
