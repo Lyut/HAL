@@ -6,10 +6,12 @@ namespace HAL::Config {
 
 	namespace Colors {
 		float f2DColor[] = { 0.15f, 0.68f, 0.37f, 1.00f };
+		float f3DColor[] = { 0.15f, 0.68f, 0.37f, 1.00f };
 		float fNameColor[] = { 0.15f, 0.68f, 0.37f, 1.00f };
 		float fDistanceColor[] = { 0.15f, 0.68f, 0.37f, 1.00f };
 		float fSkeletonColor[] = { 0.15f, 0.68f, 0.37f, 1.00f };
 		float fTracerColor[] = { 0.15f, 0.68f, 0.37f, 1.00f };
+		float fBarrelColor[] = { 0.15f, 0.68f, 0.37f, 1.00f };
 	}
 
 	namespace ESP {
@@ -17,10 +19,12 @@ namespace HAL::Config {
 		bool bShowName = false;
 		bool bShowDistance = false;
 		bool bShow2DBox = false;
+		bool bShow3DBox = false;
 		bool bShowSkeleton = false;
 		bool bShowTracer = false;
 		bool bShowHealth = false;
 		bool bShowArmor = false;
-		bool bShowHeading = false;
+		bool bShowBarrel = false;
+		bool bDrawNPC = false;
 	}
 }

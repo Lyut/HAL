@@ -1,4 +1,9 @@
 #pragma once
+#include "DxINC/SimpleMath.h"
+
+using namespace DirectX::SimpleMath;
+
+/*
 #include <vector>
 
 class Vector3
@@ -30,4 +35,4 @@ public:
 	{
 		return Vector3(from.x - to.x, from.y - to.y, from.z - to.z).length();
 	}
-};
+}; */

@@ -186,10 +186,34 @@
     <ClInclude Include="hooks\reset.h" />
     <ClInclude Include="includes.h" />
     <ClInclude Include="memoryman.h" />
+    <ClInclude Include="sdk\DxINC\Audio.h" />
+    <ClInclude Include="sdk\DxINC\BufferHelpers.h" />
+    <ClInclude Include="sdk\DxINC\CommonStates.h" />
+    <ClInclude Include="sdk\DxINC\DDSTextureLoader.h" />
+    <ClInclude Include="sdk\DxINC\DirectXHelpers.h" />
+    <ClInclude Include="sdk\DxINC\Effects.h" />
+    <ClInclude Include="sdk\DxINC\GamePad.h" />
+    <ClInclude Include="sdk\DxINC\GeometricPrimitive.h" />
+    <ClInclude Include="sdk\DxINC\GraphicsMemory.h" />
+    <ClInclude Include="sdk\DxINC\Keyboard.h" />
+    <ClInclude Include="sdk\DxINC\Model.h" />
+    <ClInclude Include="sdk\DxINC\Mouse.h" />
+    <ClInclude Include="sdk\DxINC\PostProcess.h" />
+    <ClInclude Include="sdk\DxINC\PrimitiveBatch.h" />
+    <ClInclude Include="sdk\DxINC\ScreenGrab.h" />
+    <ClInclude Include="sdk\DxINC\SimpleMath.h" />
+    <ClInclude Include="sdk\DxINC\SpriteBatch.h" />
+    <ClInclude Include="sdk\DxINC\SpriteFont.h" />
+    <ClInclude Include="sdk\DxINC\VertexTypes.h" />
+    <ClInclude Include="sdk\DxINC\WICTextureLoader.h" />
+    <ClInclude Include="sdk\DxINC\XboxDDSTextureLoader.h" />
     <ClInclude Include="sdk\game.h" />
     <ClInclude Include="sdk\utils.h" />
     <ClInclude Include="sdk\vec3.h" />
     <ClInclude Include="xorstr.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="sdk\DxINC\SimpleMath.inl" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

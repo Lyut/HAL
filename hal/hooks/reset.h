@@ -16,6 +16,7 @@ void HAL::Hooks::Reset::CreateSwapChain_hk(__int64 who_cares, ID3D11Device* pDev
 	pD11RenderTargetView = nullptr;
 	pD11Device->Release();
 	pD11Device = nullptr;
+	SDK::Game::Init();
 
 	return o_CreateSwapChain(who_cares, pDevice, pDesc, ppSwapChain);
 }

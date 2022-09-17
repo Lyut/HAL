@@ -25,6 +25,9 @@
     <Filter Include="File di intestazione\graphics\imgui">
       <UniqueIdentifier>{334421a7-57b0-4b5c-8d7a-d9568e30ade6}</UniqueIdentifier>
     </Filter>
+    <Filter Include="File di intestazione\sdk\DxINC">
+      <UniqueIdentifier>{181cd1c7-e1c8-449c-8571-c9b8af03a5e5}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="dllmain.cpp">
@@ -113,5 +116,73 @@
     <ClInclude Include="sdk\game.h">
       <Filter>File di intestazione\sdk</Filter>
     </ClInclude>
+    <ClInclude Include="sdk\DxINC\GamePad.h">
+      <Filter>File di intestazione\sdk\DxINC</Filter>
+    </ClInclude>
+    <ClInclude Include="sdk\DxINC\GeometricPrimitive.h">
+      <Filter>File di intestazione\sdk\DxINC</Filter>
+    </ClInclude>
+    <ClInclude Include="sdk\DxINC\GraphicsMemory.h">
+      <Filter>File di intestazione\sdk\DxINC</Filter>
+    </ClInclude>
+    <ClInclude Include="sdk\DxINC\Keyboard.h">
+      <Filter>File di intestazione\sdk\DxINC</Filter>
+    </ClInclude>
+    <ClInclude Include="sdk\DxINC\Model.h">
+      <Filter>File di intestazione\sdk\DxINC</Filter>
+    </ClInclude>
+    <ClInclude Include="sdk\DxINC\Mouse.h">
+      <Filter>File di intestazione\sdk\DxINC</Filter>
+    </ClInclude>
+    <ClInclude Include="sdk\DxINC\PostProcess.h">
+      <Filter>File di intestazione\sdk\DxINC</Filter>
+    </ClInclude>
+    <ClInclude Include="sdk\DxINC\PrimitiveBatch.h">
+      <Filter>File di intestazione\sdk\DxINC</Filter>
+    </ClInclude>
+    <ClInclude Include="sdk\DxINC\ScreenGrab.h">
+      <Filter>File di intestazione\sdk\DxINC</Filter>
+    </ClInclude>
+    <ClInclude Include="sdk\DxINC\SimpleMath.h">
+      <Filter>File di intestazione\sdk\DxINC</Filter>
+    </ClInclude>
+    <ClInclude Include="sdk\DxINC\SpriteBatch.h">
+      <Filter>File di intestazione\sdk\DxINC</Filter>
+    </ClInclude>
+    <ClInclude Include="sdk\DxINC\SpriteFont.h">
+      <Filter>File di intestazione\sdk\DxINC</Filter>
+    </ClInclude>
+    <ClInclude Include="sdk\DxINC\VertexTypes.h">
+      <Filter>File di intestazione\sdk\DxINC</Filter>
+    </ClInclude>
+    <ClInclude Include="sdk\DxINC\WICTextureLoader.h">
+      <Filter>File di intestazione\sdk\DxINC</Filter>
+    </ClInclude>
+    <ClInclude Include="sdk\DxINC\XboxDDSTextureLoader.h">
+      <Filter>File di intestazione\sdk\DxINC</Filter>
+    </ClInclude>
+    <ClInclude Include="sdk\DxINC\Audio.h">
+      <Filter>File di intestazione\sdk\DxINC</Filter>
+    </ClInclude>
+    <ClInclude Include="sdk\DxINC\BufferHelpers.h">
+      <Filter>File di intestazione\sdk\DxINC</Filter>
+    </ClInclude>
+    <ClInclude Include="sdk\DxINC\CommonStates.h">
+      <Filter>File di intestazione\sdk\DxINC</Filter>
+    </ClInclude>
+    <ClInclude Include="sdk\DxINC\DDSTextureLoader.h">
+      <Filter>File di intestazione\sdk\DxINC</Filter>
+    </ClInclude>
+    <ClInclude Include="sdk\DxINC\DirectXHelpers.h">
+      <Filter>File di intestazione\sdk\DxINC</Filter>
+    </ClInclude>
+    <ClInclude Include="sdk\DxINC\Effects.h">
+      <Filter>File di intestazione\sdk\DxINC</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="sdk\DxINC\SimpleMath.inl">
+      <Filter>File di intestazione\sdk\DxINC</Filter>
+    </None>
   </ItemGroup>
 </Project>

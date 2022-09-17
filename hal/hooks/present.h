@@ -83,6 +83,7 @@ LRESULT __stdcall HAL::Hooks::Present::WndProc(const HWND hWnd, UINT uMsg, WPARA
         if (pD11Device != NULL && wParam != SIZE_MINIMIZED) {
             if (pD11RenderTargetView) { pD11RenderTargetView->Release(); pD11RenderTargetView = NULL; }
             pSwapChain->ResizeBuffers(0, (UINT)LOWORD(lParam), (UINT)HIWORD(lParam), DXGI_FORMAT_UNKNOWN, 0);
+            SDK::Game::Init();
         }
         break;
     }
@@ -107,13 +108,13 @@ HRESULT HAL::Hooks::Present::Present_hk(IDXGISwapChain* dxSwapChain, UINT syncIn
         (void)io;
 		io.Fonts->AddFontFromMemoryTTF(&lewdFontData, sizeof lewdFontData, 14);
 
-        SDK::Game::Init();
-
         if (SUCCEEDED(dxSwapChain->GetDevice(__uuidof(ID3D11Device), (void**)&pD11Device)))
         {
             dxSwapChain->GetDevice(__uuidof(pD11Device), (void**)&pD11Device);
             pD11Device->GetImmediateContext(&pD11DeviceContext);
         }
+
+        SDK::Game::Init();
 
         pSwapChain = dxSwapChain;
         DXGI_SWAP_CHAIN_DESC desc;

@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 #include <string>
 #include <DirectXMath.h>
 #include "../includes.h"
@@ -201,14 +201,14 @@ namespace HAL::Graphics::Drawing
 		Vector3 screenOrigin, screenTrail, trailEnd;
 
 		Vector3 trail(forwardVec.x * trailLen, forwardVec.y * trailLen, forwardVec.z * trailLen);
-		trailEnd = Vector3(trail.x + HeadPos.x, trail.y + HeadPos.y, trail.z + HeadPos.z);
+		trailEnd = trail + HeadPos;
+		ImVec2 screen_1, screen_2;
+		screen_1 = SDK::Game::WorldToScreen(HeadPos);
+		screen_2 = SDK::Game::WorldToScreen(trailEnd);
 
-		ImVec2 screen_origin = SDK::Game::WorldToScreen(HeadPos);
-		ImVec2 screen_trail = SDK::Game::WorldToScreen(trailEnd);
-
-		if (screen_origin.x != 0 && screen_origin.y != 0 &&
-			screen_trail.x != 0 && screen_trail.y != 0) {
-			DrawLine(screenOrigin.x, screenOrigin.y, screenTrail.x, screenTrail.y, FLOAT4TORGBA(Config::Colors::f2DColor), 1);
+		if (screen_1.x > 0 && screen_1.y > 0 &&
+			screen_2.x > 0 && screen_2.y > 0) {
+			DrawLine(screen_1.x, screen_1.y, screen_2.x, screen_2.y, FLOAT4TORGBA(Config::Colors::fBarrelColor), 1);
 		}
 	}
 	void DrawSkeleton(uintptr_t ped) {
@@ -227,22 +227,101 @@ namespace HAL::Graphics::Drawing
 				bone_2 = SDK::Game::getBone(ped, bone_positions[i][1]);
 			screen_1 = SDK::Game::WorldToScreen2(bone_1);
 			screen_2 = SDK::Game::WorldToScreen2(bone_2);
-			if (bone_1.x != 0 && bone_1.y != 0 && bone_1.z != 0 &&
-				bone_2.x != 0 && bone_2.y != 0 && bone_2.z != 0 &&
-				screen_1.x != 0 && screen_1.y != 0 &&
-				screen_2.x != 0 && screen_2.y != 0) {
-				//if (SDK::Utils::Distance(Vector3(screen_1.x, screen_1.y, 0.0f), Vector3(screen_2.x, screen_2.y, 0.0f)) > 70.0f)
-				if (SDK::Game::Distance(Vector3(screen_1.x, screen_1.y, 0.0f), Vector3(screen_2.x, screen_2.y, 0.0f)) < 900)
-					DrawLine(screen_1.x, screen_1.y, screen_2.x, screen_2.y, FLOAT4TORGBA(Config::Colors::fSkeletonColor), 1);
+
+			if (bone_1.x > 0 && bone_1.y > 0 && bone_1.z > 0 &&
+				bone_2.x > 0 && bone_2.y > 0 && bone_2.z > 0 &&
+				screen_1.x > 0 && screen_1.y > 0 &&
+				screen_2.x > 0 && screen_2.y > 0) {
+				DrawLine(screen_1.x, screen_1.y, screen_2.x, screen_2.y, FLOAT4TORGBA(Config::Colors::fSkeletonColor), 1);
 			}
 		}
+	}
+	bool Draw3DBox(Vector3 Position, Vector3 Rotation, Vector3 Origin)
+	{
+		float rot = acosf(Rotation.x) * 180.0f / DirectX::XM_PI;
+		if (asinf(Rotation.y) * 180.0f / DirectX::XM_PI < 0.0f) rot *= -1.0f;
+
+		Vector3 HeadPos = Vector3(Position.x, Position.y, Position.z);
+		Vector3 FeetPos = Vector3(Origin.x, Origin.y, Origin.z);
+
+		Vector3 t[8];
+		ImVec2 screen_1, screen_2, screen_3, screen_4, screen_5, screen_6, screen_7, screen_8;
+
+		Vector4 Cosines;
+		Vector4 Sines;
+		Vector4 Corners = Vector4(DirectX::XMConvertToRadians(rot - 45.0f), DirectX::XMConvertToRadians(rot - 135.0f), DirectX::XMConvertToRadians(rot + 45.0f), DirectX::XMConvertToRadians(rot + 135.0f));
+		Cosines.x = cosf(Corners.x);
+		Cosines.y = cosf(Corners.y);
+		Cosines.z = cosf(Corners.z);
+		Cosines.w = cosf(Corners.w);
+		Sines.x = sinf(Corners.x);
+		Sines.y = sinf(Corners.y);
+		Sines.z = sinf(Corners.z);
+		Sines.w = sinf(Corners.w);
+
+		float radius = 0.5f;
+
+		Vector3 HeadLeftForward = HeadPos + Vector3(Cosines.x * radius, Sines.x * radius, 0.0f);
+		Vector3 HeadLeftBackward = HeadPos + Vector3(Cosines.y * radius, Sines.y * radius, 0.0f);
+		Vector3 HeadRightForward = HeadPos + Vector3(Cosines.z * radius, Sines.z * radius, 0.0f);
+		Vector3 HeadRightBackward = HeadPos + Vector3(Cosines.w * radius, Sines.w * radius, 0.0f);
+
+		Vector3 FeetLeftForward = FeetPos + Vector3(Cosines.x * radius, Sines.x * radius, 0.0f);
+		Vector3 FeetLeftBackward = FeetPos + Vector3(Cosines.y * radius, Sines.y * radius, 0.0f);
+		Vector3 FeetRightForward = FeetPos + Vector3(Cosines.z * radius, Sines.z * radius, 0.0f);
+		Vector3 FeetRightBackward = FeetPos + Vector3(Cosines.w * radius, Sines.w * radius, 0.0f);
+
+		screen_1 = SDK::Game::WorldToScreen(HeadLeftForward);
+		screen_2 = SDK::Game::WorldToScreen(HeadLeftBackward);
+		screen_3 = SDK::Game::WorldToScreen(HeadRightBackward);
+		screen_4 = SDK::Game::WorldToScreen(HeadRightForward);
+		screen_5 = SDK::Game::WorldToScreen(FeetLeftForward);
+		screen_6 = SDK::Game::WorldToScreen(FeetLeftBackward);
+		screen_7 = SDK::Game::WorldToScreen(FeetRightBackward);
+		screen_8 = SDK::Game::WorldToScreen(FeetRightForward);
+		t[0].x = screen_1.x; t[0].y = screen_1.y;
+		t[1].x = screen_2.x; t[1].y = screen_2.y;
+		t[2].x = screen_3.x; t[2].y = screen_3.y;
+		t[3].x = screen_4.x; t[3].y = screen_4.y;
+		t[4].x = screen_5.x; t[4].y = screen_5.y;
+		t[5].x = screen_6.x; t[5].y = screen_6.y;
+		t[6].x = screen_7.x; t[6].y = screen_7.y;
+		t[7].x = screen_8.x; t[7].y = screen_8.y;
+
+		if (screen_1.x > 0 && screen_1.y > 0 &&
+			screen_2.x > 0 && screen_2.y > 0 &&
+			screen_3.x > 0 && screen_3.y > 0 &&
+			screen_4.x > 0 && screen_4.y > 0)
+		{
+			if (screen_5.x > 0 && screen_5.y > 0 &&
+				screen_6.x > 0 && screen_6.y > 0 &&
+				screen_7.x > 0 && screen_7.y > 0 &&
+				screen_8.x > 0 && screen_8.y > 0)
+			{
+
+				for (int i = 0; i < 4; i++)
+				{
+					DrawLine(t[i].x, t[i].y, t[i + 4].x, t[i + 4].y, FLOAT4TORGBA(Config::Colors::f3DColor), 1);
+
+					if (i != 3) DrawLine(t[i].x, t[i].y, t[i + 1].x, t[i + 1].y, FLOAT4TORGBA(Config::Colors::f3DColor), 1);
+					else DrawLine(t[3].x, t[3].y, t[0].x, t[0].y, FLOAT4TORGBA(Config::Colors::f3DColor), 1);
+				}
+
+				for (int i = 4; i < 8; i++)
+				{
+					if (i != 7) DrawLine(t[i].x, t[i].y, t[i + 1].x, t[i + 1].y, FLOAT4TORGBA(Config::Colors::f3DColor), 1);
+					else DrawLine(t[7].x, t[7].y, t[4].x, t[4].y, FLOAT4TORGBA(Config::Colors::f3DColor), 1);
+				}
+			}
+		}
+		return true;
 	}
 	void DrawMenu()
 	{
 		ImGui::ShowDemoWindow();
 		ImVec2 center(ImGui::GetIO().DisplaySize.x * 0.5f, ImGui::GetIO().DisplaySize.y * 0.6f);
 		ImGui::SetNextWindowPos(center, ImGuiCond_Once, ImVec2(0.5f, 0.5f));
-		ImGui::SetNextWindowSize(ImVec2(355, 345), ImGuiCond_Once);
+		ImGui::SetNextWindowSize(ImVec2(365, 355), ImGuiCond_Once);
 		ImGui::Begin(xorstr_("lewd.vip"));
 		ImGuiTabBarFlags tab_bar_flags = ImGuiTabBarFlags_Reorderable | ImGuiTabBarFlags_FittingPolicyScroll;
 		if (ImGui::BeginTabBar(xorstr_("merdaMenu"), tab_bar_flags))
@@ -267,6 +346,9 @@ namespace HAL::Graphics::Drawing
 				ImGui::ColorEdit4(xorstr_("2D Box Color"), (float*)Config::Colors::f2DColor, color_picker_flags);
 				ImGui::SameLine();
 				ImGui::Checkbox(xorstr_("2D Box"), &Config::ESP::bShow2DBox);
+				ImGui::ColorEdit4(xorstr_("3D Box Color"), (float*)Config::Colors::f3DColor, color_picker_flags);
+				ImGui::SameLine();
+				ImGui::Checkbox(xorstr_("3D Box"), &Config::ESP::bShow3DBox);
 				ImGui::ColorEdit4(xorstr_("Name Color"), (float*)Config::Colors::fNameColor, color_picker_flags);
 				ImGui::SameLine();
 				ImGui::Checkbox(xorstr_("Name"), &Config::ESP::bShowName);
@@ -280,43 +362,47 @@ namespace HAL::Graphics::Drawing
 				ImGui::SameLine();
 				ImGui::Checkbox(xorstr_("Tracer"), &Config::ESP::bShowTracer);
 				ImGui::NextColumn();
+				ImGui::ColorEdit4(xorstr_("Barrel Color"), (float*)Config::Colors::fBarrelColor, color_picker_flags);
+				ImGui::SameLine();
+				ImGui::Checkbox(xorstr_("Barrel"), &Config::ESP::bShowBarrel);
 				ImGui::Checkbox(xorstr_("Health"), &Config::ESP::bShowHealth);
 				ImGui::Checkbox(xorstr_("Armor"), &Config::ESP::bShowArmor);
 				ImGui::EndColumns();
-				//if (ImGui::TreeNode("Show:"))
-				//{
-				//	ImGui::Selectable("PLAYER_0", &selection[0]);
-				//	ImGui::Selectable("PLAYER_1", &selection[1]);
-				//	ImGui::Selectable("NETWORK_PLAYER", &selection[2]);
-				//	ImGui::Selectable("PLAYER_2", &selection[3]);
-				//	ImGui::Selectable("CIVMALE", &selection[4]);
-				//	ImGui::Selectable("CIVFEMALE", &selection[5]);
-				//	ImGui::Selectable("COP", &selection[6]);
-				//	ImGui::Selectable("GANG_ALBANIAN", &selection[7]);
-				//	ImGui::Selectable("GANG_BIKER_1", &selection[8]);
-				//	ImGui::Selectable("GANG_BIKER_2", &selection[9]);
-				//	ImGui::Selectable("GANG_ITALIAN", &selection[10]);
-				//	ImGui::Selectable("GANG_RUSSIAN", &selection[11]);
-				//	ImGui::Selectable("GANG_RUSSIAN_2", &selection[12]);
-				//	ImGui::Selectable("GANG_IRISH", &selection[13]);
-				//	ImGui::Selectable("GANG_JAMAICAN", &selection[14]);
-				//	ImGui::Selectable("GANG_AFRICAN_AMERICAN", &selection[15]);
-				//	ImGui::Selectable("GANG_KOREAN", &selection[16]);
-				//	ImGui::Selectable("GANG_CHINESE_JAPANESE", &selection[17]);
-				//	ImGui::Selectable("GANG_PUERTO_RICAN", &selection[18]);
-				//	ImGui::Selectable("DEALER", &selection[19]);
-				//	ImGui::Selectable("MEDIC", &selection[20]);
-				//	ImGui::Selectable("FIREMAN", &selection[21]);
-				//	ImGui::Selectable("CRIMINAL", &selection[22]);
-				//	ImGui::Selectable("BUM", &selection[23]);
-				//	ImGui::Selectable("PROSTITUTE", &selection[24]);
-				//	ImGui::Selectable("SPECIAL", &selection[25]);
-				//	ImGui::Selectable("MISSION", &selection[26]);
-				//	ImGui::Selectable("SWAT", &selection[27]);
-				//	ImGui::Selectable("ANIMAL", &selection[28]);
-				//	ImGui::Selectable("ARMY", &selection[29]);
-				//	ImGui::TreePop();
-				//}
+				ImGui::Checkbox(xorstr_("Draw NPCs"), &Config::ESP::bDrawNPC);
+				if (ImGui::TreeNode("Show:"))
+				{
+					ImGui::Selectable(xorstr_("MICHAEL"), &selection[0]);
+					ImGui::Selectable(xorstr_("FRANKLIN"), &selection[1]);
+					ImGui::Selectable(xorstr_("NETWORK_PLAYER"), &selection[2]);
+					ImGui::Selectable(xorstr_("TREVOR"), &selection[3]);
+					ImGui::Selectable(xorstr_("CIVMALE"), &selection[4]);
+					ImGui::Selectable(xorstr_("CIVFEMALE"), &selection[5]);
+					ImGui::Selectable(xorstr_("COP"), &selection[6]);
+					ImGui::Selectable(xorstr_("GANG_ALBANIAN"), &selection[7]);
+					ImGui::Selectable(xorstr_("GANG_BIKER_1"), &selection[8]);
+					ImGui::Selectable(xorstr_("GANG_BIKER_2"), &selection[9]);
+					ImGui::Selectable(xorstr_("GANG_ITALIAN"), &selection[10]);
+					ImGui::Selectable(xorstr_("GANG_RUSSIAN"), &selection[11]);
+					ImGui::Selectable(xorstr_("GANG_RUSSIAN_2"), &selection[12]);
+					ImGui::Selectable(xorstr_("GANG_IRISH"), &selection[13]);
+					ImGui::Selectable(xorstr_("GANG_JAMAICAN"), &selection[14]);
+					ImGui::Selectable(xorstr_("GANG_AFRICAN_AMERICAN"), &selection[15]);
+					ImGui::Selectable(xorstr_("GANG_KOREAN"), &selection[16]);
+					ImGui::Selectable(xorstr_("GANG_CHINESE_JAPANESE"), &selection[17]);
+					ImGui::Selectable(xorstr_("GANG_PUERTO_RICAN"), &selection[18]);
+					ImGui::Selectable(xorstr_("DEALER"), &selection[19]);
+					ImGui::Selectable(xorstr_("MEDIC"), &selection[20]);
+					ImGui::Selectable(xorstr_("FIREMAN"), &selection[21]);
+					ImGui::Selectable(xorstr_("CRIMINAL"), &selection[22]);
+					ImGui::Selectable(xorstr_("BUM"), &selection[23]);
+					ImGui::Selectable(xorstr_("PROSTITUTE"), &selection[24]);
+					ImGui::Selectable(xorstr_("SPECIAL"), &selection[25]);
+					ImGui::Selectable(xorstr_("MISSION"), &selection[26]);
+					ImGui::Selectable(xorstr_("SWAT"), &selection[27]);
+					ImGui::Selectable(xorstr_("ANIMAL"), &selection[28]);
+					ImGui::Selectable(xorstr_("ARMY"), &selection[29]);
+					ImGui::TreePop();
+				}
 
 				ImGui::EndTabItem();
 			}
@@ -354,7 +440,6 @@ namespace HAL::Graphics::Drawing
 					//if (SDK::Game::Players[i].ped == SDK::Game::LocalPlayer)
 					//	continue;
 
-					printf("0x%p\n", SDK::Game::LocalPlayer);
 					Vector3 pedPos = Vector3(SDK::Game::Players[i].position.x, SDK::Game::Players[i].position.y, SDK::Game::Players[i].position.z);
 
 					//if (Distance(SDK::PLAYER::Position(), pedPos) <= (Config::ESP::distance * 3))
@@ -366,8 +451,11 @@ namespace HAL::Graphics::Drawing
 					//if (pedPos.x == 0.0f || pedPos.y == 0.0f || pedPos.z == 0.0f)
 					//	continue;
 
-					//if (!selection[SDK::Game::Players[i].ped_type])
-					//	continue;
+					if (SDK::Game::Players[i].ped_type != SDK::Game::ped_types::NETWORK_PLAYER && !Config::ESP::bDrawNPC)
+						continue;
+
+					if (!selection[SDK::Game::Players[i].ped_type])
+						continue;
 
 					Vector3 originPos = Vector3(pedPos.x, pedPos.y, pedPos.z - 1.0f);
 					Vector3 headPos = Vector3(pedPos.x, pedPos.y, pedPos.z + 0.9f);
@@ -385,12 +473,13 @@ namespace HAL::Graphics::Drawing
 							Graphics::Drawing::DrawLine(screenPos.x - w, screenPos.y, screenPos.x - w, screenPosHead.y, FLOAT4TORGBA(Config::Colors::f2DColor), 1);
 							Graphics::Drawing::DrawLine(screenPos.x + w, screenPos.y, screenPos.x + w, screenPosHead.y, FLOAT4TORGBA(Config::Colors::f2DColor), 1);
 							Graphics::Drawing::DrawLine(screenPos.x - w, screenPos.y, screenPos.x + w, screenPos.y, FLOAT4TORGBA(Config::Colors::f2DColor), 1);
-
 							//Graphics::Drawing::DrawStrokeText(screenPos.x - w, screenPosHead.y, FLOAT4TORGBA(Config::ESP::f2DColor), "a");
 							//Graphics::Drawing::DrawStrokeText(screenPos.x + w, screenPosHead.y, FLOAT4TORGBA(Config::ESP::f2DColor), "b");
 							//Graphics::Drawing::DrawStrokeText(screenPos.x + w, screenPos.y, FLOAT4TORGBA(Config::ESP::f2DColor), "c");
 							//Graphics::Drawing::DrawStrokeText(screenPos.x - w, screenPos.y, FLOAT4TORGBA(Config::ESP::f2DColor), "d");
 						}
+						if (Config::ESP::bShow3DBox) 
+								Draw3DBox(headPos, SDK::Game::Players[i].ObjectNavigation->Rotation, originPos);
 						if (Config::ESP::bShowHealth)
 						{
 							float flBarlenght = ((SDK::Game::Players[i].health * (h - 2)) / SDK::Game::Players[i].maxHealth) + 2;
@@ -414,8 +503,6 @@ namespace HAL::Graphics::Drawing
 						}
 						if (Config::ESP::bShowName)
 							Graphics::Drawing::DrawStrokeText(screenPos.x + w + 4, screenPosHead.y - 4, FLOAT4TORGBA(Config::Colors::fNameColor), std::to_string(SDK::Game::Players[i].ped).c_str());
-						//unsigned int test = SDK::Game::Players[i].ped_type << 11 >> 25;
-						//Graphics::Drawing::DrawStrokeText(screenPos.x + w + 4, screenPosHead.y + 16, FLOAT4TORGBA(Config::Colors::fNameColor), std::to_string(test).c_str());
 						if (Config::ESP::bShowDistance)
 						{
 							int iDistance = SDK::Game::Distance(SDK::Game::Position(), pedPos);
@@ -425,10 +512,12 @@ namespace HAL::Graphics::Drawing
 						if (Config::ESP::bShowSkeleton)
 							DrawSkeleton(SDK::Game::Players[i].ped);
 						if (Config::ESP::bShowTracer)
-							Barrel(headPos, SDK::Game::Players[i]._ObjectNavigation, 5.0f);
-						if (Config::ESP::bShowHeading)
+							Graphics::Drawing::DrawLine(localPlyScreenPos.x, localPlyScreenPos.y, screenPos.x, screenPos.y + (h * 0.5), FLOAT4TORGBA(Config::Colors::fTracerColor), 1);
+						if (Config::ESP::bShowBarrel)
 						{
-
+							auto boneNeck = SDK::Game::getBone(SDK::Game::Players[i].ped, 0);
+							Vector3 v3NeckPos = Vector3(boneNeck.x, boneNeck.y, boneNeck.z);
+							Barrel(v3NeckPos, SDK::Game::Players[i].ObjectNavigation->Rotation, 3.0f);
 						}
 					}
 				}

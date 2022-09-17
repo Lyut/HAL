@@ -30,20 +30,45 @@ namespace HAL::SDK::Game {
 	class CObjectNavigation
 	{
 	public:
-		char pad_0x0000[0x20]; //0x0000
-		Vector3 Rotation; //0x0030 0x0020
+		char pad_0x0000[0x40]; //0x0000
+		Vector3 Rotation; //0x0030 
 		char pad_0x003C[0x14]; //0x003C
 		Vector3 Position; //0x0050 
 		char pad_0x005C[0x24]; //0x005C
 	}; //Size=0x0080
 
+	class CModelInfo
+	{
+	public:
+		char pad_0000[24]; //0x0000
+		uint32_t Hash; //0x0018
+		char pad_001C[20]; //0x001C
+		Vector3 MinDim; //0x0030
+		char pad_003C[4]; //0x003C
+		Vector3 MaxDim; //0x0040
+		char pad_004C[588]; //0x004C
+		char Name[24]; //0x0298
+		char pad_02A0[688]; //0x02A0
+	}; //Size: 0x0550
+
+	class CBoneManager
+	{
+	public:
+		Vector4 vecTrans1; //0x0000 
+		Vector4 vecTrans2; //0x0010 
+		Vector4 vecTrans3; //0x0020 
+		Vector4 fPosition; //0x0030 
+
+	};//Size=0x0040
+
 	struct PoolPlayers
 	{
 		DWORD64 ped;
 		std::string name;
-		CObjectNavigation _ObjectNavigation;
-		Vector3 Rotation;
-		//_int32 ped_type;
+		CModelInfo* ModelInfo;
+		CObjectNavigation* ObjectNavigation;
+		CBoneManager* BoneManager;
+		__int32 ped_type;
 		ImVec4 position;
 		float health;
 		float maxHealth;
@@ -170,10 +195,6 @@ namespace HAL::SDK::Game {
 			Players[i].position.x = 0.0f;
 			Players[i].position.y = 0.0f;
 			Players[i].position.z = 0.0f;
-			Players[i].maxHealth = 0.0f;
-			Players[i].health = 0.0f;
-			//Players[i].ped_type = 0;
-			Players[i].armor = 0.0f;
 
 			if (i < list_max_ptr)
 			{
@@ -187,11 +208,11 @@ namespace HAL::SDK::Game {
 						Players[i].position = ImVec4(pedPos.x, pedPos.y, pedPos.z, 0.0f);
 						Players[i].maxHealth = *(float*)(ped + 0x02A0) - 100.0f;
 						Players[i].health = *(float*)(ped + 0x280) - 100.0f;
-						Players[i]._ObjectNavigation = *(CObjectNavigation*)(ped + 0x30);
-						printf("	mio addy: 0x%p\n", Players[i]._ObjectNavigation);
-						//Players[i].ped_type = *(__int32*)(ped + 0x10A8);
-						//Players[i].ped_type = (*(WORD*)(ped + 0x10A8) << 11 >> 25);
-						//*(uint32_t*)(ped + 0x10A8);
+						Players[i].ObjectNavigation = (CObjectNavigation*)(ped + 0x30);
+						Players[i].BoneManager = (CBoneManager*)(ped + 0x180);
+						Players[i].ModelInfo = (CModelInfo*)(ped + 0x20);
+						__int32 pedType = *(__int32*)(ped + 0x10A8);
+						Players[i].ped_type = pedType << 11 >> 25;
 						Players[i].armor = *(float*)(ped + 0x14B0);
 					}
 				}
