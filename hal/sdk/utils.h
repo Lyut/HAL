@@ -9,7 +9,6 @@
 #include "../memoryman.h"
 #include "vec3.h"
 #include "../config.h"
-//test
 
 namespace HAL::SDK::Utils {
 
