@@ -79,6 +79,7 @@ namespace HAL::SDK::Utils {
 		Config::ESP::bShowHealth = ConfigParseBool(Config::ConfigIni.GetValue(xorstr_("ESP"), xorstr_("ShowHealth")), false);
 		Config::ESP::bShowSkeleton = ConfigParseBool(Config::ConfigIni.GetValue(xorstr_("ESP"), xorstr_("ShowSkeleton")), false);
 		Config::ESP::bShowTracer = ConfigParseBool(Config::ConfigIni.GetValue(xorstr_("ESP"), xorstr_("ShowTracer")), false);
+		Config::ESP::bDrawLocal = ConfigParseBool(Config::ConfigIni.GetValue(xorstr_("ESP"), xorstr_("DrawLocal")), false);
 		Config::ESP::bDrawNPC = ConfigParseBool(Config::ConfigIni.GetValue(xorstr_("ESP"), xorstr_("DrawNPC")), false);
 		Config::ESP::fDistance = ConfigParseInt(Config::ConfigIni.GetValue(xorstr_("ESP"), xorstr_("Distance")), 2500);
 
@@ -112,6 +113,7 @@ namespace HAL::SDK::Utils {
 			Config::ConfigIni.SetBoolValue(xorstr_("ESP"), xorstr_("ShowHealth"), false);
 			Config::ConfigIni.SetBoolValue(xorstr_("ESP"), xorstr_("ShowSkeleton"), false);
 			Config::ConfigIni.SetBoolValue(xorstr_("ESP"), xorstr_("ShowTracer"), false);
+			Config::ConfigIni.SetBoolValue(xorstr_("ESP"), xorstr_("DrawLocal"), false);
 			Config::ConfigIni.SetBoolValue(xorstr_("ESP"), xorstr_("DrawNPC"), false);
 			Config::ConfigIni.SetDoubleValue(xorstr_("ESP"), xorstr_("Distance"), 2500);
 
@@ -148,6 +150,7 @@ namespace HAL::SDK::Utils {
 		Config::ConfigIni.SetBoolValue(xorstr_("ESP"), xorstr_("ShowHealth"), Config::ESP::bShowHealth);
 		Config::ConfigIni.SetBoolValue(xorstr_("ESP"), xorstr_("ShowSkeleton"), Config::ESP::bShowSkeleton);
 		Config::ConfigIni.SetBoolValue(xorstr_("ESP"), xorstr_("ShowTracer"), Config::ESP::bShowTracer);
+		Config::ConfigIni.SetBoolValue(xorstr_("ESP"), xorstr_("DrawLocal"), Config::ESP::bDrawLocal);
 		Config::ConfigIni.SetBoolValue(xorstr_("ESP"), xorstr_("DrawNPC"), Config::ESP::bDrawNPC);
 		Config::ConfigIni.SetDoubleValue(xorstr_("ESP"), xorstr_("Distance"), Config::ESP::fDistance);
 

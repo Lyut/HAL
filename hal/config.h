@@ -29,5 +29,6 @@ namespace HAL::Config {
 		bool bShowArmor = false;
 		bool bShowBarrel = false;
 		bool bDrawNPC = false;
+		bool bDrawLocal = false;
 	}
 }

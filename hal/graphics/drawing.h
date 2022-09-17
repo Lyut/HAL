@@ -321,7 +321,7 @@ namespace HAL::Graphics::Drawing
 		ImGui::ShowDemoWindow();
 		ImVec2 center(ImGui::GetIO().DisplaySize.x * 0.5f, ImGui::GetIO().DisplaySize.y * 0.6f);
 		ImGui::SetNextWindowPos(center, ImGuiCond_Appearing, ImVec2(0.5f, 0.5f));
-		ImGui::SetNextWindowSize(ImVec2(365, 385), ImGuiCond_Appearing);
+		ImGui::SetNextWindowSize(ImVec2(365, 400), ImGuiCond_Appearing);
 		ImGui::Begin(xorstr_("lewd.vip"));
 		ImGuiTabBarFlags tab_bar_flags = ImGuiTabBarFlags_Reorderable | ImGuiTabBarFlags_FittingPolicyScroll;
 		if (ImGui::BeginTabBar(xorstr_("merdaMenu"), tab_bar_flags))
@@ -369,6 +369,7 @@ namespace HAL::Graphics::Drawing
 				ImGui::Checkbox(xorstr_("Armor"), &Config::ESP::bShowArmor);
 				ImGui::EndColumns();
 				ImGui::Checkbox(xorstr_("Draw NPCs"), &Config::ESP::bDrawNPC);
+				ImGui::Checkbox(xorstr_("Draw Local"), &Config::ESP::bDrawLocal);
 				if (ImGui::TreeNode(xorstr_("Show:")))
 				{
 					ImGui::Selectable(xorstr_("MICHAEL"), &selection[0]);
@@ -437,8 +438,8 @@ namespace HAL::Graphics::Drawing
 					if (SDK::Game::Players[i].ped == NULL)
 						continue;
 
-					//if (SDK::Game::Players[i].ped == SDK::Game::LocalPlayer)
-					//	continue;
+					if (SDK::Game::Players[i].ped == SDK::Game::LocalPlayer && !Config::ESP::bDrawLocal)
+						continue;
 
 					Vector3 pedPos = Vector3(SDK::Game::Players[i].position.x, SDK::Game::Players[i].position.y, SDK::Game::Players[i].position.z);
 
@@ -502,7 +503,9 @@ namespace HAL::Graphics::Drawing
 						if (Config::ESP::bShowSkeleton)
 							DrawSkeleton(SDK::Game::Players[i].ped);
 						if (Config::ESP::bShowTracer)
-							Graphics::Drawing::DrawLine(localPlyScreenPos.x, localPlyScreenPos.y, screenPos.x, screenPos.y + (h * 0.5), FLOAT4TORGBA(Config::Colors::fTracerColor), 1);
+							Graphics::Drawing::DrawLine(localPlyScreenPos.x > 0 ? localPlyScreenPos.x : ImGui::GetIO().DisplaySize.x * 0.5f,
+								localPlyScreenPos.y > 0 ? localPlyScreenPos.y : ImGui::GetIO().DisplaySize.y * 0.6f,
+								screenPos.x, screenPos.y + (h * 0.5), FLOAT4TORGBA(Config::Colors::fTracerColor), 1);
 						if (Config::ESP::bShowBarrel)
 						{
 							auto boneNeck = SDK::Game::getBone(SDK::Game::Players[i].ped, 0);
