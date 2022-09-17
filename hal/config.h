@@ -1,6 +1,9 @@
 #pragma once
+#include "sdk/SimpleIni.h"
 
 namespace HAL::Config {
+
+	CSimpleIniA ConfigIni;
 
 	bool bShowMenu = true;
 

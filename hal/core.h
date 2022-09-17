@@ -7,12 +7,13 @@
 #include "hooks.h"
 #include "hooks/present.h"
 #include "hooks/reset.h"
+#include "sdk/SimpleIni.h"
 
 namespace HAL::Core {
 
 	void HALAllocConsole() {
 		AllocConsole();
-		SetConsoleTitleA("HELLO");
+		SetConsoleTitleA("a");
 		FILE* NewConsoleStream;
 		freopen_s(&NewConsoleStream, "CONIN$", "r", stdin);
 		freopen_s(&NewConsoleStream, "CONOUT$", "w", stdout);
@@ -21,7 +22,6 @@ namespace HAL::Core {
 
 	void Attach(HMODULE Instance)
 	{
-		HALAllocConsole();
 		/*auto Shutdown = [Instance]() -> void
 		{
 			//FreeLibraryAndExitThread(Instance, EXIT_FAILURE);
@@ -66,31 +66,7 @@ namespace HAL::Core {
 		}
 
 		MemoryMan::Hook(Hooks::Reset::g_pCreateSwapChain, &Hooks::Reset::CreateSwapChain_hk, &Hooks::Reset::o_CreateSwapChain);
-
-		/* MemoryMan::OutputDebugString_("Ci siamo...");
-
-		  uint64_t adhesiveBase = (unsigned long long)(MemoryMan::getModuleHandle("adhesive.dll"));
-		  uint64_t GORBase = (unsigned long long)(MemoryMan::getModuleHandle("gameoverlayrenderer64.dll"));
-
-		  if (adhesiveBase) {
-
-			  OutputDebugStringA(xorstr_("[#] page guarding"));
-
-			  MemoryMan::PageGuard::GOR_base = (void*)GORBase;
-			  MemoryMan::PageGuard::anti_cheat_base = (void*)adhesiveBase;
-			  GetModuleInformation(GetCurrentProcess(), (HMODULE)MemoryMan::PageGuard::anti_cheat_base, &MemoryMan::PageGuard::anti_cheat_info, sizeof(MemoryMan::PageGuard::anti_cheat_info));
-
-			  //void* load_buffer = (void*)(CustomAPI::GetModuleA("citizen-scripting-lua.dll") + MemoryAddressesLUA::LUALoadBufferx);
-			  //void* load_file = (void*)(CustomAPI::GetModuleA("citizen-scripting-lua.dll") + MemoryAddressesLUA::LUALoadHostFileInternalAddr);
-
-			  // caller 0x8B8E71
-			  void* adhesive_page = (void*)(MemoryMan::getModuleHandle("adhesive.dll") + 0x862200);
-			  void* adhesive_page_1 = (void*)(MemoryMan::getModuleHandle("adhesive.dll") + 0x802599);
-
-			  AddVectoredExceptionHandler(1ul, MemoryMan::PageGuard::VectoredExceptionHandler);
-			  MemoryMan::PageGuard::initializeBreakpoint(adhesive_page);
-			  MemoryMan::PageGuard::initializeBreakpoint(adhesive_page_1);
-		  } */
+		SDK::Utils::InitConfig();
 
 		  /* [[likely]]
 			while (!GetAsyncKeyState(VK_DELETE))

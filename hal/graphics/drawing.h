@@ -189,8 +189,8 @@ namespace HAL::Graphics::Drawing
 		DrawFilledRect(x, y + h - h / 3 + borderPx * 2, borderPx, h / 3, color); //left 
 		DrawFilledRect(x + borderPx, y + h + borderPx, w / 3, borderPx, color); //bottom 
 		DrawFilledRect(x + w - w / 3 + borderPx, y + h + borderPx, w / 3, borderPx, color); //bottom 
-		DrawFilledRect(x + w + borderPx, y, borderPx, h / 3, color);//right 
-		DrawFilledRect(x + w + borderPx, y + h - h / 3 + borderPx * 2, borderPx, h / 3, color);//right 
+		DrawFilledRect(x + w + borderPx, y, borderPx, h / 3, color); //right 
+		DrawFilledRect(x + w + borderPx, y + h - h / 3 + borderPx * 2, borderPx, h / 3, color); //right 
 	}
 	void Barrel(Vector3 HeadPos, Vector3 Rotation, const float trailLen = 10.0f) {
 		float rot = acosf(Rotation.x) * 180.0f / DirectX::XM_PI;
@@ -320,8 +320,8 @@ namespace HAL::Graphics::Drawing
 	{
 		ImGui::ShowDemoWindow();
 		ImVec2 center(ImGui::GetIO().DisplaySize.x * 0.5f, ImGui::GetIO().DisplaySize.y * 0.6f);
-		ImGui::SetNextWindowPos(center, ImGuiCond_Once, ImVec2(0.5f, 0.5f));
-		ImGui::SetNextWindowSize(ImVec2(365, 355), ImGuiCond_Once);
+		ImGui::SetNextWindowPos(center, ImGuiCond_Appearing, ImVec2(0.5f, 0.5f));
+		ImGui::SetNextWindowSize(ImVec2(365, 385), ImGuiCond_Appearing);
 		ImGui::Begin(xorstr_("lewd.vip"));
 		ImGuiTabBarFlags tab_bar_flags = ImGuiTabBarFlags_Reorderable | ImGuiTabBarFlags_FittingPolicyScroll;
 		if (ImGui::BeginTabBar(xorstr_("merdaMenu"), tab_bar_flags))
@@ -349,12 +349,6 @@ namespace HAL::Graphics::Drawing
 				ImGui::ColorEdit4(xorstr_("3D Box Color"), (float*)Config::Colors::f3DColor, color_picker_flags);
 				ImGui::SameLine();
 				ImGui::Checkbox(xorstr_("3D Box"), &Config::ESP::bShow3DBox);
-				ImGui::ColorEdit4(xorstr_("Name Color"), (float*)Config::Colors::fNameColor, color_picker_flags);
-				ImGui::SameLine();
-				ImGui::Checkbox(xorstr_("Name"), &Config::ESP::bShowName);
-				ImGui::ColorEdit4(xorstr_("Distance Color"), (float*)Config::Colors::fDistanceColor, color_picker_flags);
-				ImGui::SameLine();
-				ImGui::Checkbox(xorstr_("Distance"), &Config::ESP::bShowDistance);
 				ImGui::ColorEdit4(xorstr_("Skeleton Color"), (float*)Config::Colors::fSkeletonColor, color_picker_flags);
 				ImGui::SameLine();
 				ImGui::Checkbox(xorstr_("Skeleton"), &Config::ESP::bShowSkeleton);
@@ -362,6 +356,12 @@ namespace HAL::Graphics::Drawing
 				ImGui::SameLine();
 				ImGui::Checkbox(xorstr_("Tracer"), &Config::ESP::bShowTracer);
 				ImGui::NextColumn();
+				ImGui::ColorEdit4(xorstr_("Name Color"), (float*)Config::Colors::fNameColor, color_picker_flags);
+				ImGui::SameLine();
+				ImGui::Checkbox(xorstr_("Name"), &Config::ESP::bShowName);
+				ImGui::ColorEdit4(xorstr_("Distance Color"), (float*)Config::Colors::fDistanceColor, color_picker_flags);
+				ImGui::SameLine();
+				ImGui::Checkbox(xorstr_("Distance"), &Config::ESP::bShowDistance);
 				ImGui::ColorEdit4(xorstr_("Barrel Color"), (float*)Config::Colors::fBarrelColor, color_picker_flags);
 				ImGui::SameLine();
 				ImGui::Checkbox(xorstr_("Barrel"), &Config::ESP::bShowBarrel);
@@ -369,7 +369,7 @@ namespace HAL::Graphics::Drawing
 				ImGui::Checkbox(xorstr_("Armor"), &Config::ESP::bShowArmor);
 				ImGui::EndColumns();
 				ImGui::Checkbox(xorstr_("Draw NPCs"), &Config::ESP::bDrawNPC);
-				if (ImGui::TreeNode("Show:"))
+				if (ImGui::TreeNode(xorstr_("Show:")))
 				{
 					ImGui::Selectable(xorstr_("MICHAEL"), &selection[0]);
 					ImGui::Selectable(xorstr_("FRANKLIN"), &selection[1]);
@@ -442,14 +442,8 @@ namespace HAL::Graphics::Drawing
 
 					Vector3 pedPos = Vector3(SDK::Game::Players[i].position.x, SDK::Game::Players[i].position.y, SDK::Game::Players[i].position.z);
 
-					//if (Distance(SDK::PLAYER::Position(), pedPos) <= (Config::ESP::distance * 3))
-					//	continue
-
 					if (SDK::Game::Distance(SDK::Game::Position(), pedPos) >= Config::ESP::fDistance) // to meters
 						continue;
-
-					//if (pedPos.x == 0.0f || pedPos.y == 0.0f || pedPos.z == 0.0f)
-					//	continue;
 
 					if (SDK::Game::Players[i].ped_type != SDK::Game::ped_types::NETWORK_PLAYER && !Config::ESP::bDrawNPC)
 						continue;
@@ -473,13 +467,9 @@ namespace HAL::Graphics::Drawing
 							Graphics::Drawing::DrawLine(screenPos.x - w, screenPos.y, screenPos.x - w, screenPosHead.y, FLOAT4TORGBA(Config::Colors::f2DColor), 1);
 							Graphics::Drawing::DrawLine(screenPos.x + w, screenPos.y, screenPos.x + w, screenPosHead.y, FLOAT4TORGBA(Config::Colors::f2DColor), 1);
 							Graphics::Drawing::DrawLine(screenPos.x - w, screenPos.y, screenPos.x + w, screenPos.y, FLOAT4TORGBA(Config::Colors::f2DColor), 1);
-							//Graphics::Drawing::DrawStrokeText(screenPos.x - w, screenPosHead.y, FLOAT4TORGBA(Config::ESP::f2DColor), "a");
-							//Graphics::Drawing::DrawStrokeText(screenPos.x + w, screenPosHead.y, FLOAT4TORGBA(Config::ESP::f2DColor), "b");
-							//Graphics::Drawing::DrawStrokeText(screenPos.x + w, screenPos.y, FLOAT4TORGBA(Config::ESP::f2DColor), "c");
-							//Graphics::Drawing::DrawStrokeText(screenPos.x - w, screenPos.y, FLOAT4TORGBA(Config::ESP::f2DColor), "d");
 						}
-						if (Config::ESP::bShow3DBox) 
-								Draw3DBox(headPos, SDK::Game::Players[i].ObjectNavigation->Rotation, originPos);
+						if (Config::ESP::bShow3DBox)
+							Draw3DBox(headPos, SDK::Game::Players[i].ObjectNavigation->Rotation, originPos);
 						if (Config::ESP::bShowHealth)
 						{
 							float flBarlenght = ((SDK::Game::Players[i].health * (h - 2)) / SDK::Game::Players[i].maxHealth) + 2;

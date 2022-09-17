@@ -179,6 +179,9 @@
     <ClInclude Include="sdk\DxINC\Effects.h">
       <Filter>File di intestazione\sdk\DxINC</Filter>
     </ClInclude>
+    <ClInclude Include="sdk\SimpleIni.h">
+      <Filter>File di intestazione\sdk</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="sdk\DxINC\SimpleMath.inl">
