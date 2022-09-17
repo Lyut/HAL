@@ -43,6 +43,17 @@ namespace HAL::SDK::Utils {
 		}
 	}
 
+	inline float ConfigParseFloat(std::string str, float defaultt)
+	{
+		try {
+			RemoveSpaces(&str);
+			return std::stoi(str);
+		}
+		catch (...) {
+			return defaultt;
+		}
+	}
+
 	inline bool ConfigParseBool(std::string str, bool defaultt)
 	{
 		try {
@@ -70,6 +81,11 @@ namespace HAL::SDK::Utils {
 		Config::ESP::bShowTracer = ConfigParseBool(Config::ConfigIni.GetValue(xorstr_("ESP"), xorstr_("ShowTracer")), false);
 		Config::ESP::bDrawNPC = ConfigParseBool(Config::ConfigIni.GetValue(xorstr_("ESP"), xorstr_("DrawNPC")), false);
 		Config::ESP::fDistance = ConfigParseInt(Config::ConfigIni.GetValue(xorstr_("ESP"), xorstr_("Distance")), 2500);
+
+		Config::Colors::f2DColor[0] = ConfigParseFloat(Config::ConfigIni.GetValue(xorstr_("ESPColors"), xorstr_("2DBoxR")), 1);
+		Config::Colors::f2DColor[1] = ConfigParseFloat(Config::ConfigIni.GetValue(xorstr_("ESPColors"), xorstr_("2DBoxG")), 0.15f);
+		Config::Colors::f2DColor[2] = ConfigParseFloat(Config::ConfigIni.GetValue(xorstr_("ESPColors"), xorstr_("2DBoxB")), 0.15f);
+		Config::Colors::f2DColor[3] = ConfigParseFloat(Config::ConfigIni.GetValue(xorstr_("ESPColors"), xorstr_("2DBoxA")), 1);
 #pragma endregion
 	}
 
@@ -98,6 +114,11 @@ namespace HAL::SDK::Utils {
 			Config::ConfigIni.SetBoolValue(xorstr_("ESP"), xorstr_("ShowTracer"), false);
 			Config::ConfigIni.SetBoolValue(xorstr_("ESP"), xorstr_("DrawNPC"), false);
 			Config::ConfigIni.SetDoubleValue(xorstr_("ESP"), xorstr_("Distance"), 2500);
+
+			Config::ConfigIni.SetDoubleValue(xorstr_("ESPColors"), xorstr_("2DBoxR"), 1);
+			Config::ConfigIni.SetDoubleValue(xorstr_("ESPColors"), xorstr_("2DBoxG"), 1);
+			Config::ConfigIni.SetDoubleValue(xorstr_("ESPColors"), xorstr_("2DBoxB"), 1);
+			Config::ConfigIni.SetDoubleValue(xorstr_("ESPColors"), xorstr_("2DBoxA"), 1);
 #pragma endregion
 
 			if (PathFileExistsA(ConfigPath.c_str())) {
@@ -129,6 +150,11 @@ namespace HAL::SDK::Utils {
 		Config::ConfigIni.SetBoolValue(xorstr_("ESP"), xorstr_("ShowTracer"), Config::ESP::bShowTracer);
 		Config::ConfigIni.SetBoolValue(xorstr_("ESP"), xorstr_("DrawNPC"), Config::ESP::bDrawNPC);
 		Config::ConfigIni.SetDoubleValue(xorstr_("ESP"), xorstr_("Distance"), Config::ESP::fDistance);
+
+		Config::ConfigIni.SetDoubleValue(xorstr_("ESPColors"), xorstr_("2DBoxR"), Config::Colors::f2DColor[0]);
+		Config::ConfigIni.SetDoubleValue(xorstr_("ESPColors"), xorstr_("2DBoxG"), Config::Colors::f2DColor[1]);
+		Config::ConfigIni.SetDoubleValue(xorstr_("ESPColors"), xorstr_("2DBoxB"), Config::Colors::f2DColor[2]);
+		Config::ConfigIni.SetDoubleValue(xorstr_("ESPColors"), xorstr_("2DBoxA"), Config::Colors::f2DColor[3]);
 		Config::ConfigIni.SaveFile(ConfigPath.c_str());
 #pragma endregion
 	}
