@@ -10,8 +10,6 @@
 #include "../hooks.h"
 #include "../config.h"
 
-static bool selection[29] = { true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true };
-
 namespace HAL::Graphics::Drawing
 {
 	typedef struct
@@ -372,36 +370,36 @@ namespace HAL::Graphics::Drawing
 				ImGui::Checkbox(xorstr_("Draw Local"), &Config::ESP::bDrawLocal);
 				if (ImGui::TreeNode(xorstr_("Show:")))
 				{
-					ImGui::Selectable(xorstr_("MICHAEL"), &selection[0]);
-					ImGui::Selectable(xorstr_("FRANKLIN"), &selection[1]);
-					ImGui::Selectable(xorstr_("NETWORK_PLAYER"), &selection[2]);
-					ImGui::Selectable(xorstr_("TREVOR"), &selection[3]);
-					ImGui::Selectable(xorstr_("CIVMALE"), &selection[4]);
-					ImGui::Selectable(xorstr_("CIVFEMALE"), &selection[5]);
-					ImGui::Selectable(xorstr_("COP"), &selection[6]);
-					ImGui::Selectable(xorstr_("GANG_ALBANIAN"), &selection[7]);
-					ImGui::Selectable(xorstr_("GANG_BIKER_1"), &selection[8]);
-					ImGui::Selectable(xorstr_("GANG_BIKER_2"), &selection[9]);
-					ImGui::Selectable(xorstr_("GANG_ITALIAN"), &selection[10]);
-					ImGui::Selectable(xorstr_("GANG_RUSSIAN"), &selection[11]);
-					ImGui::Selectable(xorstr_("GANG_RUSSIAN_2"), &selection[12]);
-					ImGui::Selectable(xorstr_("GANG_IRISH"), &selection[13]);
-					ImGui::Selectable(xorstr_("GANG_JAMAICAN"), &selection[14]);
-					ImGui::Selectable(xorstr_("GANG_AFRICAN_AMERICAN"), &selection[15]);
-					ImGui::Selectable(xorstr_("GANG_KOREAN"), &selection[16]);
-					ImGui::Selectable(xorstr_("GANG_CHINESE_JAPANESE"), &selection[17]);
-					ImGui::Selectable(xorstr_("GANG_PUERTO_RICAN"), &selection[18]);
-					ImGui::Selectable(xorstr_("DEALER"), &selection[19]);
-					ImGui::Selectable(xorstr_("MEDIC"), &selection[20]);
-					ImGui::Selectable(xorstr_("FIREMAN"), &selection[21]);
-					ImGui::Selectable(xorstr_("CRIMINAL"), &selection[22]);
-					ImGui::Selectable(xorstr_("BUM"), &selection[23]);
-					ImGui::Selectable(xorstr_("PROSTITUTE"), &selection[24]);
-					ImGui::Selectable(xorstr_("SPECIAL"), &selection[25]);
-					ImGui::Selectable(xorstr_("MISSION"), &selection[26]);
-					ImGui::Selectable(xorstr_("SWAT"), &selection[27]);
-					ImGui::Selectable(xorstr_("ANIMAL"), &selection[28]);
-					ImGui::Selectable(xorstr_("ARMY"), &selection[29]);
+					ImGui::Selectable(xorstr_("MICHAEL"), &Config::PedSelection[0]);
+					ImGui::Selectable(xorstr_("FRANKLIN"), &Config::PedSelection[1]);
+					ImGui::Selectable(xorstr_("NETWORK_PLAYER"), &Config::PedSelection[2]);
+					ImGui::Selectable(xorstr_("TREVOR"), &Config::PedSelection[3]);
+					ImGui::Selectable(xorstr_("CIVMALE"), &Config::PedSelection[4]);
+					ImGui::Selectable(xorstr_("CIVFEMALE"), &Config::PedSelection[5]);
+					ImGui::Selectable(xorstr_("COP"), &Config::PedSelection[6]);
+					ImGui::Selectable(xorstr_("GANG_ALBANIAN"), &Config::PedSelection[7]);
+					ImGui::Selectable(xorstr_("GANG_BIKER_1"), &Config::PedSelection[8]);
+					ImGui::Selectable(xorstr_("GANG_BIKER_2"), &Config::PedSelection[9]);
+					ImGui::Selectable(xorstr_("GANG_ITALIAN"), &Config::PedSelection[10]);
+					ImGui::Selectable(xorstr_("GANG_RUSSIAN"), &Config::PedSelection[11]);
+					ImGui::Selectable(xorstr_("GANG_RUSSIAN_2"), &Config::PedSelection[12]);
+					ImGui::Selectable(xorstr_("GANG_IRISH"), &Config::PedSelection[13]);
+					ImGui::Selectable(xorstr_("GANG_JAMAICAN"), &Config::PedSelection[14]);
+					ImGui::Selectable(xorstr_("GANG_AFRICAN_AMERICAN"), &Config::PedSelection[15]);
+					ImGui::Selectable(xorstr_("GANG_KOREAN"), &Config::PedSelection[16]);
+					ImGui::Selectable(xorstr_("GANG_CHINESE_JAPANESE"), &Config::PedSelection[17]);
+					ImGui::Selectable(xorstr_("GANG_PUERTO_RICAN"), &Config::PedSelection[18]);
+					ImGui::Selectable(xorstr_("DEALER"), &Config::PedSelection[19]);
+					ImGui::Selectable(xorstr_("MEDIC"), &Config::PedSelection[20]);
+					ImGui::Selectable(xorstr_("FIREMAN"), &Config::PedSelection[21]);
+					ImGui::Selectable(xorstr_("CRIMINAL"), &Config::PedSelection[22]);
+					ImGui::Selectable(xorstr_("BUM"), &Config::PedSelection[23]);
+					ImGui::Selectable(xorstr_("PROSTITUTE"), &Config::PedSelection[24]);
+					ImGui::Selectable(xorstr_("SPECIAL"), &Config::PedSelection[25]);
+					ImGui::Selectable(xorstr_("MISSION"), &Config::PedSelection[26]);
+					ImGui::Selectable(xorstr_("SWAT"), &Config::PedSelection[27]);
+					ImGui::Selectable(xorstr_("ANIMAL"), &Config::PedSelection[28]);
+					ImGui::Selectable(xorstr_("ARMY"), &Config::PedSelection[29]);
 					ImGui::TreePop();
 				}
 
@@ -449,7 +447,7 @@ namespace HAL::Graphics::Drawing
 					if (SDK::Game::Players[i].ped_type != SDK::Game::ped_types::NETWORK_PLAYER && !Config::ESP::bDrawNPC)
 						continue;
 
-					if (!selection[SDK::Game::Players[i].ped_type])
+					if (!Config::PedSelection[SDK::Game::Players[i].ped_type])
 						continue;
 
 					Vector3 originPos = Vector3(pedPos.x, pedPos.y, pedPos.z - 1.0f);

@@ -253,7 +253,6 @@ namespace HAL::SDK::Utils {
 	}
 
 	void ResetConfig() {
-		Config::ConfigIni.Reset();
 		bDoOnce = 0;
 		InitConfig();
 		ParseSettings();

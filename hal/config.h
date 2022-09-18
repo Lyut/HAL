@@ -31,4 +31,11 @@ namespace HAL::Config {
 		bool bDrawNPC = false;
 		bool bDrawLocal = false;
 	}
+
+	static bool PedSelection[29] = { true, true, true, true, true, true, true,
+									 true, true, true, true, true, true, true,
+									 true, true, true, true, true, true, true,
+									 true, true, true, true, true, true, true,
+									 true 
+	};
 }
