@@ -83,10 +83,40 @@ namespace HAL::SDK::Utils {
 		Config::ESP::bDrawNPC = ConfigParseBool(Config::ConfigIni.GetValue(xorstr_("ESP"), xorstr_("DrawNPC")), false);
 		Config::ESP::fDistance = ConfigParseInt(Config::ConfigIni.GetValue(xorstr_("ESP"), xorstr_("Distance")), 2500);
 
-		Config::Colors::f2DColor[0] = ConfigParseFloat(Config::ConfigIni.GetValue(xorstr_("ESPColors"), xorstr_("2DBoxR")), 1);
-		Config::Colors::f2DColor[1] = ConfigParseFloat(Config::ConfigIni.GetValue(xorstr_("ESPColors"), xorstr_("2DBoxG")), 0.15f);
-		Config::Colors::f2DColor[2] = ConfigParseFloat(Config::ConfigIni.GetValue(xorstr_("ESPColors"), xorstr_("2DBoxB")), 0.15f);
-		Config::Colors::f2DColor[3] = ConfigParseFloat(Config::ConfigIni.GetValue(xorstr_("ESPColors"), xorstr_("2DBoxA")), 1);
+		Config::Colors::f2DColor[0] = floor(Config::ConfigIni.GetDoubleValue(xorstr_("ESPColors"), xorstr_("2DBoxR")) * 100) / 100;
+		Config::Colors::f2DColor[1] = floor(Config::ConfigIni.GetDoubleValue(xorstr_("ESPColors"), xorstr_("2DBoxG")) * 100) / 100;
+		Config::Colors::f2DColor[2] = floor(Config::ConfigIni.GetDoubleValue(xorstr_("ESPColors"), xorstr_("2DBoxB")) * 100) / 100;
+		Config::Colors::f2DColor[3] = floor(Config::ConfigIni.GetDoubleValue(xorstr_("ESPColors"), xorstr_("2DBoxA")) * 100) / 100;
+
+		Config::Colors::f3DColor[0] = floor(Config::ConfigIni.GetDoubleValue(xorstr_("ESPColors"), xorstr_("3DBoxR")) * 100) / 100;
+		Config::Colors::f3DColor[1] = floor(Config::ConfigIni.GetDoubleValue(xorstr_("ESPColors"), xorstr_("3DBoxG")) * 100) / 100;
+		Config::Colors::f3DColor[2] = floor(Config::ConfigIni.GetDoubleValue(xorstr_("ESPColors"), xorstr_("3DBoxB")) * 100) / 100;
+		Config::Colors::f3DColor[3] = floor(Config::ConfigIni.GetDoubleValue(xorstr_("ESPColors"), xorstr_("3DBoxA")) * 100) / 100;
+
+		Config::Colors::fNameColor[0] = floor(Config::ConfigIni.GetDoubleValue(xorstr_("ESPColors"), xorstr_("NameR")) * 100) / 100;
+		Config::Colors::fNameColor[1] = floor(Config::ConfigIni.GetDoubleValue(xorstr_("ESPColors"), xorstr_("NameG")) * 100) / 100;
+		Config::Colors::fNameColor[2] = floor(Config::ConfigIni.GetDoubleValue(xorstr_("ESPColors"), xorstr_("NameB")) * 100) / 100;
+		Config::Colors::fNameColor[3] = floor(Config::ConfigIni.GetDoubleValue(xorstr_("ESPColors"), xorstr_("NameA")) * 100) / 100;
+
+		Config::Colors::fDistanceColor[0] = floor(Config::ConfigIni.GetDoubleValue(xorstr_("ESPColors"), xorstr_("DistanceR")) * 100) / 100;
+		Config::Colors::fDistanceColor[1] = floor(Config::ConfigIni.GetDoubleValue(xorstr_("ESPColors"), xorstr_("DistanceG")) * 100) / 100;
+		Config::Colors::fDistanceColor[2] = floor(Config::ConfigIni.GetDoubleValue(xorstr_("ESPColors"), xorstr_("DistanceB")) * 100) / 100;
+		Config::Colors::fDistanceColor[3] = floor(Config::ConfigIni.GetDoubleValue(xorstr_("ESPColors"), xorstr_("DistanceA")) * 100) / 100;
+
+		Config::Colors::fSkeletonColor[0] = floor(Config::ConfigIni.GetDoubleValue(xorstr_("ESPColors"), xorstr_("SkeletonR")) * 100) / 100;
+		Config::Colors::fSkeletonColor[1] = floor(Config::ConfigIni.GetDoubleValue(xorstr_("ESPColors"), xorstr_("SkeletonG")) * 100) / 100;
+		Config::Colors::fSkeletonColor[2] = floor(Config::ConfigIni.GetDoubleValue(xorstr_("ESPColors"), xorstr_("SkeletonB")) * 100) / 100;
+		Config::Colors::fSkeletonColor[3] = floor(Config::ConfigIni.GetDoubleValue(xorstr_("ESPColors"), xorstr_("SkeletonA")) * 100) / 100;
+
+		Config::Colors::fTracerColor[0] = floor(Config::ConfigIni.GetDoubleValue(xorstr_("ESPColors"), xorstr_("TracerR")) * 100) / 100;
+		Config::Colors::fTracerColor[1] = floor(Config::ConfigIni.GetDoubleValue(xorstr_("ESPColors"), xorstr_("TracerG")) * 100) / 100;
+		Config::Colors::fTracerColor[2] = floor(Config::ConfigIni.GetDoubleValue(xorstr_("ESPColors"), xorstr_("TracerB")) * 100) / 100;
+		Config::Colors::fTracerColor[3] = floor(Config::ConfigIni.GetDoubleValue(xorstr_("ESPColors"), xorstr_("TracerA")) * 100) / 100;
+
+		Config::Colors::fBarrelColor[0] = floor(Config::ConfigIni.GetDoubleValue(xorstr_("ESPColors"), xorstr_("BarrelR")) * 100) / 100;
+		Config::Colors::fBarrelColor[1] = floor(Config::ConfigIni.GetDoubleValue(xorstr_("ESPColors"), xorstr_("BarrelG")) * 100) / 100;
+		Config::Colors::fBarrelColor[2] = floor(Config::ConfigIni.GetDoubleValue(xorstr_("ESPColors"), xorstr_("BarrelB")) * 100) / 100;
+		Config::Colors::fBarrelColor[3] = floor(Config::ConfigIni.GetDoubleValue(xorstr_("ESPColors"), xorstr_("BarrelA")) * 100) / 100;
 #pragma endregion
 	}
 
@@ -117,10 +147,40 @@ namespace HAL::SDK::Utils {
 			Config::ConfigIni.SetBoolValue(xorstr_("ESP"), xorstr_("DrawNPC"), false);
 			Config::ConfigIni.SetDoubleValue(xorstr_("ESP"), xorstr_("Distance"), 2500);
 
-			Config::ConfigIni.SetDoubleValue(xorstr_("ESPColors"), xorstr_("2DBoxR"), 1);
-			Config::ConfigIni.SetDoubleValue(xorstr_("ESPColors"), xorstr_("2DBoxG"), 1);
-			Config::ConfigIni.SetDoubleValue(xorstr_("ESPColors"), xorstr_("2DBoxB"), 1);
+			Config::ConfigIni.SetDoubleValue(xorstr_("ESPColors"), xorstr_("2DBoxR"), 0.15f);
+			Config::ConfigIni.SetDoubleValue(xorstr_("ESPColors"), xorstr_("2DBoxG"), 0.68f);
+			Config::ConfigIni.SetDoubleValue(xorstr_("ESPColors"), xorstr_("2DBoxB"), 0.37f);
 			Config::ConfigIni.SetDoubleValue(xorstr_("ESPColors"), xorstr_("2DBoxA"), 1);
+
+			Config::ConfigIni.SetDoubleValue(xorstr_("ESPColors"), xorstr_("3DBoxR"), 0.15f);
+			Config::ConfigIni.SetDoubleValue(xorstr_("ESPColors"), xorstr_("3DBoxG"), 0.68f);
+			Config::ConfigIni.SetDoubleValue(xorstr_("ESPColors"), xorstr_("3DBoxB"), 0.37f);
+			Config::ConfigIni.SetDoubleValue(xorstr_("ESPColors"), xorstr_("3DBoxA"), 1);
+
+			Config::ConfigIni.SetDoubleValue(xorstr_("ESPColors"), xorstr_("NameR"), 0.15f);
+			Config::ConfigIni.SetDoubleValue(xorstr_("ESPColors"), xorstr_("NameG"), 0.68f);
+			Config::ConfigIni.SetDoubleValue(xorstr_("ESPColors"), xorstr_("NameB"), 0.37f);
+			Config::ConfigIni.SetDoubleValue(xorstr_("ESPColors"), xorstr_("NameA"), 1);
+
+			Config::ConfigIni.SetDoubleValue(xorstr_("ESPColors"), xorstr_("DistanceR"), 0.15f);
+			Config::ConfigIni.SetDoubleValue(xorstr_("ESPColors"), xorstr_("DistanceG"), 0.68f);
+			Config::ConfigIni.SetDoubleValue(xorstr_("ESPColors"), xorstr_("DistanceB"), 0.37f);
+			Config::ConfigIni.SetDoubleValue(xorstr_("ESPColors"), xorstr_("DistanceA"), 1);
+
+			Config::ConfigIni.SetDoubleValue(xorstr_("ESPColors"), xorstr_("SkeletonR"), 0.15f);
+			Config::ConfigIni.SetDoubleValue(xorstr_("ESPColors"), xorstr_("SkeletonG"), 0.68f);
+			Config::ConfigIni.SetDoubleValue(xorstr_("ESPColors"), xorstr_("SkeletonB"), 0.37f);
+			Config::ConfigIni.SetDoubleValue(xorstr_("ESPColors"), xorstr_("SkeletonA"), 1);
+
+			Config::ConfigIni.SetDoubleValue(xorstr_("ESPColors"), xorstr_("TracerR"), 0.15f);
+			Config::ConfigIni.SetDoubleValue(xorstr_("ESPColors"), xorstr_("TracerG"), 0.68f);
+			Config::ConfigIni.SetDoubleValue(xorstr_("ESPColors"), xorstr_("TracerB"), 0.37f);
+			Config::ConfigIni.SetDoubleValue(xorstr_("ESPColors"), xorstr_("TracerA"), 1);
+
+			Config::ConfigIni.SetDoubleValue(xorstr_("ESPColors"), xorstr_("BarrelR"), 0.15f);
+			Config::ConfigIni.SetDoubleValue(xorstr_("ESPColors"), xorstr_("BarrelG"), 0.68f);
+			Config::ConfigIni.SetDoubleValue(xorstr_("ESPColors"), xorstr_("BarrelB"), 0.37f);
+			Config::ConfigIni.SetDoubleValue(xorstr_("ESPColors"), xorstr_("BarrelA"), 1);
 #pragma endregion
 
 			if (PathFileExistsA(ConfigPath.c_str())) {
@@ -158,6 +218,36 @@ namespace HAL::SDK::Utils {
 		Config::ConfigIni.SetDoubleValue(xorstr_("ESPColors"), xorstr_("2DBoxG"), Config::Colors::f2DColor[1]);
 		Config::ConfigIni.SetDoubleValue(xorstr_("ESPColors"), xorstr_("2DBoxB"), Config::Colors::f2DColor[2]);
 		Config::ConfigIni.SetDoubleValue(xorstr_("ESPColors"), xorstr_("2DBoxA"), Config::Colors::f2DColor[3]);
+
+		Config::ConfigIni.SetDoubleValue(xorstr_("ESPColors"), xorstr_("3DBoxR"), Config::Colors::f3DColor[0]);
+		Config::ConfigIni.SetDoubleValue(xorstr_("ESPColors"), xorstr_("3DBoxG"), Config::Colors::f3DColor[1]);
+		Config::ConfigIni.SetDoubleValue(xorstr_("ESPColors"), xorstr_("3DBoxB"), Config::Colors::f3DColor[2]);
+		Config::ConfigIni.SetDoubleValue(xorstr_("ESPColors"), xorstr_("3DBoxA"), Config::Colors::f3DColor[3]);
+
+		Config::ConfigIni.SetDoubleValue(xorstr_("ESPColors"), xorstr_("NameR"), Config::Colors::fNameColor[0]);
+		Config::ConfigIni.SetDoubleValue(xorstr_("ESPColors"), xorstr_("NameG"), Config::Colors::fNameColor[1]);
+		Config::ConfigIni.SetDoubleValue(xorstr_("ESPColors"), xorstr_("NameB"), Config::Colors::fNameColor[2]);
+		Config::ConfigIni.SetDoubleValue(xorstr_("ESPColors"), xorstr_("NameA"), Config::Colors::fNameColor[3]);
+
+		Config::ConfigIni.SetDoubleValue(xorstr_("ESPColors"), xorstr_("DistanceR"), Config::Colors::fDistanceColor[0]);
+		Config::ConfigIni.SetDoubleValue(xorstr_("ESPColors"), xorstr_("DistanceG"), Config::Colors::fDistanceColor[1]);
+		Config::ConfigIni.SetDoubleValue(xorstr_("ESPColors"), xorstr_("DistanceB"), Config::Colors::fDistanceColor[2]);
+		Config::ConfigIni.SetDoubleValue(xorstr_("ESPColors"), xorstr_("DistanceA"), Config::Colors::fDistanceColor[3]);
+
+		Config::ConfigIni.SetDoubleValue(xorstr_("ESPColors"), xorstr_("SkeletonR"), Config::Colors::fSkeletonColor[0]);
+		Config::ConfigIni.SetDoubleValue(xorstr_("ESPColors"), xorstr_("SkeletonG"), Config::Colors::fSkeletonColor[1]);
+		Config::ConfigIni.SetDoubleValue(xorstr_("ESPColors"), xorstr_("SkeletonB"), Config::Colors::fSkeletonColor[2]);
+		Config::ConfigIni.SetDoubleValue(xorstr_("ESPColors"), xorstr_("SkeletonA"), Config::Colors::fSkeletonColor[3]);
+
+		Config::ConfigIni.SetDoubleValue(xorstr_("ESPColors"), xorstr_("TracerR"), Config::Colors::fTracerColor[0]);
+		Config::ConfigIni.SetDoubleValue(xorstr_("ESPColors"), xorstr_("TracerG"), Config::Colors::fTracerColor[1]);
+		Config::ConfigIni.SetDoubleValue(xorstr_("ESPColors"), xorstr_("TracerB"), Config::Colors::fTracerColor[2]);
+		Config::ConfigIni.SetDoubleValue(xorstr_("ESPColors"), xorstr_("TracerA"), Config::Colors::fTracerColor[3]);
+
+		Config::ConfigIni.SetDoubleValue(xorstr_("ESPColors"), xorstr_("BarrelR"), Config::Colors::fBarrelColor[0]);
+		Config::ConfigIni.SetDoubleValue(xorstr_("ESPColors"), xorstr_("BarrelG"), Config::Colors::fBarrelColor[1]);
+		Config::ConfigIni.SetDoubleValue(xorstr_("ESPColors"), xorstr_("BarrelB"), Config::Colors::fBarrelColor[2]);
+		Config::ConfigIni.SetDoubleValue(xorstr_("ESPColors"), xorstr_("BarrelA"), Config::Colors::fBarrelColor[3]);
 		Config::ConfigIni.SaveFile(ConfigPath.c_str());
 #pragma endregion
 	}
