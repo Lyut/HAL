@@ -147,39 +147,39 @@ namespace HAL::SDK::Utils {
 			Config::ConfigIni.SetBoolValue(xorstr_("ESP"), xorstr_("DrawNPC"), false);
 			Config::ConfigIni.SetDoubleValue(xorstr_("ESP"), xorstr_("Distance"), 2500);
 
-			Config::ConfigIni.SetDoubleValue(xorstr_("ESPColors"), xorstr_("2DBoxR"), 0.15f);
-			Config::ConfigIni.SetDoubleValue(xorstr_("ESPColors"), xorstr_("2DBoxG"), 0.68f);
-			Config::ConfigIni.SetDoubleValue(xorstr_("ESPColors"), xorstr_("2DBoxB"), 0.37f);
+			Config::ConfigIni.SetDoubleValue(xorstr_("ESPColors"), xorstr_("2DBoxR"), 0);
+			Config::ConfigIni.SetDoubleValue(xorstr_("ESPColors"), xorstr_("2DBoxG"), 1);
+			Config::ConfigIni.SetDoubleValue(xorstr_("ESPColors"), xorstr_("2DBoxB"), 0);
 			Config::ConfigIni.SetDoubleValue(xorstr_("ESPColors"), xorstr_("2DBoxA"), 1);
 
-			Config::ConfigIni.SetDoubleValue(xorstr_("ESPColors"), xorstr_("3DBoxR"), 0.15f);
-			Config::ConfigIni.SetDoubleValue(xorstr_("ESPColors"), xorstr_("3DBoxG"), 0.68f);
-			Config::ConfigIni.SetDoubleValue(xorstr_("ESPColors"), xorstr_("3DBoxB"), 0.37f);
+			Config::ConfigIni.SetDoubleValue(xorstr_("ESPColors"), xorstr_("3DBoxR"), 1);
+			Config::ConfigIni.SetDoubleValue(xorstr_("ESPColors"), xorstr_("3DBoxG"), 0);
+			Config::ConfigIni.SetDoubleValue(xorstr_("ESPColors"), xorstr_("3DBoxB"), 0.88f);
 			Config::ConfigIni.SetDoubleValue(xorstr_("ESPColors"), xorstr_("3DBoxA"), 1);
 
-			Config::ConfigIni.SetDoubleValue(xorstr_("ESPColors"), xorstr_("NameR"), 0.15f);
-			Config::ConfigIni.SetDoubleValue(xorstr_("ESPColors"), xorstr_("NameG"), 0.68f);
-			Config::ConfigIni.SetDoubleValue(xorstr_("ESPColors"), xorstr_("NameB"), 0.37f);
+			Config::ConfigIni.SetDoubleValue(xorstr_("ESPColors"), xorstr_("NameR"), 1);
+			Config::ConfigIni.SetDoubleValue(xorstr_("ESPColors"), xorstr_("NameG"), 0);
+			Config::ConfigIni.SetDoubleValue(xorstr_("ESPColors"), xorstr_("NameB"), 0.94f);
 			Config::ConfigIni.SetDoubleValue(xorstr_("ESPColors"), xorstr_("NameA"), 1);
 
-			Config::ConfigIni.SetDoubleValue(xorstr_("ESPColors"), xorstr_("DistanceR"), 0.15f);
-			Config::ConfigIni.SetDoubleValue(xorstr_("ESPColors"), xorstr_("DistanceG"), 0.68f);
-			Config::ConfigIni.SetDoubleValue(xorstr_("ESPColors"), xorstr_("DistanceB"), 0.37f);
+			Config::ConfigIni.SetDoubleValue(xorstr_("ESPColors"), xorstr_("DistanceR"), 0.99f);
+			Config::ConfigIni.SetDoubleValue(xorstr_("ESPColors"), xorstr_("DistanceG"), 1);
+			Config::ConfigIni.SetDoubleValue(xorstr_("ESPColors"), xorstr_("DistanceB"), 0.99f);
 			Config::ConfigIni.SetDoubleValue(xorstr_("ESPColors"), xorstr_("DistanceA"), 1);
 
-			Config::ConfigIni.SetDoubleValue(xorstr_("ESPColors"), xorstr_("SkeletonR"), 0.15f);
-			Config::ConfigIni.SetDoubleValue(xorstr_("ESPColors"), xorstr_("SkeletonG"), 0.68f);
-			Config::ConfigIni.SetDoubleValue(xorstr_("ESPColors"), xorstr_("SkeletonB"), 0.37f);
+			Config::ConfigIni.SetDoubleValue(xorstr_("ESPColors"), xorstr_("SkeletonR"), 0.99f);
+			Config::ConfigIni.SetDoubleValue(xorstr_("ESPColors"), xorstr_("SkeletonG"), 1);
+			Config::ConfigIni.SetDoubleValue(xorstr_("ESPColors"), xorstr_("SkeletonB"), 0.99f);
 			Config::ConfigIni.SetDoubleValue(xorstr_("ESPColors"), xorstr_("SkeletonA"), 1);
 
-			Config::ConfigIni.SetDoubleValue(xorstr_("ESPColors"), xorstr_("TracerR"), 0.15f);
-			Config::ConfigIni.SetDoubleValue(xorstr_("ESPColors"), xorstr_("TracerG"), 0.68f);
-			Config::ConfigIni.SetDoubleValue(xorstr_("ESPColors"), xorstr_("TracerB"), 0.37f);
-			Config::ConfigIni.SetDoubleValue(xorstr_("ESPColors"), xorstr_("TracerA"), 1);
+			Config::ConfigIni.SetDoubleValue(xorstr_("ESPColors"), xorstr_("TracerR"), 1);
+			Config::ConfigIni.SetDoubleValue(xorstr_("ESPColors"), xorstr_("TracerG"), 0);
+			Config::ConfigIni.SetDoubleValue(xorstr_("ESPColors"), xorstr_("TracerB"), 0);
+			Config::ConfigIni.SetDoubleValue(xorstr_("ESPColors"), xorstr_("TracerA"), 0.39f);
 
-			Config::ConfigIni.SetDoubleValue(xorstr_("ESPColors"), xorstr_("BarrelR"), 0.15f);
-			Config::ConfigIni.SetDoubleValue(xorstr_("ESPColors"), xorstr_("BarrelG"), 0.68f);
-			Config::ConfigIni.SetDoubleValue(xorstr_("ESPColors"), xorstr_("BarrelB"), 0.37f);
+			Config::ConfigIni.SetDoubleValue(xorstr_("ESPColors"), xorstr_("BarrelR"), 1);
+			Config::ConfigIni.SetDoubleValue(xorstr_("ESPColors"), xorstr_("BarrelG"), 0);
+			Config::ConfigIni.SetDoubleValue(xorstr_("ESPColors"), xorstr_("BarrelB"), 0);
 			Config::ConfigIni.SetDoubleValue(xorstr_("ESPColors"), xorstr_("BarrelA"), 1);
 #pragma endregion
 
@@ -255,6 +255,5 @@ namespace HAL::SDK::Utils {
 	void ResetConfig() {
 		bDoOnce = 0;
 		InitConfig();
-		ParseSettings();
 	}
 }

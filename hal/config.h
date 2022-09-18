@@ -17,6 +17,14 @@ namespace HAL::Config {
 		float fBarrelColor[] = { 0.15f, 0.68f, 0.37f, 1.00f };
 	}
 
+	namespace Aimbot {
+		int iFOV = 100;
+		bool bEnabled = false;
+		bool bSmoothEnabled = false;
+		int iSmoothness = 0;
+		int iAimBone = 0;
+	}
+
 	namespace ESP {
 		float fDistance = 2500;
 		bool bShowName = false;

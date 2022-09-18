@@ -324,51 +324,40 @@ namespace HAL::Graphics::Drawing
 		ImGuiTabBarFlags tab_bar_flags = ImGuiTabBarFlags_Reorderable | ImGuiTabBarFlags_FittingPolicyScroll;
 		if (ImGui::BeginTabBar(xorstr_("merdaMenu"), tab_bar_flags))
 		{
-			if (ImGui::BeginTabItem(xorstr_("DEBUG")))
-			{
-				if (SDK::Game::hAsiFive)
-					ImGui::Text((std::string(xorstr_("GTA version: b")) + std::to_string(SDK::Game::GetGameBuild())).c_str());
-				ImGui::EndTabItem();
-			}
-			if (ImGui::BeginTabItem(xorstr_("aimbot")))
-			{
-
-				ImGui::EndTabItem();
-			}
 			if (ImGui::BeginTabItem(xorstr_("visuals")))
 			{
 				ImGuiTabBarFlags color_picker_flags = ImGuiColorEditFlags_NoInputs | ImGuiColorEditFlags_AlphaPreview | ImGuiColorEditFlags_AlphaBar | ImGuiColorEditFlags_NoLabel;
 				ImGui::Text("Ctrl+LClick to type");
-				ImGui::SliderFloat(xorstr_("Range"), &Config::ESP::fDistance, 0, 2500, Config::ESP::fDistance == 1.0f ? xorstr_("%.0f meter") : xorstr_("%.0f meters"));
+				ImGui::SliderFloat(xorstr_("range"), &Config::ESP::fDistance, 0, 2500, Config::ESP::fDistance == 1.0f ? xorstr_("%.0f meter") : xorstr_("%.0f meters"));
 				ImGui::Columns(2, NULL, true);
-				ImGui::ColorEdit4(xorstr_("2D Box Color"), (float*)Config::Colors::f2DColor, color_picker_flags);
+				ImGui::ColorEdit4(xorstr_("2D box color"), (float*)Config::Colors::f2DColor, color_picker_flags);
 				ImGui::SameLine();
-				ImGui::Checkbox(xorstr_("2D Box"), &Config::ESP::bShow2DBox);
-				ImGui::ColorEdit4(xorstr_("3D Box Color"), (float*)Config::Colors::f3DColor, color_picker_flags);
+				ImGui::Checkbox(xorstr_("2D box"), &Config::ESP::bShow2DBox);
+				ImGui::ColorEdit4(xorstr_("3D Box color"), (float*)Config::Colors::f3DColor, color_picker_flags);
 				ImGui::SameLine();
-				ImGui::Checkbox(xorstr_("3D Box"), &Config::ESP::bShow3DBox);
-				ImGui::ColorEdit4(xorstr_("Skeleton Color"), (float*)Config::Colors::fSkeletonColor, color_picker_flags);
+				ImGui::Checkbox(xorstr_("3D box"), &Config::ESP::bShow3DBox);
+				ImGui::ColorEdit4(xorstr_("skeleton color"), (float*)Config::Colors::fSkeletonColor, color_picker_flags);
 				ImGui::SameLine();
-				ImGui::Checkbox(xorstr_("Skeleton"), &Config::ESP::bShowSkeleton);
-				ImGui::ColorEdit4(xorstr_("Tracer Color"), (float*)Config::Colors::fTracerColor, color_picker_flags);
+				ImGui::Checkbox(xorstr_("skeleton"), &Config::ESP::bShowSkeleton);
+				ImGui::ColorEdit4(xorstr_("tracer color"), (float*)Config::Colors::fTracerColor, color_picker_flags);
 				ImGui::SameLine();
-				ImGui::Checkbox(xorstr_("Tracer"), &Config::ESP::bShowTracer);
+				ImGui::Checkbox(xorstr_("tracer"), &Config::ESP::bShowTracer);
 				ImGui::NextColumn();
-				ImGui::ColorEdit4(xorstr_("Name Color"), (float*)Config::Colors::fNameColor, color_picker_flags);
+				ImGui::ColorEdit4(xorstr_("name color"), (float*)Config::Colors::fNameColor, color_picker_flags);
 				ImGui::SameLine();
-				ImGui::Checkbox(xorstr_("Name"), &Config::ESP::bShowName);
-				ImGui::ColorEdit4(xorstr_("Distance Color"), (float*)Config::Colors::fDistanceColor, color_picker_flags);
+				ImGui::Checkbox(xorstr_("name"), &Config::ESP::bShowName);
+				ImGui::ColorEdit4(xorstr_("distance color"), (float*)Config::Colors::fDistanceColor, color_picker_flags);
 				ImGui::SameLine();
-				ImGui::Checkbox(xorstr_("Distance"), &Config::ESP::bShowDistance);
-				ImGui::ColorEdit4(xorstr_("Barrel Color"), (float*)Config::Colors::fBarrelColor, color_picker_flags);
+				ImGui::Checkbox(xorstr_("distance"), &Config::ESP::bShowDistance);
+				ImGui::ColorEdit4(xorstr_("barrel color"), (float*)Config::Colors::fBarrelColor, color_picker_flags);
 				ImGui::SameLine();
-				ImGui::Checkbox(xorstr_("Barrel"), &Config::ESP::bShowBarrel);
-				ImGui::Checkbox(xorstr_("Health"), &Config::ESP::bShowHealth);
-				ImGui::Checkbox(xorstr_("Armor"), &Config::ESP::bShowArmor);
+				ImGui::Checkbox(xorstr_("barrel"), &Config::ESP::bShowBarrel);
+				ImGui::Checkbox(xorstr_("health"), &Config::ESP::bShowHealth);
+				ImGui::Checkbox(xorstr_("armor"), &Config::ESP::bShowArmor);
 				ImGui::EndColumns();
-				ImGui::Checkbox(xorstr_("Draw NPCs"), &Config::ESP::bDrawNPC);
-				ImGui::Checkbox(xorstr_("Draw Local"), &Config::ESP::bDrawLocal);
-				if (ImGui::TreeNode(xorstr_("Show:")))
+				ImGui::Checkbox(xorstr_("draw NPCs"), &Config::ESP::bDrawNPC);
+				ImGui::Checkbox(xorstr_("draw local"), &Config::ESP::bDrawLocal);
+				if (ImGui::TreeNode(xorstr_("show:")))
 				{
 					ImGui::Selectable(xorstr_("MICHAEL"), &Config::PedSelection[0]);
 					ImGui::Selectable(xorstr_("FRANKLIN"), &Config::PedSelection[1]);
@@ -402,6 +391,24 @@ namespace HAL::Graphics::Drawing
 					ImGui::Selectable(xorstr_("ARMY"), &Config::PedSelection[29]);
 					ImGui::TreePop();
 				}
+
+				ImGui::EndTabItem();
+			}
+			if (ImGui::BeginTabItem(xorstr_("aimbot")))
+			{
+				ImGui::SliderInt(xorstr_("FOV"), &Config::Aimbot::iFOV, 100, 300, Config::Aimbot::iFOV == 1 ? xorstr_("%d degree") : xorstr_("%d degrees"));
+				ImGui::Checkbox(xorstr_("enabled"), &Config::Aimbot::bEnabled);
+				ImGui::Checkbox(xorstr_("smooth"), &Config::Aimbot::bSmoothEnabled);
+				ImGui::SliderInt(xorstr_("smoothness"), &Config::Aimbot::iSmoothness, 0, 30);
+				const char* bones[] = { "head", "neck", "stomach", "left hand", "right hand", "left leg", "right leg", "left foot", "right foot" };
+				ImGui::Combo("aim bone", &Config::Aimbot::iAimBone, bones, IM_ARRAYSIZE(bones));
+
+				ImGui::EndTabItem();
+			}
+			if (ImGui::BeginTabItem(xorstr_("misc")))
+			{
+				if (SDK::Game::hAsiFive)
+					ImGui::Text((std::string(xorstr_("GTA version: b")) + std::to_string(SDK::Game::GetGameBuild())).c_str());
 
 				ImGui::EndTabItem();
 			}
