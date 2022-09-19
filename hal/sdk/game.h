@@ -67,21 +67,21 @@ namespace HAL::SDK::Game {
 
 	};//Size=0x0040
 
-	struct PoolPlayers
+	struct PlayerHolder
 	{
-		DWORD64 ped;
-		std::string name;
+		DWORD64 Ped;
+		std::string Name;
 		CModelInfo* ModelInfo;
 		CObjectNavigation* ObjectNavigation;
 		CBoneManager* BoneManager;
-		__int32 ped_type;
-		ImVec4 position;
-		float health;
-		float maxHealth;
-		float armor;
+		__int32 PedType;
+		ImVec4 Position;
+		float Health;
+		float MaxHealth;
+		float Armor;
 		bool isInVehicle;
 	};
-	PoolPlayers Players[1024];
+	PlayerHolder Players[1024];
 
 	typedef BOOLEAN(__cdecl* WorldToScreen_t)(Vector3* WorldPos, float* x, float* y);
 	WorldToScreen_t World2Screen;
@@ -201,10 +201,10 @@ namespace HAL::SDK::Game {
 
 		for (int i = 0; i < 1024; i++)
 		{
-			Players[i].ped = NULL;
-			Players[i].position.x = 0.0f;
-			Players[i].position.y = 0.0f;
-			Players[i].position.z = 0.0f;
+			Players[i].Ped = NULL;
+			Players[i].Position.x = 0.0f;
+			Players[i].Position.y = 0.0f;
+			Players[i].Position.z = 0.0f;
 
 			if (i < list_max_ptr)
 			{
@@ -213,17 +213,17 @@ namespace HAL::SDK::Game {
 					DWORD64 ped = *(DWORD64*)(list + i * 0x10);
 					if (HAL::MemoryMan::ValidPTR(ped))
 					{
-						Players[i].ped = ped;
+						Players[i].Ped = ped;
 						Vector3 pedPos = *(Vector3*)(ped + 0x90);
-						Players[i].position = ImVec4(pedPos.x, pedPos.y, pedPos.z, 0.0f);
-						Players[i].maxHealth = *(float*)(ped + 0x02A0) - 100.0f;
-						Players[i].health = *(float*)(ped + 0x280) - 100.0f;
+						Players[i].Position = ImVec4(pedPos.x, pedPos.y, pedPos.z, 0.0f);
+						Players[i].MaxHealth = *(float*)(ped + 0x02A0) - 100.0f;
+						Players[i].Health = *(float*)(ped + 0x280) - 100.0f;
 						Players[i].ObjectNavigation = (CObjectNavigation*)(ped + 0x30);
 						Players[i].BoneManager = (CBoneManager*)(ped + 0x180);
 						Players[i].ModelInfo = (CModelInfo*)(ped + 0x20);
 						__int32 pedType = *(__int32*)(ped + 0x10A8);
-						Players[i].ped_type = pedType << 11 >> 25;
-						Players[i].armor = *(float*)(ped + 0x14B0);
+						Players[i].PedType = pedType << 11 >> 25;
+						Players[i].Armor = *(float*)(ped + 0x14B0);
 						Players[i].isInVehicle = (bool)(*reinterpret_cast<__int32*>(ped + 0xE52) > 0);
 					}
 				}

@@ -22,11 +22,11 @@ namespace HAL::Core {
 
 	void Attach(HMODULE Instance)
 	{
-		/*auto Shutdown = [Instance]() -> void
-		{
+		//auto Shutdown = [Instance]() -> void
+		//{
 			//FreeLibraryAndExitThread(Instance, EXIT_FAILURE);
-			MessageBoxA(NULL, "HAL::Core: Attach(HMODULE Instance) decided it's time to shut down! This is unexpected behavior!", "Warning", MB_ICONWARNING | MB_OK);
-		};*/
+			//MessageBoxA(NULL, "HAL::Core: Attach(HMODULE Instance) decided it's time to shut down! This is unexpected behavior!", "Warning", MB_ICONWARNING | MB_OK);
+		//};
 
 		[[unlikely]]
 #ifdef _WIN64

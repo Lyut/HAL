@@ -440,21 +440,24 @@ namespace HAL::Graphics::Drawing
 			{
 				for (int i = 0; i < 1024; i++)
 				{
-					if (SDK::Game::Players[i].ped == NULL)
+					if (SDK::Game::Players[i].Ped == NULL)
 						continue;
 
-					if (SDK::Game::Players[i].ped == SDK::Game::LocalPlayer && !Config::ESP::bDrawLocal)
+					if (SDK::Game::Players[i].Ped == SDK::Game::LocalPlayer && !Config::ESP::bDrawLocal)
 						continue;
 
-					Vector3 pedPos = Vector3(SDK::Game::Players[i].position.x, SDK::Game::Players[i].position.y, SDK::Game::Players[i].position.z);
+					Vector3 pedPos = Vector3(SDK::Game::Players[i].Position.x, SDK::Game::Players[i].Position.y, SDK::Game::Players[i].Position.z);
 
 					if (SDK::Game::Distance(SDK::Game::Position(), pedPos) >= Config::ESP::fDistance) // to meters
 						continue;
 
-					if (SDK::Game::Players[i].ped_type != SDK::Game::ped_types::NETWORK_PLAYER && !Config::ESP::bDrawNPC)
+					if (SDK::Game::Players[i].PedType != SDK::Game::ped_types::NETWORK_PLAYER && !Config::ESP::bDrawNPC)
 						continue;
 
-					if (!Config::PedSelection[SDK::Game::Players[i].ped_type])
+					if (!Config::PedSelection[SDK::Game::Players[i].PedType])
+						continue;
+
+					if (SDK::Game::Players[i].Health < 1)
 						continue;
 
 					Vector3 originPos = Vector3(pedPos.x, pedPos.y, pedPos.z - 1.0f);
@@ -478,27 +481,27 @@ namespace HAL::Graphics::Drawing
 							Draw3DBox(headPos, SDK::Game::Players[i].ObjectNavigation->Rotation, originPos);
 						if (Config::ESP::bShowHealth)
 						{
-							float flBarlenght = ((SDK::Game::Players[i].health * (h - 2)) / SDK::Game::Players[i].maxHealth) + 2;
-							if (SDK::Game::Players[i].health < 1)
+							float flBarlenght = ((SDK::Game::Players[i].Health * (h - 2)) / SDK::Game::Players[i].MaxHealth) + 2;
+							if (SDK::Game::Players[i].Health < 1)
 								flBarlenght = 0;
 							Graphics::Drawing::DrawRect(((screenPos.x - 1) + 4) + w, screenPos.y - 1, 3 + 2, h + 2, Graphics::Drawing::Col.black, 1);
 							Graphics::Drawing::DrawRect(((screenPos.x + 1) + 4) + w, screenPos.y + 1, 3 - 2, h - 2, Graphics::Drawing::Col.black, 1);
-							RGBA colHealth = { 255 - (255 / SDK::Game::Players[i].maxHealth) * (SDK::Game::Players[i].health), (255 / SDK::Game::Players[i].maxHealth) * (SDK::Game::Players[i].health), 0, 255 };
+							RGBA colHealth = { 255 - (255 / SDK::Game::Players[i].MaxHealth) * (SDK::Game::Players[i].Health), (255 / SDK::Game::Players[i].MaxHealth) * (SDK::Game::Players[i].Health), 0, 255 };
 							Graphics::Drawing::DrawFilledRect((screenPos.x + 4) + w, screenPos.y, 3, flBarlenght, &colHealth);
 						}
 						if (Config::ESP::bShowArmor)
 						{
-							if (SDK::Game::Players[i].armor > 0)
+							if (SDK::Game::Players[i].Armor > 0)
 							{
-								float flBarlenght = ((SDK::Game::Players[i].armor * (h - 2)) / 50) + 2;
+								float flBarlenght = ((SDK::Game::Players[i].Armor * (h - 2)) / 50) + 2;
 								Graphics::Drawing::DrawRect(((screenPos.x - 1) + 8) + w, screenPos.y - 1, 3 + 2, h + 2, Graphics::Drawing::Col.black, 1);
 								Graphics::Drawing::DrawRect(((screenPos.x + 1) + 8) + w, screenPos.y + 1, 3 - 2, h - 2, Graphics::Drawing::Col.black, 1);
-								RGBA colArmor = { 255 - (255 / 50) * (SDK::Game::Players[i].armor), 0, (255 / 50) * (SDK::Game::Players[i].armor), 255 };
+								RGBA colArmor = { 255 - (255 / 50) * (SDK::Game::Players[i].Armor), 0, (255 / 50) * (SDK::Game::Players[i].Armor), 255 };
 								Graphics::Drawing::DrawFilledRect((screenPos.x + 8) + w, screenPos.y, 3, flBarlenght, &colArmor);
 							}
 						}
 						if (Config::ESP::bShowName)
-							Graphics::Drawing::DrawStrokeText(screenPos.x + w + 4, screenPosHead.y - 4, FLOAT4TORGBA(Config::Colors::fNameColor), std::to_string(SDK::Game::Players[i].ped).c_str());
+							Graphics::Drawing::DrawStrokeText(screenPos.x + w + 4, screenPosHead.y - 4, FLOAT4TORGBA(Config::Colors::fNameColor), std::to_string(SDK::Game::Players[i].Ped).c_str());
 						if (Config::ESP::bShowDistance)
 						{
 							int iDistance = SDK::Game::Distance(SDK::Game::Position(), pedPos);
@@ -506,14 +509,14 @@ namespace HAL::Graphics::Drawing
 							Graphics::Drawing::DrawStrokeText(screenPos.x + w + 4, screenPosHead.y + 8, FLOAT4TORGBA(Config::Colors::fDistanceColor), sDistance.c_str());
 						}
 						if (Config::ESP::bShowSkeleton)
-							DrawSkeleton(SDK::Game::Players[i].ped);
+							DrawSkeleton(SDK::Game::Players[i].Ped);
 						if (Config::ESP::bShowTracer)
 							Graphics::Drawing::DrawLine(localPlyScreenPos.x > 0 ? localPlyScreenPos.x : ImGui::GetIO().DisplaySize.x * 0.5f,
 								localPlyScreenPos.y > 0 ? localPlyScreenPos.y : ImGui::GetIO().DisplaySize.y * 0.6f,
 								screenPos.x, screenPos.y + (h * 0.5), FLOAT4TORGBA(Config::Colors::fTracerColor), 1);
 						if (Config::ESP::bShowBarrel)
 						{
-							auto boneNeck = SDK::Game::getBone(SDK::Game::Players[i].ped, 0);
+							auto boneNeck = SDK::Game::getBone(SDK::Game::Players[i].Ped, 0);
 							Vector3 v3NeckPos = Vector3(boneNeck.x, boneNeck.y, boneNeck.z);
 							Barrel(v3NeckPos, SDK::Game::Players[i].ObjectNavigation->Rotation, 3.0f);
 						}

@@ -160,13 +160,13 @@ namespace HAL::SDK::Aimbot {
 
 		for (int i = 0; i < 1024; i++)
 		{
-			if (SDK::Game::Players[i].ped == NULL)
+			if (SDK::Game::Players[i].Ped == NULL)
 				continue;
 
-			if (SDK::Game::Players[i].ped == SDK::Game::LocalPlayer)
+			if (SDK::Game::Players[i].Ped == SDK::Game::LocalPlayer)
 				continue;
 
-			if (SDK::Game::Players[i].health < 1.0f)
+			if (SDK::Game::Players[i].Health < 1.0f)
 				continue;
 
 			Vector3 myPos;
@@ -174,7 +174,7 @@ namespace HAL::SDK::Aimbot {
 			if (addr != NULL)
 				myPos = *(Vector3*)(addr + 0x60);
 
-			Vector3 pedPos = Vector3(SDK::Game::Players[i].position.x, SDK::Game::Players[i].position.y, SDK::Game::Players[i].position.z);
+			Vector3 pedPos = Vector3(SDK::Game::Players[i].Position.x, SDK::Game::Players[i].Position.y, SDK::Game::Players[i].Position.z);
 			if (pedPos.x == 0.0f || pedPos.y == 0.0f || pedPos.z == 0.0f)
 				continue;
 
@@ -183,7 +183,7 @@ namespace HAL::SDK::Aimbot {
 			if (distance < 2.0f)
 				continue;
 
-			Vector3 originPos = Vector3(SDK::Game::Players[i].position.x, SDK::Game::Players[i].position.y, SDK::Game::Players[i].position.z);
+			Vector3 originPos = Vector3(SDK::Game::Players[i].Position.x, SDK::Game::Players[i].Position.y, SDK::Game::Players[i].Position.z);
 			ImVec2 screenPos = SDK::Game::WorldToScreen(originPos);
 			int fov = Config::Aimbot::iFOV;
 			if (screenPos.x > 0)
@@ -205,7 +205,7 @@ namespace HAL::SDK::Aimbot {
 			if (closest_fov >= 1000.0f) return;
 			if (closest_id == -1) return;
 
-			if (SDK::Game::Players[closest_id].position.x == 0.0f)
+			if (SDK::Game::Players[closest_id].Position.x == 0.0f)
 				return;
 
 			int bone_positions[][2] = {
@@ -217,12 +217,12 @@ namespace HAL::SDK::Aimbot {
 				{ 8, 4 }
 			};
 
-			Vector3 originPos = Vector3(SDK::Game::getBone(SDK::Game::Players[closest_id].ped, bone_positions[3][0]).x, SDK::Game::getBone(SDK::Game::Players[closest_id].ped, bone_positions[3][0]).y, SDK::Game::getBone(SDK::Game::Players[closest_id].ped, bone_positions[3][0]).z);
-			Vector3 headPos = Vector3(SDK::Game::getBone(SDK::Game::Players[closest_id].ped, bone_positions[0][0]).x, SDK::Game::getBone(SDK::Game::Players[closest_id].ped, bone_positions[0][0]).y, SDK::Game::getBone(SDK::Game::Players[closest_id].ped, bone_positions[0][0]).z);
-			Vector3 neckPos = Vector3(SDK::Game::getBone(SDK::Game::Players[closest_id].ped, bone_positions[1][0]).x, SDK::Game::getBone(SDK::Game::Players[closest_id].ped, bone_positions[1][0]).y, SDK::Game::getBone(SDK::Game::Players[closest_id].ped, bone_positions[1][0]).z);
+			Vector3 originPos = Vector3(SDK::Game::getBone(SDK::Game::Players[closest_id].Ped, bone_positions[3][0]).x, SDK::Game::getBone(SDK::Game::Players[closest_id].Ped, bone_positions[3][0]).y, SDK::Game::getBone(SDK::Game::Players[closest_id].Ped, bone_positions[3][0]).z);
+			Vector3 headPos = Vector3(SDK::Game::getBone(SDK::Game::Players[closest_id].Ped, bone_positions[0][0]).x, SDK::Game::getBone(SDK::Game::Players[closest_id].Ped, bone_positions[0][0]).y, SDK::Game::getBone(SDK::Game::Players[closest_id].Ped, bone_positions[0][0]).z);
+			Vector3 neckPos = Vector3(SDK::Game::getBone(SDK::Game::Players[closest_id].Ped, bone_positions[1][0]).x, SDK::Game::getBone(SDK::Game::Players[closest_id].Ped, bone_positions[1][0]).y, SDK::Game::getBone(SDK::Game::Players[closest_id].Ped, bone_positions[1][0]).z);
 
 			if (locked != 0) {
-				if (SDK::Game::Players[locked].health < 1) {
+				if (SDK::Game::Players[locked].Health < 1) {
 					locked = closest_id;
 				}
 			}
@@ -232,9 +232,9 @@ namespace HAL::SDK::Aimbot {
 			}
 
 			if (locked != 0) {
-				originPos = Vector3(SDK::Game::getBone(SDK::Game::Players[locked].ped, bone_positions[3][0]).x, SDK::Game::getBone(SDK::Game::Players[locked].ped, bone_positions[3][0]).y, SDK::Game::getBone(SDK::Game::Players[locked].ped, bone_positions[3][0]).z);
-				headPos = Vector3(SDK::Game::getBone(SDK::Game::Players[locked].ped, bone_positions[0][0]).x, SDK::Game::getBone(SDK::Game::Players[locked].ped, bone_positions[0][0]).y, SDK::Game::getBone(SDK::Game::Players[locked].ped, bone_positions[0][0]).z);
-				neckPos = Vector3(SDK::Game::getBone(SDK::Game::Players[locked].ped, bone_positions[1][0]).x, SDK::Game::getBone(SDK::Game::Players[locked].ped, bone_positions[1][0]).y, SDK::Game::getBone(SDK::Game::Players[locked].ped, bone_positions[1][0]).z);
+				originPos = Vector3(SDK::Game::getBone(SDK::Game::Players[locked].Ped, bone_positions[3][0]).x, SDK::Game::getBone(SDK::Game::Players[locked].Ped, bone_positions[3][0]).y, SDK::Game::getBone(SDK::Game::Players[locked].Ped, bone_positions[3][0]).z);
+				headPos = Vector3(SDK::Game::getBone(SDK::Game::Players[locked].Ped, bone_positions[0][0]).x, SDK::Game::getBone(SDK::Game::Players[locked].Ped, bone_positions[0][0]).y, SDK::Game::getBone(SDK::Game::Players[locked].Ped, bone_positions[0][0]).z);
+				neckPos = Vector3(SDK::Game::getBone(SDK::Game::Players[locked].Ped, bone_positions[1][0]).x, SDK::Game::getBone(SDK::Game::Players[locked].Ped, bone_positions[1][0]).y, SDK::Game::getBone(SDK::Game::Players[locked].Ped, bone_positions[1][0]).z);
 			}
 
 			if (Config::Aimbot::iAimBone == 0) {
