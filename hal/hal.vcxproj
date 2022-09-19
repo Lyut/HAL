@@ -186,6 +186,7 @@
     <ClInclude Include="hooks\reset.h" />
     <ClInclude Include="includes.h" />
     <ClInclude Include="memoryman.h" />
+    <ClInclude Include="sdk\aimbot.h" />
     <ClInclude Include="sdk\DxINC\Audio.h" />
     <ClInclude Include="sdk\DxINC\BufferHelpers.h" />
     <ClInclude Include="sdk\DxINC\CommonStates.h" />

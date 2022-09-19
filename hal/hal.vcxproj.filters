@@ -182,6 +182,9 @@
     <ClInclude Include="sdk\SimpleIni.h">
       <Filter>File di intestazione\sdk</Filter>
     </ClInclude>
+    <ClInclude Include="sdk\aimbot.h">
+      <Filter>File di intestazione\sdk</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="sdk\DxINC\SimpleMath.inl">

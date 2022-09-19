@@ -10,6 +10,7 @@
 //#include "../graphics/imgui.h"
 #include "../graphics/drawing.h"
 #include "../config.h"
+#include "aimbot.h"
 
 namespace HAL::SDK::Game {
 
@@ -25,6 +26,13 @@ namespace HAL::SDK::Game {
 	{
 		if (MemoryMan::ValidPTR(ReplayInterface))
 			return *(DWORD64*)(ReplayInterface + 0x0);
+	}
+
+	DWORD64 CameraViewAngles;
+	DWORD64 GetCameraViewAngles()
+	{
+		if (MemoryMan::ValidPTR(CameraViewAngles))
+			return *(DWORD64*)(CameraViewAngles + 0x0);
 	}
 
 	class CObjectNavigation
@@ -125,6 +133,8 @@ namespace HAL::SDK::Game {
 			ReplayInterface = Utils::GetPointerAddress((DWORD64)HAL::MemoryMan::PatternScan(GetModuleHandleA(NULL), xorstr_("48 8D 0D ? ? ? ? 48 8B D7 E8 ? ? ? ? 48 8D 0D ? ? ? ? 8A D8 E8 ? ? ? ? 84 DB 75 13 48 8D 0D")), 0x3);
 		if (HAL::MemoryMan::PatternScan(GetModuleHandleA(NULL), xorstr_("48 89 5C 24 ?? 55 56 57 48 83 EC 70 65 4C 8B 0C 25 ?? 00 00 00 8B")))
 			World2Screen = (WorldToScreen_t)(DWORD64)HAL::MemoryMan::PatternScan(GetModuleHandleA(NULL), xorstr_("48 89 5C 24 ?? 55 56 57 48 83 EC 70 65 4C 8B 0C 25 ?? 00 00 00 8B"));
+		if (HAL::MemoryMan::PatternScan(GetModuleHandleA(NULL), xorstr_("48 8B 05 ? ? ? ? 48 8B 98 ? ? ? ? EB 32")))
+			CameraViewAngles = Utils::GetPointerAddress((DWORD64)HAL::MemoryMan::PatternScan(GetModuleHandleA(NULL), xorstr_("48 8B 05 ? ? ? ? 48 8B 98 ? ? ? ? EB 32")), 0x3);
 		//tGET_RAYCAST_RESULT raycast_result_func = (tGET_RAYCAST_RESULT)(DWORD64)HAL::MemoryMan::PatternScan(GetModuleHandleA(NULL), xorstr_("48 8B C4 48 89 58 08 48 90 70 10 48 89 78 18 4C 89 70 20 55 48 8D A8 00 00 00 00 48 81 EC 00 00 00 00 33 DB 45 8B F0 48 8B FA 48 8B F1 8B C3 45 85 C9 74 08 41 8B C9 E8 00 00 00 00 F3 0F 10 1F"));
 		if (World)
 			LocalPlayer = *(DWORD64*)(World + 0x8);
@@ -173,6 +183,7 @@ namespace HAL::SDK::Game {
 
 	void Tick()
 	{
+		SDK::Aimbot::Tick();
 		DWORD64 list_interface = NULL;
 		DWORD64 list = NULL;
 		int list_max_ptr = 0;
@@ -220,7 +231,4 @@ namespace HAL::SDK::Game {
 			}
 		}
 	}
-
-
-
 }
