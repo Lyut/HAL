@@ -9,6 +9,7 @@
 #include "../graphics/font.h"
 #include "../sdk/utils.h"
 #include "../sdk/game.h"
+#include "../sdk/aimbot.h"
 
 ID3D11Device* pD11Device = nullptr;
 ID3D11DeviceContext* pD11DeviceContext = nullptr;
@@ -147,7 +148,10 @@ HRESULT HAL::Hooks::Present::Present_hk(IDXGISwapChain* dxSwapChain, UINT syncIn
         Graphics::Drawing::DrawMenu();
     }
     else
+    {
         ImGui::GetIO().MouseDrawCursor = false;
+        SDK::Aimbot::Tick();
+    }
 
     ImguiStyle();
     Graphics::Drawing::Draw();
