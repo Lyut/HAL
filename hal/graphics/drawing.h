@@ -435,7 +435,6 @@ namespace HAL::Graphics::Drawing
 		if (MemoryMan::ValidPTR(SDK::Game::World))
 		{
 			SDK::Game::Tick();
-			SDK::Aimbot::Tick();
 			SDK::Game::LocalPlayer = *(DWORD64*)(SDK::Game::World + 0x8);
 			if (SDK::Game::LocalPlayer != NULL)
 			{

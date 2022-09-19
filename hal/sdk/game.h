@@ -10,7 +10,6 @@
 //#include "../graphics/imgui.h"
 #include "../graphics/drawing.h"
 #include "../config.h"
-#include "aimbot.h"
 
 namespace HAL::SDK::Game {
 
@@ -183,7 +182,6 @@ namespace HAL::SDK::Game {
 
 	void Tick()
 	{
-		SDK::Aimbot::Tick();
 		DWORD64 list_interface = NULL;
 		DWORD64 list = NULL;
 		int list_max_ptr = 0;
