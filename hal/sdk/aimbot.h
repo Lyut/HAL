@@ -222,7 +222,7 @@ namespace HAL::SDK::Aimbot {
 			Vector3 neckPos = Vector3(SDK::Game::getBone(SDK::Game::Players[closest_id].Ped, bone_positions[1][0]).x, SDK::Game::getBone(SDK::Game::Players[closest_id].Ped, bone_positions[1][0]).y, SDK::Game::getBone(SDK::Game::Players[closest_id].Ped, bone_positions[1][0]).z);
 
 			if (locked != 0) {
-				if (SDK::Game::Players[locked].Health < 1) {
+				if (SDK::Game::Players[locked].Ped && SDK::Game::Players[locked].Health < 1) {
 					locked = closest_id;
 				}
 			}
@@ -231,7 +231,7 @@ namespace HAL::SDK::Aimbot {
 				locked = closest_id;
 			}
 
-			if (locked != 0) {
+			if (locked != 0 && SDK::Game::Players[locked].Ped) {
 				originPos = Vector3(SDK::Game::getBone(SDK::Game::Players[locked].Ped, bone_positions[3][0]).x, SDK::Game::getBone(SDK::Game::Players[locked].Ped, bone_positions[3][0]).y, SDK::Game::getBone(SDK::Game::Players[locked].Ped, bone_positions[3][0]).z);
 				headPos = Vector3(SDK::Game::getBone(SDK::Game::Players[locked].Ped, bone_positions[0][0]).x, SDK::Game::getBone(SDK::Game::Players[locked].Ped, bone_positions[0][0]).y, SDK::Game::getBone(SDK::Game::Players[locked].Ped, bone_positions[0][0]).z);
 				neckPos = Vector3(SDK::Game::getBone(SDK::Game::Players[locked].Ped, bone_positions[1][0]).x, SDK::Game::getBone(SDK::Game::Players[locked].Ped, bone_positions[1][0]).y, SDK::Game::getBone(SDK::Game::Players[locked].Ped, bone_positions[1][0]).z);

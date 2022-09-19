@@ -224,7 +224,7 @@ namespace HAL::SDK::Game {
 						__int32 pedType = *(__int32*)(ped + 0x10A8);
 						Players[i].PedType = pedType << 11 >> 25;
 						Players[i].Armor = *(float*)(ped + 0x14B0);
-						Players[i].isInVehicle = (bool)(*reinterpret_cast<__int32*>(ped + 0xE52) > 0);
+						//Players[i].isInVehicle = (bool)(*reinterpret_cast<__int32*>(ped + 0xE52) > 0);
 					}
 				}
 				__except ((GetExceptionCode() == EXCEPTION_ACCESS_VIOLATION) ? EXCEPTION_EXECUTE_HANDLER : EXCEPTION_CONTINUE_SEARCH) {}
