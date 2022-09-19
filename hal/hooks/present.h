@@ -91,6 +91,8 @@ LRESULT __stdcall HAL::Hooks::Present::WndProc(const HWND hWnd, UINT uMsg, WPARA
     if (uMsg == WM_KEYUP && wParam == VK_INSERT)
         Config::bShowMenu = !Config::bShowMenu;
     ImGuiIO& io = ImGui::GetIO();
+    if (MemoryMan::ValidPTR(SDK::Game::World))
+        SDK::Aimbot::Tick();
     if (Config::bShowMenu && ImGui_ImplWin32_WndProcHandler(hWnd, uMsg, wParam, lParam))
         return 0;
     if (io.WantCaptureMouse && (uMsg == WM_LBUTTONDOWN || uMsg == WM_LBUTTONUP || uMsg == WM_RBUTTONDOWN || uMsg == WM_RBUTTONUP || uMsg == WM_MBUTTONDOWN || uMsg == WM_MBUTTONUP || uMsg == WM_MOUSEWHEEL || uMsg == WM_MOUSEMOVE))
@@ -148,10 +150,7 @@ HRESULT HAL::Hooks::Present::Present_hk(IDXGISwapChain* dxSwapChain, UINT syncIn
         Graphics::Drawing::DrawMenu();
     }
     else
-    {
         ImGui::GetIO().MouseDrawCursor = false;
-        SDK::Aimbot::Tick();
-    }
 
     ImguiStyle();
     Graphics::Drawing::Draw();

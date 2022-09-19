@@ -7,7 +7,6 @@
 #include "../memoryman.h"
 #include "vec3.h"
 #include "utils.h"
-//#include "../graphics/imgui.h"
 #include "../graphics/drawing.h"
 #include "../config.h"
 
@@ -80,6 +79,7 @@ namespace HAL::SDK::Game {
 		float health;
 		float maxHealth;
 		float armor;
+		bool isInVehicle;
 	};
 	PoolPlayers Players[1024];
 
@@ -137,6 +137,7 @@ namespace HAL::SDK::Game {
 		//tGET_RAYCAST_RESULT raycast_result_func = (tGET_RAYCAST_RESULT)(DWORD64)HAL::MemoryMan::PatternScan(GetModuleHandleA(NULL), xorstr_("48 8B C4 48 89 58 08 48 90 70 10 48 89 78 18 4C 89 70 20 55 48 8D A8 00 00 00 00 48 81 EC 00 00 00 00 33 DB 45 8B F0 48 8B FA 48 8B F1 8B C3 45 85 C9 74 08 41 8B C9 E8 00 00 00 00 F3 0F 10 1F"));
 		if (World)
 			LocalPlayer = *(DWORD64*)(World + 0x8);
+
 	}
 
 	Vector3 Position()
@@ -223,6 +224,7 @@ namespace HAL::SDK::Game {
 						__int32 pedType = *(__int32*)(ped + 0x10A8);
 						Players[i].ped_type = pedType << 11 >> 25;
 						Players[i].armor = *(float*)(ped + 0x14B0);
+						Players[i].isInVehicle = (bool)(*reinterpret_cast<__int32*>(ped + 0xE52) > 0);
 					}
 				}
 				__except ((GetExceptionCode() == EXCEPTION_ACCESS_VIOLATION) ? EXCEPTION_EXECUTE_HANDLER : EXCEPTION_CONTINUE_SEARCH) {}

@@ -185,16 +185,7 @@ namespace HAL::SDK::Aimbot {
 
 			Vector3 originPos = Vector3(SDK::Game::Players[i].position.x, SDK::Game::Players[i].position.y, SDK::Game::Players[i].position.z);
 			ImVec2 screenPos = SDK::Game::WorldToScreen(originPos);
-			int fov = 100;
-			if (Config::Aimbot::iFOV == 0) {
-				fov = 100;
-			}
-			else if (Config::Aimbot::iFOV == 1) {
-				fov = 200;
-			}
-			else if (Config::Aimbot::iFOV == 2) {
-				fov = 300;
-			}
+			int fov = Config::Aimbot::iFOV;
 			if (screenPos.x > 0)
 			{
 				float AngleDifferences = sqrt(pow((screenPos.x - ScreenCX), 2) + pow((screenPos.y - ScreenCY), 2));
