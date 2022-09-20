@@ -75,8 +75,8 @@ namespace HAL::SDK::Utils {
 	void ParseSettings()
 	{
 #pragma region wrappit stuff
-		Config::License = Config::ConfigIni.GetValue("LEWD", "LicenseKey", "INSERT PRODUCT KEY HERE");
-		RemoveSpaces(&Config::License);
+		//Config::License = Config::ConfigIni.GetValue("LEWD", "LicenseKey", "INSERT PRODUCT KEY HERE");
+		//RemoveSpaces(&Config::License);
 
 		Config::ESP::bShowName = ConfigParseBool(Config::ConfigIni.GetValue(xorstr_("ESP"), xorstr_("ShowName")), false);
 		Config::ESP::bShow2DBox = ConfigParseBool(Config::ConfigIni.GetValue(xorstr_("ESP"), xorstr_("Show2DBox")), false);
@@ -143,7 +143,7 @@ namespace HAL::SDK::Utils {
 			ConfigPath = Path + xorstr_("\\config.ini");
 
 #pragma region wrappit stuff again
-			Config::ConfigIni.SetValue(xorstr_("LEWD"), xorstr_("LicenseKey"), xorstr_("INVALID"));
+			//Config::ConfigIni.SetValue(xorstr_("LEWD"), xorstr_("LicenseKey"), xorstr_("INVALID"));
 
 			Config::ConfigIni.SetBoolValue(xorstr_("ESP"), xorstr_("ShowName"), false);
 			Config::ConfigIni.SetBoolValue(xorstr_("ESP"), xorstr_("Show2DBox"), false);

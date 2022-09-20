@@ -7,7 +7,7 @@
 #include "hooks/reset.h"
 
 namespace HAL::Core {
-
+#ifdef DEBUG_CONSOLE
 	void HALAllocConsole() {
 		AllocConsole();
 		SetConsoleTitleA("a");
@@ -16,9 +16,13 @@ namespace HAL::Core {
 		freopen_s(&NewConsoleStream, "CONOUT$", "w", stdout);
 		freopen_s(&NewConsoleStream, "CONOUT$", "w", stderr);
 	}
+#endif
 
 	void Attach(HMODULE Instance)
 	{
+#ifdef DEBUG_CONSOLE
+		HALAllocConsole();
+#endif
 		auto Shutdown = [Instance]() -> void
 		{
 			FreeLibraryAndExitThread(Instance, EXIT_FAILURE);
@@ -76,10 +80,12 @@ namespace HAL::Core {
 
 	void Detach()
 	{
-		/*fclose(stdin);
-		  fclose(stdout);
-		  fclose(stderr);
-		  FreeConsole();*/
+#ifdef DEBUG_CONSOLE
+		fclose(stdin);
+		fclose(stdout);
+		fclose(stderr);
+		FreeConsole();
+#endif
 		MemoryMan::UnhookAll();
 	}
 
