@@ -106,6 +106,7 @@ namespace HAL::MemoryMan
 
     bool Initialize()
     {
+        VMP_BEGIN("HAL::MemoryMan::Initialize");
 #ifdef _WIN64
         const HMODULE GameOverlayRenderer = GetModuleHandleA(xorstr_("gameoverlayrenderer64.dll"));
 #else
@@ -139,6 +140,7 @@ namespace HAL::MemoryMan
             return false;
 
         return true;
+        VMP_END();
     }
 
     bool Hook(void* FunctionAddress, void* HookAddress, void* OriginalAddress)

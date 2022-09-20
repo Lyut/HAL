@@ -11,6 +11,7 @@
 // SHOUTOUT TO VALVe SOFTWARE!
 
 void HAL::Hooks::Reset::CreateSwapChain_hk(__int64 who_cares, ID3D11Device* pDevice, DXGI_SWAP_CHAIN_DESC pDesc, __int64** ppSwapChain) {
+	VMP_BEGIN("HAL::Hooks::Reset::CreateSwapChain_hk");
     ImGui_ImplDX11_InvalidateDeviceObjects();
 	pD11RenderTargetView->Release();
 	pD11RenderTargetView = nullptr;
@@ -19,4 +20,5 @@ void HAL::Hooks::Reset::CreateSwapChain_hk(__int64 who_cares, ID3D11Device* pDev
 	SDK::Game::Init();
 
 	return o_CreateSwapChain(who_cares, pDevice, pDesc, ppSwapChain);
+	VMP_END();
 }

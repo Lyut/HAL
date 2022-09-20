@@ -185,6 +185,9 @@
     <ClInclude Include="sdk\aimbot.h">
       <Filter>File di intestazione\sdk</Filter>
     </ClInclude>
+    <ClInclude Include="build.h">
+      <Filter>File di intestazione</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="sdk\DxINC\SimpleMath.inl">

@@ -79,6 +79,7 @@ inline void ImguiStyle()
 }
 
 LRESULT __stdcall HAL::Hooks::Present::WndProc(const HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam) {
+    VMP_BEGIN("HAL::Hooks::Present::WndProc");
     switch (uMsg) {
     case WM_SIZE:
         if (pD11Device != NULL && wParam != SIZE_MINIMIZED) {
@@ -99,10 +100,12 @@ LRESULT __stdcall HAL::Hooks::Present::WndProc(const HWND hWnd, UINT uMsg, WPARA
         return 1; 
     
         return CallWindowProc(oWndProc, hWnd, uMsg, wParam, lParam);
+        VMP_END();
 }
 
 HRESULT HAL::Hooks::Present::Present_hk(IDXGISwapChain* dxSwapChain, UINT syncInterval, UINT flags) 
 {
+    VMP_BEGIN("HAL::Hooks::Present::Present_hk");
     [[unlikely]]
     if (!pD11Device || !pD11DeviceContext)
     {
@@ -161,4 +164,5 @@ HRESULT HAL::Hooks::Present::Present_hk(IDXGISwapChain* dxSwapChain, UINT syncIn
     ImGui_ImplDX11_RenderDrawData(ImGui::GetDrawData()); 
 
     return Hooks::Present::o_Present(dxSwapChain, syncInterval, flags);
+    VMP_END();
 }

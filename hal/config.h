@@ -4,6 +4,7 @@
 namespace HAL::Config {
 
 	CSimpleIniA ConfigIni;
+	std::string License;
 
 	bool bShowMenu = true;
 

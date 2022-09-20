@@ -22,11 +22,11 @@ namespace HAL::Core {
 
 	void Attach(HMODULE Instance)
 	{
-		//auto Shutdown = [Instance]() -> void
-		//{
-			//FreeLibraryAndExitThread(Instance, EXIT_FAILURE);
+		auto Shutdown = [Instance]() -> void
+		{
+			FreeLibraryAndExitThread(Instance, EXIT_FAILURE);
 			//MessageBoxA(NULL, "HAL::Core: Attach(HMODULE Instance) decided it's time to shut down! This is unexpected behavior!", "Warning", MB_ICONWARNING | MB_OK);
-		//};
+		};
 
 		[[unlikely]]
 #ifdef _WIN64
@@ -41,8 +41,8 @@ namespace HAL::Core {
 		[[unlikely]]
 		if (!MemoryMan::Initialize())
 		{
-			//  Shutdown();
-			MessageBoxA(NULL, "HAL::Core: MemoryManager::Initialize called AGAIN! This is unexpected behavior!", "Warning", MB_ICONWARNING | MB_OK);
+			//Shutdown();
+			//MessageBoxA(NULL, "HAL::Core: MemoryManager::Initialize called AGAIN! This is unexpected behavior!", "Warning", MB_ICONWARNING | MB_OK);
 		}
 
 		Hooks::Present::g_pPresent = MemoryMan::PatternScan(GetModuleHandleA(xorstr_("gameoverlayrenderer64.dll")), xorstr_("48 89 6C 24 18 48 89 74 24 20 41 56 48 83 EC 20 41 8B E8"));
@@ -66,6 +66,7 @@ namespace HAL::Core {
 		}
 
 		MemoryMan::Hook(Hooks::Reset::g_pCreateSwapChain, &Hooks::Reset::CreateSwapChain_hk, &Hooks::Reset::o_CreateSwapChain);
+
 		SDK::Utils::InitConfig();
 
 		  /* [[likely]]

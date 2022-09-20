@@ -6,6 +6,9 @@
 #include <d3dx9math.h>
 #include <shlobj.h>
 #include <Shlwapi.h>
+#include <shellapi.h>
+#include <comutil.h>
+#include <fstream>
 #include "../memoryman.h"
 #include "vec3.h"
 #include "../config.h"
@@ -15,6 +18,8 @@ namespace HAL::SDK::Utils {
 	bool bDoOnce = 0;
 	std::string Path;
 	std::string ConfigPath;
+	std::string LicensePath;
+	std::string Username;
 
 	SIZE_T GetPointerAddress(SIZE_T Address, UINT Offset)
 	{
@@ -70,6 +75,9 @@ namespace HAL::SDK::Utils {
 	void ParseSettings()
 	{
 #pragma region wrappit stuff
+		Config::License = Config::ConfigIni.GetValue("LEWD", "LicenseKey", "INVALID");
+		RemoveSpaces(&Config::License);
+
 		Config::ESP::bShowName = ConfigParseBool(Config::ConfigIni.GetValue(xorstr_("ESP"), xorstr_("ShowName")), false);
 		Config::ESP::bShow2DBox = ConfigParseBool(Config::ConfigIni.GetValue(xorstr_("ESP"), xorstr_("Show2DBox")), false);
 		Config::ESP::bShow3DBox = ConfigParseBool(Config::ConfigIni.GetValue(xorstr_("ESP"), xorstr_("Show3DBox")), false);
@@ -126,14 +134,17 @@ namespace HAL::SDK::Utils {
 			char Documents[MAX_PATH];
 			SHGetFolderPathA(NULL, CSIDL_PERSONAL, NULL, SHGFP_TYPE_CURRENT, Documents);
 
-			Path += std::string(Documents) + "\\lewd";
+			Path += std::string(Documents) + xorstr_("\\lewd");
+			LicensePath = Path + xorstr_("\\.license");
 
 			if (!PathIsDirectoryA(Path.c_str()))
 				CreateDirectoryA(Path.c_str(), 0);
 
-			ConfigPath = Path + "\\config.ini";
+			ConfigPath = Path + xorstr_("\\config.ini");
 
 #pragma region wrappit stuff again
+			Config::ConfigIni.SetValue(xorstr_("LEWD"), xorstr_("LicenseKey"), xorstr_("INVALID"));
+
 			Config::ConfigIni.SetBoolValue(xorstr_("ESP"), xorstr_("ShowName"), false);
 			Config::ConfigIni.SetBoolValue(xorstr_("ESP"), xorstr_("Show2DBox"), false);
 			Config::ConfigIni.SetBoolValue(xorstr_("ESP"), xorstr_("Show3DBox"), false);
@@ -191,6 +202,81 @@ namespace HAL::SDK::Utils {
 			}
 			ParseSettings();
 		}
+#ifdef USE_ACTIVATION
+		if (Config::License == VMPSTR("INSERT PRODUCT KEY HERE")) {
+			MessageBoxA(NULL, VMPSTR("Please set your License Key in 'Documents/lewd/config.ini'!"), VMPSTR("ByondHook"), 0);
+			ShellExecuteA(NULL, "edit", ConfigPath.c_str(), NULL, Path.c_str(), true);
+		}
+
+		char VMPSerial[8192];
+		bool Activated = false;
+		bool TryToActivate = false;
+		//printf("License is %s\n", License.c_str());
+		int KeyRes = VMProtectActivateLicense(Config::License.c_str(), VMPSerial, 8192);
+		switch (KeyRes) {
+		case ACTIVATION_OK:
+			Activated = true;
+			break;
+		case ACTIVATION_ALREADY_USED:
+			//Log(VMPSTR("ACTIVATION_ALREADY_USED"));
+			MessageBoxA(NULL, VMPSTR("Please only use this LEWD license key with the original machine it was created for.\nIf this is a mistake, please use LEWDbot to regenerate your key."), VMPSTR("LEWD"), 0);
+			break;
+		case ACTIVATION_NO_CONNECTION:
+			//Log(VMPSTR("ACTIVATION_NO_CONNECTION"));
+			if (PathFileExistsA(LicensePath.c_str()))
+				TryToActivate = true;
+			else
+				MessageBoxA(NULL, VMPSTR("Failed to connect to LEWD activation server."), VMPSTR("LEWD"), 0);
+			break;
+		case ACTIVATION_BAD_REPLY:
+			//Log(VMPSTR("ACTIVATION_BAD_REPLY"));
+			if (PathFileExistsA(LicensePath.c_str()))
+				TryToActivate = true;
+			else
+				MessageBoxA(NULL, VMPSTR("Recieved bad reply from LEWD activation server."), VMPSTR("LEWD"), 0);
+			break;
+		case ACTIVATION_CORRUPTED:
+		case ACTIVATION_BAD_CODE:
+		case ACTIVATION_SERIAL_UNKNOWN:
+			//Log(VMPSTR("ACTIVATION_CORRUPTED"));
+			MessageBoxA(NULL, VMPSTR("Invalid LEWD license key."), VMPSTR("LEWD"), 0);
+			if (PathFileExistsA(LicensePath.c_str()))
+				DeleteFileA(LicensePath.c_str());
+			break;
+		default:
+			MessageBoxA(NULL, VMPSTR("Could not activate LEWD."), VMPSTR("LEWD"), 0);
+			break;
+		}
+		if (Activated || TryToActivate) {
+			if (TryToActivate) {
+				std::ifstream lic(LicensePath);
+				lic.read(VMPSerial, sizeof(VMPSerial));
+				lic.close();
+			}
+			VMProtectSetSerialNumber(VMPSerial);
+			VMProtectSerialNumberData sd = { 0 };
+			VMProtectGetSerialNumberData(&sd, sizeof(sd));
+			if (sd.nState != SERIAL_STATE_SUCCESS) {
+				MessageBoxA(NULL, VMPSTR("LEWD"), VMPSTR("LEWD"), 0);
+				Activated = false;
+				if (PathFileExistsA(LicensePath.c_str()))
+					DeleteFileA(LicensePath.c_str());
+			}
+			else {
+				if (!TryToActivate) {
+					std::ofstream lic(LicensePath);
+					lic << VMPSerial;
+					lic.close();
+				}
+				_bstr_t b(sd.wUserName);
+				Username = _strdup((const char*)b);
+			}
+		}
+		if (!Activated) {
+			FreeLibraryAndExitThread(NULL, 0);
+			return;
+		}
+#endif
 		bDoOnce = 1;
 	}
 
