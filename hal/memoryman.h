@@ -1,10 +1,5 @@
 #pragma once
-#include <Windows.h>
-#include <vector>
-#include <Psapi.h>
-#include <winternl.h>
-#include <filesystem>
-#include "xorstr.h"
+#include "includes.h"
 
 #ifdef _WIN64
 #define PTRMAXVAL ((DWORD64)0x000F000000000000)

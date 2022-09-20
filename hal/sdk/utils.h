@@ -75,7 +75,7 @@ namespace HAL::SDK::Utils {
 	void ParseSettings()
 	{
 #pragma region wrappit stuff
-		Config::License = Config::ConfigIni.GetValue("LEWD", "LicenseKey", "INVALID");
+		Config::License = Config::ConfigIni.GetValue("LEWD", "LicenseKey", "INSERT PRODUCT KEY HERE");
 		RemoveSpaces(&Config::License);
 
 		Config::ESP::bShowName = ConfigParseBool(Config::ConfigIni.GetValue(xorstr_("ESP"), xorstr_("ShowName")), false);

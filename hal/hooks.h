@@ -1,11 +1,8 @@
 #pragma once
-#include <Windows.h>
-#include <d3d11.h>
-#include <d3dx11.h>
+#include "includes.h"
 #include "graphics/imgui.h"
 #include "graphics/imgui_impl_dx11.h"
 #include "graphics/imgui_internal.h"
-#pragma comment(lib, "d3d11.lib")
 
 namespace HAL::Hooks
 {

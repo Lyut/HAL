@@ -1,9 +1,4 @@
 ﻿#pragma once
-#include <cstddef>
-#include <vector>
-#include <d3d9.h>
-#include <d3dx9.h>
-#include <d3dx9math.h>
 #include "../memoryman.h"
 #include "vec3.h"
 #include "utils.h"

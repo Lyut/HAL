@@ -1,13 +1,10 @@
 #pragma once
-#include <cstddef>
-#include <vector>
 #include <thread>
 #include "includes.h"
 #include "memoryman.h"
 #include "hooks.h"
 #include "hooks/present.h"
 #include "hooks/reset.h"
-#include "sdk/SimpleIni.h"
 
 namespace HAL::Core {
 
