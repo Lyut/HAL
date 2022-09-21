@@ -18,11 +18,18 @@ namespace HAL::Core {
 	}
 #endif
 
+	HMODULE ProcessThread;
+
 	void Attach(HMODULE Instance)
 	{
 #ifdef DEBUG_CONSOLE
 		HALAllocConsole();
 #endif
+#ifdef USE_ACTIVATION
+		SuspendThread(Instance); // Go ahead and suspend it. Give it ZERO time to do any sort of checks.
+		ProcessThread = Instance;
+#endif
+
 		auto Shutdown = [Instance]() -> void
 		{
 			FreeLibraryAndExitThread(Instance, EXIT_FAILURE);
@@ -68,7 +75,7 @@ namespace HAL::Core {
 
 		MemoryMan::Hook(Hooks::Reset::g_pCreateSwapChain, &Hooks::Reset::CreateSwapChain_hk, &Hooks::Reset::o_CreateSwapChain);
 
-		SDK::Utils::InitConfig();
+		SDK::Utils::InitConfig(ProcessThread);
 
 		  /* [[likely]]
 			while (!GetAsyncKeyState(VK_DELETE))

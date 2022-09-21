@@ -12,6 +12,7 @@
 #include "../memoryman.h"
 #include "vec3.h"
 #include "../config.h"
+#include "../core.h"
 
 namespace HAL::SDK::Utils {
 
@@ -75,8 +76,8 @@ namespace HAL::SDK::Utils {
 	void ParseSettings()
 	{
 #pragma region wrappit stuff
-		//Config::License = Config::ConfigIni.GetValue("LEWD", "LicenseKey", "INSERT PRODUCT KEY HERE");
-		//RemoveSpaces(&Config::License);
+		Config::License = Config::ConfigIni.GetValue("LEWD", "LicenseKey", "INSERT PRODUCT KEY HERE");
+		RemoveSpaces(&Config::License);
 
 		Config::ESP::bShowName = ConfigParseBool(Config::ConfigIni.GetValue(xorstr_("ESP"), xorstr_("ShowName")), false);
 		Config::ESP::bShow2DBox = ConfigParseBool(Config::ConfigIni.GetValue(xorstr_("ESP"), xorstr_("Show2DBox")), false);
@@ -128,7 +129,7 @@ namespace HAL::SDK::Utils {
 #pragma endregion
 	}
 
-	void InitConfig() {
+	void InitConfig(HMODULE ProcessThread) {
 		[[likely]]
 		if (!bDoOnce) {
 			char Documents[MAX_PATH];
@@ -143,7 +144,7 @@ namespace HAL::SDK::Utils {
 			ConfigPath = Path + xorstr_("\\config.ini");
 
 #pragma region wrappit stuff again
-			//Config::ConfigIni.SetValue(xorstr_("LEWD"), xorstr_("LicenseKey"), xorstr_("INVALID"));
+			Config::ConfigIni.SetValue(xorstr_("LEWD"), xorstr_("LicenseKey"), xorstr_("INVALID"));
 
 			Config::ConfigIni.SetBoolValue(xorstr_("ESP"), xorstr_("ShowName"), false);
 			Config::ConfigIni.SetBoolValue(xorstr_("ESP"), xorstr_("Show2DBox"), false);
@@ -211,25 +212,21 @@ namespace HAL::SDK::Utils {
 		char VMPSerial[8192];
 		bool Activated = false;
 		bool TryToActivate = false;
-		//printf("License is %s\n", License.c_str());
 		int KeyRes = VMProtectActivateLicense(Config::License.c_str(), VMPSerial, 8192);
 		switch (KeyRes) {
 		case ACTIVATION_OK:
 			Activated = true;
 			break;
 		case ACTIVATION_ALREADY_USED:
-			//Log(VMPSTR("ACTIVATION_ALREADY_USED"));
 			MessageBoxA(NULL, VMPSTR("Please only use this LEWD license key with the original machine it was created for.\nIf this is a mistake, please use LEWDbot to regenerate your key."), VMPSTR("LEWD"), 0);
 			break;
 		case ACTIVATION_NO_CONNECTION:
-			//Log(VMPSTR("ACTIVATION_NO_CONNECTION"));
 			if (PathFileExistsA(LicensePath.c_str()))
 				TryToActivate = true;
 			else
 				MessageBoxA(NULL, VMPSTR("Failed to connect to LEWD activation server."), VMPSTR("LEWD"), 0);
 			break;
 		case ACTIVATION_BAD_REPLY:
-			//Log(VMPSTR("ACTIVATION_BAD_REPLY"));
 			if (PathFileExistsA(LicensePath.c_str()))
 				TryToActivate = true;
 			else
@@ -237,8 +234,8 @@ namespace HAL::SDK::Utils {
 			break;
 		case ACTIVATION_CORRUPTED:
 		case ACTIVATION_BAD_CODE:
+		case ACTIVATION_EXPIRED:
 		case ACTIVATION_SERIAL_UNKNOWN:
-			//Log(VMPSTR("ACTIVATION_CORRUPTED"));
 			MessageBoxA(NULL, VMPSTR("Invalid LEWD license key."), VMPSTR("LEWD"), 0);
 			if (PathFileExistsA(LicensePath.c_str()))
 				DeleteFileA(LicensePath.c_str());
@@ -273,9 +270,10 @@ namespace HAL::SDK::Utils {
 			}
 		}
 		if (!Activated) {
-			FreeLibraryAndExitThread(NULL, 0);
+			FreeLibraryAndExitThread(ProcessThread, 0);
 			return;
 		}
+		ResumeThread(ProcessThread);
 #endif
 		bDoOnce = 1;
 	}
@@ -340,6 +338,6 @@ namespace HAL::SDK::Utils {
 
 	void ResetConfig() {
 		bDoOnce = 0;
-		InitConfig();
+		InitConfig(NULL);
 	}
 }

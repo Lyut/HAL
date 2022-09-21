@@ -8,6 +8,6 @@
 
 #ifdef RELEASE_PUBLIC
 //	#define USE_BLACKLIST
-//	#define USE_ACTIVATION
-//	#define USE_VMP
+	#define USE_ACTIVATION
+	#define USE_VMP
 #endif
